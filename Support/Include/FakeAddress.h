@@ -1,8 +1,4 @@
-﻿#ifndef _FAKE_ADDRESS_
-#define _FAKE_ADDRESS_
-
-
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -28,15 +24,19 @@ private:
 	string _city; 
 
 public:
-	Address();
+	Address(string number = "", string street = "", string ward = "", string district = "", string city = "");
+
+
+	////		Method		////
 	string get_Number();
 	string get_Street();
 	string get_Ward();
 	string get_District();
 	string get_City();
 
-
 	string Address_to_string();
+
+	void readFile();
 
 
 	////		Operators		////
@@ -50,6 +50,3 @@ class FakeHCMAddress
 public:
 	static Address next();
 };
-
-
-#endif // !_FAKE_ADDRESS_
