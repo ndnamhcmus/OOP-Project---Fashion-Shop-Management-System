@@ -24,6 +24,10 @@ public:
 	~Account();
 
 
+
+
+
+	friend class ExcelFstream;
 };
 
 

@@ -37,6 +37,14 @@ private:
 	TimeOfProduct stock_in_time;
 	TimeOfProduct stock_out_time;
 	TimeOfProduct stock_cover_time;
+
+public:
+
+
+
+
+
+	friend class ExcelFstream;
 };
 
 

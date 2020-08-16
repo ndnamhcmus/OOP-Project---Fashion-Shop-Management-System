@@ -22,6 +22,9 @@ public:
 	~Bill();
 
 
+
+
+	friend class ExcelFstream;
 };
 
 

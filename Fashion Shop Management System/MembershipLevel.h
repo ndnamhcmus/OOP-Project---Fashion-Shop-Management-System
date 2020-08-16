@@ -17,6 +17,9 @@ private:
 public:
 
 
+
+
+	friend class ExcelFstream;
 };
 
 

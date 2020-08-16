@@ -25,6 +25,9 @@ public:
 
 	Person(string name, Date date_of_birth, string phone_number, Address address);
 
+
+
+	friend class ExcelFstream;
 };
 
 class Customer : public Person
@@ -40,6 +43,9 @@ public:
 
 	}
 
+
+
+	friend class ExcelFstream;
 };
 
 class Staff : public Person
@@ -55,6 +61,11 @@ public:
 	{
 
 	}
+
+
+
+
+	friend class ExcelFstream;
 };
 
 class Seller : public Staff
@@ -70,6 +81,11 @@ public:
 	{
 
 	}
+
+
+
+
+	friend class ExcelFstream;
 };
 
 class Security : public Staff
@@ -83,6 +99,11 @@ public:
 	{
 
 	}
+
+
+
+
+	friend class ExcelFstream;
 };
 
 
