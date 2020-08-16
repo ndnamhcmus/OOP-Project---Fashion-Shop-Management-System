@@ -1,3 +1,0 @@
-D:\PROGRAMMING\OOP\Project\OOP-Project---Fashion-Shop-Management-System\Libraries\Fashion Shop Management System.pdb
-D:\PROGRAMMING\OOP\Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Debug\Fashion Shop Management System.pdb
-D:\PROGRAMMING\OOP\Project\OOP-Project---Fashion-Shop-Management-System\Support\Library\Fashion Shop Management System.pdb
