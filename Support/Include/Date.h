@@ -55,4 +55,4 @@ public:
 };
 
 
-#endif // !_DATE_
+#endif // _DATE_

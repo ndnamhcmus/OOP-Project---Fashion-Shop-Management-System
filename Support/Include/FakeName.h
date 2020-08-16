@@ -1,3 +1,7 @@
+#ifndef _FAKE_NAME_
+#define _FAKE_NAME_
+
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -16,15 +20,16 @@ private:
 	string _last_name;
 
 public:
-	FullName();
+	FullName(string first_name = "", string middle_name = "", string last_name = "");
 
 	///		Get data function	///
 	string getFirstName();
 	string getMiddleName();
 	string getLastName();
 
-
 	string FullName_to_string();
+
+	void readFile();
 
 
 	///		Operator	///
@@ -38,3 +43,6 @@ class FakeName
 public:
 	static FullName next();
 };
+
+
+#endif // !_FAKE_NAME_

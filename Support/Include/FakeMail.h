@@ -1,3 +1,7 @@
+#ifndef _FAKE_EMAIL_
+#define _FAKE_EMAIL_
+
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -13,10 +17,11 @@ class FakeEmailDomain
 private:
 	string _domain;
 public:
-	FakeEmailDomain();	
-
+	FakeEmailDomain(const string& domain = "");	
 
 	string getDomain();
+
+	void readFile();
 };
 
 
@@ -30,3 +35,6 @@ public:
 
 	string getFakeEmail();
 };
+
+
+#endif // !_FAKE_EMAIL_
