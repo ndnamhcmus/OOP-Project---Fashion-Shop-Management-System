@@ -1,3 +1,7 @@
+#ifndef _FAKE_BIRTH_DAY_
+#define _FAKE_BIRTH_DAY_
+
+
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -26,3 +30,5 @@ public:
 	int getAge();
 };
 
+
+#endif // !_FAKE_BIRTH_DAY_

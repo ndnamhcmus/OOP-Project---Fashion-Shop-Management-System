@@ -1,3 +1,7 @@
+#ifndef _FAKE_VN_TEL_
+#define _FAKE_VN_TEL_
+
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -15,3 +19,5 @@ public:
 	string getVnTel();
 };
 
+
+#endif // !_FAKE_VN_TEL_

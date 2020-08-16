@@ -1,3 +1,7 @@
+#ifndef _DATE_
+#define _DATE_
+
+
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -49,3 +53,6 @@ public:
 
 	operator string();
 };
+
+
+#endif // !_DATE_

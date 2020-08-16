@@ -1,3 +1,7 @@
+#ifndef _TOKENIZER_
+#define _TOKENIZER_
+
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -34,3 +38,5 @@ public:
 	static vector <string> Find_Prime_Number(const vector <string>& tokens);
 };
 
+
+#endif // !_TOKENIZER_

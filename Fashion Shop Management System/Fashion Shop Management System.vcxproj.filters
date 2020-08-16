@@ -27,6 +27,9 @@
     <ClCompile Include="Person_Customer_Staff_Seller_Security.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Membership_Level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Product.h">
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Person_Customer_Staff_Seller_Security.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MembershipLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

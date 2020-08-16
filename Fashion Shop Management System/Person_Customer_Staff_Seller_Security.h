@@ -62,7 +62,7 @@ class Seller : public Staff
 private:
 
 	double _commission;		// tiền hoa hồng
-	int _goods_sale;		// doanh số bán hàng
+	static int _goods_sale;		// doanh số bán hàng
 
 public:
 

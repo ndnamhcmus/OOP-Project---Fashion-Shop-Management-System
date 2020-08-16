@@ -1,4 +1,8 @@
-﻿#include <iostream>
+﻿#ifndef _FAKE_ADDRESS_
+#define _FAKE_ADDRESS_
+
+
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -46,3 +50,6 @@ class FakeHCMAddress
 public:
 	static Address next();
 };
+
+
+#endif // !_FAKE_ADDRESS_

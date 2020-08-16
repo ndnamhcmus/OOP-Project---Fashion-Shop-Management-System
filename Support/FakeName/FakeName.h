@@ -1,3 +1,7 @@
+#ifndef _FAKE_NAME_
+#define _FAKE_NAME_
+
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -38,3 +42,6 @@ class FakeName
 public:
 	static FullName next();
 };
+
+
+#endif // !_FAKE_NAME_
