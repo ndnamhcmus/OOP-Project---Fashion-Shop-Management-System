@@ -25,6 +25,6 @@ public:
 	void writeExcelfile(Bill& bill);
 
 	void readExcelFile(Staff staff);
-	void readExcelFile(Staff staff);
+	void writeExcelFile(Staff staff);
 };
 

@@ -7,13 +7,14 @@
 #include <ctime>
 #include <Date.h>
 #include <Clock.h>
+#include <MyTime.h>
 
 using namespace std;
 
 struct TimeOfProduct
 {
 	Date date;
-	Time time;
+	MyTime time;
 };
 
 class Product
@@ -34,9 +35,9 @@ private:
 	double _discount;
 
 	
-	TimeOfProduct stock_in_time;
-	TimeOfProduct stock_out_time;
-	TimeOfProduct stock_cover_time;
+	TimeOfProduct _stock_in_time;
+	TimeOfProduct _stock_out_time;
+	TimeOfProduct _stock_cover_time;
 
 public:
 

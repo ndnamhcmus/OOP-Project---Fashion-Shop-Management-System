@@ -15,7 +15,7 @@ private:
 
 	string _bill_id;
 	Date _curr_date;
-	//Product _product;
+	Product _product;
 
 public:
 	Bill();
