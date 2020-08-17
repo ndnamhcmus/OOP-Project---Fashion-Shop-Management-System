@@ -14,15 +14,17 @@ using namespace std;
 class FakeVnTel
 {
 private:
+
 	string _telephone_number;
+
+	void readFile();
+
 public:
 	FakeVnTel(string telephone_number = "");
 
 	string getVnTel();
 
 	operator string();
-
-	void readFile();
 };
 
 

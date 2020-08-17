@@ -21,11 +21,16 @@ public:
 class Address
 {
 private:
+
 	string _number = FakeHouseNumber::generateRandomHouseNumber();
 	string _street;
 	string _ward;
 	string _district;
 	string _city; 
+
+
+	void readFile();
+
 
 public:
 	Address(string number = "", string street = "", string ward = "", string district = "", string city = "");
@@ -39,8 +44,6 @@ public:
 	string get_City();
 
 	string Address_to_string();
-
-	void readFile();
 
 
 	////		Operators		////

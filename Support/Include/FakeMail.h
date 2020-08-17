@@ -16,12 +16,14 @@ class FakeEmailDomain
 {
 private:
 	string _domain;
+
+
+	void readFile();
+
 public:
 	FakeEmailDomain(const string& domain = "");	
 
 	string getDomain();
-
-	void readFile();
 };
 
 
