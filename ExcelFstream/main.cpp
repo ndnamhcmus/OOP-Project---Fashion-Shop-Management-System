@@ -6,7 +6,7 @@ int main()
 	Product product;
 
 
-	file.open("Product.csv", ios::in | ios::app);
+	file.open("Product.csv");
 	file.readExcelFile(product);
 	file.close();
 }

@@ -6,10 +6,9 @@
 
 fstream& operator<<(fstream& file, const Product& product)
 {
-	////		fix		////
 	file << product._product_name << "," << product._product_type << "," << product._product_color << "," << product._product_size << "," << product._product_id << "," << product._firm_name << ",";
 	file << product._discount << "," << product._product_price << "," << product._product_cost << ",";
-	file << product._stock_in_time.date << " " << product._stock_in_time.time << "," << product._stock_out_time.date << " " << product._stock_out_time.time << "," << product._stock_cover_time.date << " " << product._stock_cover_time.time << ",";
+	file << product._stock_in_time.date << "," << product._stock_in_time.time << "," << product._stock_out_time.date << "," << product._stock_out_time.time << "," << product._stock_cover_time.date << "," << product._stock_cover_time.time << ",";
 	file << product._quantity_out_of_stock;
 	return file;
 }
@@ -63,11 +62,11 @@ fstream& operator>>(fstream& file, Product& product)
 			break;
 
 		case 10:
-			product._stock_in_time.date.toString() = temp;
+			product._stock_in_time.date.parse(temp);
 			break;
 
 		case 11:
-			product._stock_in_time.time.toString() = temp;
+			product._stock_in_time.time.parse(temp);
 			break;
 
 		case 12:
@@ -75,15 +74,15 @@ fstream& operator>>(fstream& file, Product& product)
 			break;
 
 		case 13:
-			product._stock_out_time.time.toString() = temp;
+			product._stock_out_time.time.parse(temp);
 			break;
 
 		case 14:
-			product._stock_cover_time.date.toString() = temp;
+			product._stock_cover_time.date.parse(temp);
 			break;
 
 		case 15:
-			product._stock_cover_time.time.toString() = temp;
+			product._stock_cover_time.time.parse(temp);
 			break;
 
 		case 16:
@@ -136,7 +135,7 @@ void ExcelIfstream::readExcelFile(Product& product, const string& file_name)
 	this->_file_in >> product;
 }
 
-void ExcelIfstream::readExcelFile(Product& product, const string& file_name)
+void ExcelIfstream::readExcelFile(Account& account, const string& file_name)
 {
 	try
 	{
@@ -154,18 +153,14 @@ void ExcelIfstream::readExcelFile(Product& product, const string& file_name)
 	}
 
 
-	this->_file_in >> product;
+	this->_file_in >> account;
 }
 
-void ExcelIfstream::readExcelFile(Account& account)
+void ExcelIfstream::readExcelFile(Bill& bill, const string& file_name)
 {
 }
 
-void ExcelIfstream::readExcelFile(Bill& bill)
-{
-}
-
-void ExcelIfstream::readExcelFile(Staff staff)
+void ExcelIfstream::readExcelFile(Staff staff, const string& file_name)
 {
 }
 
@@ -218,27 +213,27 @@ ifstream& operator>>(ifstream& file_in, Product& product)
 			break;
 
 		case 10:
-			product._stock_in_time.date.toString() = temp;
+			product._stock_in_time.date = Date::parse(temp);
 			break;
 
 		case 11:
-			product._stock_in_time.time.toString() = temp;
+			product._stock_in_time.time = MyTime::parse(temp);
 			break;
 
 		case 12:
-			product._stock_out_time.date.parse(temp);
+			product._stock_out_time.date = Date::parse(temp);
 			break;
 
 		case 13:
-			product._stock_out_time.time.toString() = temp;
+			product._stock_out_time.time = MyTime::parse(temp);
 			break;
 
 		case 14:
-			product._stock_cover_time.date.toString() = temp;
+			product._stock_cover_time.date = Date::parse(temp);
 			break;
 
 		case 15:
-			product._stock_cover_time.time.toString() = temp;
+			product._stock_cover_time.time = MyTime::parse(temp);
 			break;
 
 		case 16:
@@ -247,6 +242,31 @@ ifstream& operator>>(ifstream& file_in, Product& product)
 		}
 	}
 	return file_in;
+}
+
+ifstream& operator>>(ifstream& file_in, Account& account)
+{
+	int check = 0;
+	while (!(file_in.eof()))
+	{
+		int check = 0;
+		while (!(file_in.eof()))
+		{
+			string temp;
+			getline(file_in, temp, ',');
+			++check;
+
+
+			switch (check)
+			{
+			case 1:
+				account._account_id = temp;
+				break;
+
+			}
+
+		}
+	}
 }
 
 
@@ -262,7 +282,7 @@ void ExcelOfstream::open(string directory, ios_base::openmode mode)
 			directory.insert(i, "/");
 		}
 	}
-	this->_file_out.open(directory, mode);
+	this->_file_out.open(directory, mode | ios::app);
 }
 
 void ExcelOfstream::close()
@@ -293,29 +313,6 @@ void ExcelOfstream::writeExcelFile(Product& product, const string& file_name)
 	this->_file_out << endl;
 }
 
-void ExcelOfstream::writeExcelFile(Product& product, const string& file_name)
-{
-	try
-	{
-		if (!(this->_file))
-		{
-			stringstream writer;
-			writer << file_name << " is not open";
-			throw string(writer.str());
-		}
-	}
-	catch (const string& notification)
-	{
-		cout << notification << endl;
-		exit(EXIT_FAILURE);
-	}
-
-
-
-	this->_file << product;
-	this->_file << endl;
-}
-
 void ExcelOfstream::writeExcelFile(Account& account)
 {
 }
@@ -332,7 +329,34 @@ ofstream& operator<<(ofstream& file_out, const Product& product)
 {
 	file_out << product._product_name << "," << product._product_type << "," << product._product_color << "," << product._product_size << "," << product._product_id << "," << product._firm_name << ",";
 	file_out << product._discount << "," << product._product_price << "," << product._product_cost << ",";
-	file_out << product._stock_in_time.date << " " << product._stock_in_time.time << "," << product._stock_out_time.date << " " << product._stock_out_time.time << "," << product._stock_cover_time.date << " " << product._stock_cover_time.time << ",";
+	file_out << product._stock_in_time.date << "," << product._stock_in_time.time << "," << product._stock_out_time.date << "," << product._stock_out_time.time << "," << product._stock_cover_time.date << "," << product._stock_cover_time.time << ",";
 	file_out << product._quantity_out_of_stock;
 	return file_out;
+}
+
+ofstream& operator<<(ofstream& file_out, const Account& account)
+{
+	file_out << account._account_id << ",";
+}
+
+void ExcelFstream::open(string directory, ios_base::openmode mode)
+{
+	if (mode == ios::out || (mode == ios::app | mode == ios::out))
+	{
+		_file_out.open(directory, mode);
+	}
+	else if (mode == ios::in || (mode == ios::app | mode == ios::in))
+	{
+		_file_in.open(directory, mode);
+	}
+	else
+	{
+		_file_out.open(directory, mode);
+		_file_in.open(directory, mode);
+	}
+}
+
+void ExcelFstream::close()
+{
+	_file.close();
 }
