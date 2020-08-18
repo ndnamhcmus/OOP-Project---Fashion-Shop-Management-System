@@ -21,17 +21,14 @@ void ExcelFstream::writeExcelFile(Product& product)
 		exit(EXIT_FAILURE);
 	}
 	
-	int count = 0;
-	while (count <= 1)
-	{
-		/*file_out << product._product_name << "," << product._product_type << "," << product._product_color << "," << product._product_size << "," << product._product_id << "," << product._firm_name << ","
-			<< product._discount << "," << product._product_price << "," << product._product_cost << ","
-			<< product._stock_in_time.date << " " << product._stock_in_time.time << "," << product._stock_out_time.date << " " << product._stock_out_time.time << "," << product._stock_cover_time.date << " " << product._stock_cover_time.time << ","
-			<< product._quantity_out_of_stock;*/
 
-		file_out << "abc" << "," << "def" << " " << "hik" << endl;
-		count++;
-	}
+	file_out << product._product_name << "," << product._product_type << "," << product._product_color << "," << product._product_size << "," << product._product_id << "," << product._firm_name << ",";
+	file_out << product._discount << "," << product._product_price << "," << product._product_cost << ",";
+	file_out << product._stock_in_time.date << " " << product._stock_in_time.time << "," << product._stock_out_time.date << " " << product._stock_out_time.time << "," << product._stock_cover_time.date << " " << product._stock_cover_time.time << ",";
+	file_out << product._quantity_out_of_stock;
+	file_out << endl;
+
+
 	file_out.close();
 }
 
