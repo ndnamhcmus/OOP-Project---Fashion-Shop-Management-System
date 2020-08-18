@@ -6,6 +6,7 @@
 
 fstream& operator<<(fstream& file, const Product& product)
 {
+	////		fix		////
 	file << product._product_name << "," << product._product_type << "," << product._product_color << "," << product._product_size << "," << product._product_id << "," << product._firm_name << ",";
 	file << product._discount << "," << product._product_price << "," << product._product_cost << ",";
 	file << product._stock_in_time.date << " " << product._stock_in_time.time << "," << product._stock_out_time.date << " " << product._stock_out_time.time << "," << product._stock_cover_time.date << " " << product._stock_cover_time.time << ",";
