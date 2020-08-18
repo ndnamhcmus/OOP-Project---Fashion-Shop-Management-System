@@ -53,7 +53,7 @@ class Staff : public Person
 protected:
 
 	string _staff_id;
-	double _base_salary;
+	double _base_salary = 0;
 
 public:
 
@@ -66,13 +66,17 @@ public:
 
 
 	friend class ExcelFstream;
+
+	friend ofstream& operator<<(ofstream& file_out, const Staff& staff);
+
+	friend ifstream& operator>>(ifstream& file_out, Staff& staff);
 };
 
 class Seller : public Staff
 {
 private:
 
-	double _commission;		// tiền hoa hồng
+	double _commission = 0;		// tiền hoa hồng
 	static int _goods_sale;		// doanh số bán hàng
 
 public:
@@ -86,6 +90,10 @@ public:
 
 
 	friend class ExcelFstream;
+
+	friend ofstream& operator<<(ofstream& file_out, const Seller& seller);
+
+	friend ifstream& operator>>(ifstream& file_out, Seller& seller);
 };
 
 class Security : public Staff
@@ -104,6 +112,10 @@ public:
 
 
 	friend class ExcelFstream;
+
+	friend ofstream& operator<<(ofstream& file_out, const Security& security);
+
+	friend ifstream& operator>>(ifstream& file_out, Security& security);
 };
 
 

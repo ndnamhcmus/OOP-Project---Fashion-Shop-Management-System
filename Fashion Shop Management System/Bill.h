@@ -25,6 +25,10 @@ public:
 
 
 	friend class ExcelFstream;
+
+	friend ofstream& operator<<(ofstream& file_out, const Bill& bill);
+
+	friend ifstream& operator>>(ifstream& file_out, Bill& bill);
 };
 
 

@@ -20,6 +20,10 @@ public:
 
 
 	friend class ExcelFstream;
+
+	friend ofstream& operator<<(ofstream& file_out, const MembershipLevel& membership_level);
+
+	friend ifstream& operator>>(ifstream& file_out, MembershipLevel& membership_level);
 };
 
 
