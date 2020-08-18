@@ -262,9 +262,7 @@ ifstream& operator>>(ifstream& file_in, Account& account)
 			case 1:
 				account._account_id = temp;
 				break;
-
 			}
-
 		}
 	}
 }
@@ -336,16 +334,16 @@ ofstream& operator<<(ofstream& file_out, const Product& product)
 
 ofstream& operator<<(ofstream& file_out, const Account& account)
 {
-	file_out << account._account_id << ",";
+	file_out << account._account_id;
 }
 
 void ExcelFstream::open(string directory, ios_base::openmode mode)
 {
-	if (mode == ios::out || (mode == ios::app | mode == ios::out))
+	if (mode == ios::out)
 	{
 		_file_out.open(directory, mode);
 	}
-	else if (mode == ios::in || (mode == ios::app | mode == ios::in))
+	else if (mode == ios::in)
 	{
 		_file_in.open(directory, mode);
 	}
