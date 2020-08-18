@@ -18,8 +18,14 @@ private:
 	Product _product;
 
 public:
-	Bill();
-	~Bill();
+	Bill()
+	{
+
+	}
+	~Bill()
+	{
+
+	}
 
 
 

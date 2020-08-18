@@ -4,6 +4,8 @@
 #include <sstream>
 #include <Product.h>
 #include <Account.h>
+#include <Bill.h>
+#include <Person_Customer_Staff_Seller_Security.h>
 #include <FakeAddress.h>
 
 using namespace std;
@@ -47,6 +49,9 @@ protected:
 
 	void writeExcelFile(Customer customer);
 
+	void writeExcelFile(MembershipLevel membership_level);
+
+
 public:
 
 	~ExcelOfstream()
@@ -66,9 +71,9 @@ public:
 
 	void writeExcelFile(const Account& account, const string& file_name="Account.csv");
 						
-	void writeExcelfile(const Bill& bill, const string& file_name = "Bill.csv");
+	void writeExcelfile(Bill bill, const string& file_name = "Bill.csv");
 						
-	void writeExcelFile(const Staff& staff, const string& file_name = "Staff.csv");
+	void writeExcelFile(Staff* staff, const string& file_name = "Staff.csv");
 };
 
 class ExcelFstream : public ExcelIfstream, public ExcelOfstream
@@ -87,4 +92,3 @@ public:
 
 	void close();
 };
-

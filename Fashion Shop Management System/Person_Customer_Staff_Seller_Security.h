@@ -23,7 +23,10 @@ protected:
 
 public:
 
-	Person(string name, Date date_of_birth, string phone_number, Address address);
+	Person(string name, Date date_of_birth, string phone_number, Address address)
+	{
+
+	}
 
 
 
