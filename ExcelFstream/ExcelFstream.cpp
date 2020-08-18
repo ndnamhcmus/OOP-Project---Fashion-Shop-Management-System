@@ -132,7 +132,81 @@ void ExcelIfstream::readExcelFile(Product& product, const string& file_name)
 	}
 
 
-	this->_file_in >> product;
+	int check = 0;
+	while (!(this->_file_in.eof()))
+	{
+		string temp;
+		getline(this->_file_in, temp, ',');
+		++check;
+
+
+		switch (check)
+		{
+		case 1:
+			product._product_name = temp;
+			break;
+
+		case 2:
+			product._product_type = temp;
+			break;
+
+		case 3:
+			product._product_color = temp;
+			break;
+
+		case 4:
+			product._product_size = temp;
+			break;
+
+		case 5:
+			product._product_id = temp;
+			break;
+
+		case 6:
+			product._firm_name = temp;
+			break;
+
+		case 7:
+			product._discount = stod(temp);
+			break;
+
+		case 8:
+			product._product_price = stod(temp);
+			break;
+
+		case 9:
+			product._product_cost = stod(temp);
+			break;
+
+		case 10:
+			product._stock_in_time.date = Date::parse(temp);
+			break;
+
+		case 11:
+			product._stock_in_time.time = MyTime::parse(temp);
+			break;
+
+		case 12:
+			product._stock_out_time.date = Date::parse(temp);
+			break;
+
+		case 13:
+			product._stock_out_time.time = MyTime::parse(temp);
+			break;
+
+		case 14:
+			product._stock_cover_time.date = Date::parse(temp);
+			break;
+
+		case 15:
+			product._stock_cover_time.time = MyTime::parse(temp);
+			break;
+
+		case 16:
+			product._quantity_out_of_stock = stoi(temp);
+			break;
+		}
+	}
 }
 
 void ExcelIfstream::readExcelFile(Account& account, const string& file_name)
@@ -153,7 +227,21 @@ void ExcelIfstream::readExcelFile(Account& account, const string& file_name)
 	}
 
 
-	this->_file_in >> account;
+	int check = 0;
+	while (!(this->_file_in.eof()))
+	{
+		string temp;
+		getline(this->_file_in, temp, ',');
+		++check;
+
+
+		switch (check)
+		{
+		case 1:
+			account._account_id = temp;
+			break;
+		}
+	}
 }
 
 void ExcelIfstream::readExcelFile(Bill& bill, const string& file_name)
@@ -163,109 +251,6 @@ void ExcelIfstream::readExcelFile(Bill& bill, const string& file_name)
 void ExcelIfstream::readExcelFile(Staff staff, const string& file_name)
 {
 }
-
-//ifstream& operator>>(ifstream& file_in, Product& product)
-//{
-//	int check = 0;
-//	while (!(file_in.eof()))
-//	{
-//		string temp;
-//		getline(file_in, temp, ',');
-//		++check;
-//
-//
-//		switch (check)
-//		{
-//		case 1:
-//			product._product_name = temp;
-//			break;
-//
-//		case 2:
-//			product._product_type = temp;
-//			break;
-//
-//		case 3:
-//			product._product_color = temp;
-//			break;
-//
-//		case 4:
-//			product._product_size = temp;
-//			break;
-//
-//		case 5:
-//			product._product_id = temp;
-//			break;
-//
-//		case 6:
-//			product._firm_name = temp;
-//			break;
-//
-//		case 7:
-//			product._discount = stod(temp);
-//			break;
-//
-//		case 8:
-//			product._product_price = stod(temp);
-//			break;
-//
-//		case 9:
-//			product._product_cost = stod(temp);
-//			break;
-//
-//		case 10:
-//			product._stock_in_time.date = Date::parse(temp);
-//			break;
-//
-//		case 11:
-//			product._stock_in_time.time = MyTime::parse(temp);
-//			break;
-//
-//		case 12:
-//			product._stock_out_time.date = Date::parse(temp);
-//			break;
-//
-//		case 13:
-//			product._stock_out_time.time = MyTime::parse(temp);
-//			break;
-//
-//		case 14:
-//			product._stock_cover_time.date = Date::parse(temp);
-//			break;
-//
-//		case 15:
-//			product._stock_cover_time.time = MyTime::parse(temp);
-//			break;
-//
-//		case 16:
-//			product._quantity_out_of_stock = stoi(temp);
-//			break;
-//		}
-//	}
-//	return file_in;
-//}
-
-//ifstream& operator>>(ifstream& file_in, Account& account)
-//{
-//	int check = 0;
-//	while (!(file_in.eof()))
-//	{
-//		int check = 0;
-//		while (!(file_in.eof()))
-//		{
-//			string temp;
-//			getline(file_in, temp, ',');
-//			++check;
-//
-//
-//			switch (check)
-//			{
-//			case 1:
-//				account._account_id = temp;
-//				break;
-//			}
-//		}
-//	}
-//}
 
 
 ////		EXCEL OUT FILE STREAM		////
@@ -288,7 +273,7 @@ void ExcelOfstream::close()
 	this->_file_out.close();
 }
 
-void ExcelOfstream::writeExcelFile(Product& product, const string& file_name)
+void ExcelOfstream::writeExcelFile(const Product& product, const string& file_name)
 {
 	try
 	{
@@ -314,35 +299,23 @@ void ExcelOfstream::writeExcelFile(Product& product, const string& file_name)
 	this->_file_out << endl;
 }
 
-void ExcelOfstream::writeExcelFile(Account& account)
+void ExcelOfstream::writeExcelFile(const Account& account, const string& file_name)
 {
+	_file_out << account._account_id << ",";
+	writeExcelFile(account._customer);
 }
 		  
-void ExcelOfstream::writeExcelfile(Bill& bill)
+void ExcelOfstream::writeExcelfile(const Bill& bill, const string& file_name)
 {
 }
 		 
-void ExcelOfstream::writeExcelFile(Staff staff)
+void ExcelOfstream::writeExcelFile(const Staff& staff, const string& file_name)
 {
 }
 
-//ofstream& operator<<(ofstream& file_out, const Product& product)
-//{
-//	file_out << product._product_name << "," << product._product_type << "," << product._product_color << "," << product._product_size << "," << product._product_id << "," << product._firm_name << ",";
-//	file_out << product._discount << "," << product._product_price << "," << product._product_cost << ",";
-//	file_out << product._stock_in_time.date << "," << product._stock_in_time.time << "," << product._stock_out_time.date << "," << product._stock_out_time.time << "," << product._stock_cover_time.date << "," << product._stock_cover_time.time << ",";
-//	file_out << product._quantity_out_of_stock;
-//	return file_out;
-//}
-
-ofstream& operator<<(ofstream& file_out, const Account& account)
+void ExcelOfstream::writeExcelFile(Customer customer)
 {
-	file_out << account._account_id;
-}
-
-ofstream& operator<<(ofstream& file_out, const Person& person)
-{
-	file_out << person._date_of_birth;
+	_file_out << customer._name << "," << customer._phone_number << "," << string(customer._date_of_birth) << "," << string(customer._address) << ",";
 }
 
 void ExcelFstream::open(string directory, ios_base::openmode mode)
