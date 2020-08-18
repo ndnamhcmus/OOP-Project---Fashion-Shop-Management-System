@@ -44,8 +44,11 @@ public:
 
 
 
-
-	friend class ExcelFstream;
+	////		Friend function		////
+	friend fstream& operator<<(fstream& file, const Product& product);
+	friend fstream& operator>>(fstream& file, Product& product);
+	friend ofstream& operator<<(ofstream& file_out, const Product& product);
+	friend ifstream& operator>>(ifstream& file_in, Product& product);
 };
 
 

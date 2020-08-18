@@ -3,6 +3,10 @@
 int main()
 {
 	ExcelFstream file;
-	Product test;
-	file.writeExcelFile(test);
+	Product product;
+
+
+	file.open("Product.csv", ios::in | ios::app);
+	file.readExcelFile(product);
+	file.close();
 }
