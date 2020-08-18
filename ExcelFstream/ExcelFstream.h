@@ -73,6 +73,8 @@ public:
 	friend ofstream& operator<<(ofstream& file_out, const Product& product);
 
 	friend ofstream& operator<<(ofstream& file_out, const Account& account);
+
+	friend ofstream& operator<<(ofstream& file_out, const Person& person);
 };
 
 class ExcelFstream : public ExcelIfstream, public ExcelOfstream

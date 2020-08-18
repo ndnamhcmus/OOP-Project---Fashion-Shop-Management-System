@@ -30,9 +30,9 @@ public:
 
 	friend class ExcelFstream;
 
-	friend ofstream& operator<<(ofstream& file_out, const Account& account);
+	friend class ExcelIfstream;
 
-	friend ifstream& operator>>(ifstream& file_out, Account& account);
+	friend class ExcelOfstream;
 };
 
 

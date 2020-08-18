@@ -28,6 +28,10 @@ public:
 
 
 	friend class ExcelFstream;
+
+	friend class ExcelIfstream;
+
+	friend class ExcelOfstream;
 };
 
 class Customer : public Person
@@ -46,6 +50,10 @@ public:
 
 
 	friend class ExcelFstream;
+
+	friend class ExcelIfstream;
+
+	friend class ExcelOfstream;
 };
 
 class Staff : public Person
@@ -67,9 +75,9 @@ public:
 
 	friend class ExcelFstream;
 
-	friend ofstream& operator<<(ofstream& file_out, const Staff& staff);
+	friend class ExcelIfstream;
 
-	friend ifstream& operator>>(ifstream& file_out, Staff& staff);
+	friend class ExcelOfstream;
 };
 
 class Seller : public Staff
@@ -91,9 +99,9 @@ public:
 
 	friend class ExcelFstream;
 
-	friend ofstream& operator<<(ofstream& file_out, const Seller& seller);
+	friend class ExcelIfstream;
 
-	friend ifstream& operator>>(ifstream& file_out, Seller& seller);
+	friend class ExcelOfstream;
 };
 
 class Security : public Staff
@@ -113,9 +121,9 @@ public:
 
 	friend class ExcelFstream;
 
-	friend ofstream& operator<<(ofstream& file_out, const Security& security);
+	friend class ExcelIfstream;
 
-	friend ifstream& operator>>(ifstream& file_out, Security& security);
+	friend class ExcelOfstream;
 };
 
 
