@@ -45,13 +45,14 @@ private:
 
 public:
 
+	////		Constructor			////
 	Customer(string name, Date date_of_birth, string phone_number, Address address, string customer_id) : Person(name, date_of_birth, phone_number, address)
 	{
 
 	}
 
 
-
+	////		Friend		////
 	friend class ExcelFstream;
 
 	friend class ExcelIfstream;
@@ -87,8 +88,9 @@ class Seller : public Staff
 {
 private:
 
-	double _commission = 0;		// tiền hoa hồng
+	double _commission;		// tiền hoa hồng
 	static int _goods_sale;		// doanh số bán hàng
+	double _real_salary;
 
 public:
 
@@ -96,8 +98,6 @@ public:
 	{
 
 	}
-
-
 
 
 	friend class ExcelFstream;

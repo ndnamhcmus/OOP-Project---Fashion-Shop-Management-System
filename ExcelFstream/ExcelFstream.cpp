@@ -207,6 +207,22 @@ void ExcelOfstream::writeExcelFile(const Product& product, const string& file_na
 
 void ExcelOfstream::writeExcelFile(const Account& account, const string& file_name)
 {
+	try
+	{
+		if (!(this->_file_out))
+		{
+			stringstream writer;
+			writer << file_name << " is not open";
+			throw string(writer.str());
+		}
+	}
+	catch (const string& notification)
+	{
+		cout << notification << endl;
+		exit(EXIT_FAILURE);
+	}
+
+
 	_file_out << account._account_id << ",";
 	writeExcelFile(account._customer);
 	writeExcelFile(account._membership_level);
@@ -235,15 +251,6 @@ void ExcelOfstream::writeExcelfile(Bill bill, const string& file_name)
 	_file_out << string(bill._curr_date) << ",";
 }
 		 
-void ExcelOfstream::writeExcelFile(Staff* staff, const string& file_name)
-{
-	_file_out << staff->_staff_id << "," << staff->_name << "," << staff->_phone_number << "," << string(staff->_date_of_birth) << "," << string(staff->_address) << "," << staff->_base_salary << ",";
-	/*if (dynamic_cast<Seller*> (staff))
-	{
-
-	}*/
-}
-
 void ExcelOfstream::writeExcelFile(Customer customer)
 {
 	writeExcelFile(customer);
@@ -252,6 +259,52 @@ void ExcelOfstream::writeExcelFile(Customer customer)
 void ExcelOfstream::writeExcelFile(MembershipLevel membership_level)
 {
 	_file_out << membership_level._level << "," << membership_level._cumulative_points << ",";
+}
+
+void ExcelOfstream::writeExcelFile(Staff staff, const string& file_name, const string& staff_type)
+{
+
+}
+
+void ExcelOfstream::writeExcelFile(Seller seller, const string& file_name)
+{
+	try
+	{
+		if (!(this->_file_out))
+		{
+			stringstream writer;
+			writer << file_name << " is not open";
+			throw string(writer.str());
+		}
+	}
+	catch (const string& notification)
+	{
+		cout << notification << endl;
+		exit(EXIT_FAILURE);
+	}
+	_file_out << seller._staff_id << "," << seller._name << "," << seller._phone_number << "," << string(seller._date_of_birth) << "," << string(seller._address) << "," << seller._base_salary << ",";
+	_file_out << seller._goods_sale << "," << seller._commission << "," << seller._real_salary;
+}
+
+void ExcelOfstream::writeExcelFile(Security security, const string& file_name)
+{
+	try
+	{
+		if (!(this->_file_out))
+		{
+			stringstream writer;
+			writer << file_name << " is not open";
+			throw string(writer.str());
+		}
+	}
+	catch (const string& notification)
+	{
+		cout << notification << endl;
+		exit(EXIT_FAILURE);
+	}
+
+
+	_file_out << security._staff_id << "," << security._name << "," << security._phone_number << "," << string(security._date_of_birth) << "," << string(security._address) << "," << security._base_salary << ",";
 }
 
 void ExcelFstream::open(string directory, ios_base::openmode mode)

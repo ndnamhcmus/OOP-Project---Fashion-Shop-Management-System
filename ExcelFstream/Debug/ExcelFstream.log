@@ -1,0 +1,7 @@
+﻿  ExcelFstream.cpp
+H:\PROGRAMMING\OOP\Project\OOP-Project---Fashion-Shop-Management-System\ExcelFstream\ExcelFstream.cpp(9,20): warning C4018: '<': signed/unsigned mismatch
+H:\PROGRAMMING\OOP\Project\OOP-Project---Fashion-Shop-Management-System\ExcelFstream\ExcelFstream.cpp(168,20): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+  Generating Code...
+H:\PROGRAMMING\OOP\Project\OOP-Project---Fashion-Shop-Management-System\ExcelFstream\ExcelFstream.cpp(257): warning C4717: 'ExcelOfstream::writeExcelFile': recursive on all control paths, function will cause runtime stack overflow
+  ExcelFstream.vcxproj -> H:\PROGRAMMING\OOP\Project\OOP-Project---Fashion-Shop-Management-System\Debug\ExcelFstream.exe

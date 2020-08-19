@@ -51,6 +51,9 @@ protected:
 
 	void writeExcelFile(MembershipLevel membership_level);
 
+	void writeExcelFile(Seller seller, const string& file_name = "Staff.csv");
+
+	void writeExcelFile(Security security, const string& file_name = "Staff.csv");
 
 public:
 
@@ -73,7 +76,8 @@ public:
 						
 	void writeExcelfile(Bill bill, const string& file_name = "Bill.csv");
 						
-	void writeExcelFile(Staff* staff, const string& file_name = "Staff.csv");
+	void writeExcelFile(Staff staff, const string& file_name = "Staff.csv", const string& staff_type = "staff");
+
 };
 
 class ExcelFstream : public ExcelIfstream, public ExcelOfstream
