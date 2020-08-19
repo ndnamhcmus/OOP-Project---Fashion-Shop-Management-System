@@ -94,7 +94,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Support\Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Fashion Shop Management System.lib;Date.lib;Tokenizer.lib;MyTime.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Fashion Shop Management System.lib;Date.lib;Tokenizer.lib;MyTime.lib;FakeAddress.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -113,7 +113,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Support\Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Fashion Shop Management System.lib;Date.lib;Tokenizer.lib;MyTime.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Fashion Shop Management System.lib;Date.lib;Tokenizer.lib;MyTime.lib;FakeAddress.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

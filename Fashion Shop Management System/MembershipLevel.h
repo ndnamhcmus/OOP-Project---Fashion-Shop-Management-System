@@ -20,6 +20,12 @@ public:
 
 
 	friend class ExcelFstream;
+
+	friend class ExcelIfstream;
+
+	friend class ExcelOfstream;
+
+	friend class Account;
 };
 
 

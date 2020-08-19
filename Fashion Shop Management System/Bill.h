@@ -18,13 +18,23 @@ private:
 	Product _product;
 
 public:
-	Bill();
-	~Bill();
+	Bill()
+	{
+
+	}
+	~Bill()
+	{
+
+	}
 
 
 
 
 	friend class ExcelFstream;
+
+	friend class ExcelIfstream;
+
+	friend class ExcelOfstream;
 };
 
 
