@@ -151,6 +151,11 @@ void ExcelIfstream::readExcelFile(Account& account, const string& file_name)
 	}
 }
 
+void ExcelIfstream::readExcelFile(Customer& customer, const string& file_name)
+{
+	getline(_file_in, customer._customer_id, ',');
+}
+
 void ExcelIfstream::readExcelFile(Bill& bill, const string& file_name)
 {
 }
@@ -251,9 +256,15 @@ void ExcelOfstream::writeExcelfile(Bill bill, const string& file_name)
 	_file_out << string(bill._curr_date) << ",";
 }
 		 
+void ExcelOfstream::writePersonToExcelFile(Person person)
+{
+	_file_out << person._name << "," << string(person._date_of_birth) << "," << person._phone_number << "," << string(person._address) << ",";
+}
+
 void ExcelOfstream::writeExcelFile(Customer customer)
 {
-	writeExcelFile(customer);
+	writePersonToExcelFile(customer);
+	_file_out << customer._customer_id << ",";
 }
 
 void ExcelOfstream::writeExcelFile(MembershipLevel membership_level)
@@ -261,9 +272,11 @@ void ExcelOfstream::writeExcelFile(MembershipLevel membership_level)
 	_file_out << membership_level._level << "," << membership_level._cumulative_points << ",";
 }
 
-void ExcelOfstream::writeExcelFile(Staff staff, const string& file_name, const string& staff_type)
+void ExcelOfstream::writeStaffInfoToExcelFile(Staff staff)
 {
-
+	_file_out << staff._staff_id << ",";
+	writePersonToExcelFile(staff);
+	_file_out << staff._base_salary << ",";
 }
 
 void ExcelOfstream::writeExcelFile(Seller seller, const string& file_name)
@@ -282,8 +295,11 @@ void ExcelOfstream::writeExcelFile(Seller seller, const string& file_name)
 		cout << notification << endl;
 		exit(EXIT_FAILURE);
 	}
-	_file_out << seller._staff_id << "," << seller._name << "," << seller._phone_number << "," << string(seller._date_of_birth) << "," << string(seller._address) << "," << seller._base_salary << ",";
-	_file_out << seller._goods_sale << "," << seller._commission << "," << seller._real_salary;
+	
+
+	writeStaffInfoToExcelFile(seller);
+	_file_out << seller._goods_sale << "," << seller._commission << "," << seller._real_salary << ",";
+	_file_out << endl;
 }
 
 void ExcelOfstream::writeExcelFile(Security security, const string& file_name)
@@ -304,8 +320,14 @@ void ExcelOfstream::writeExcelFile(Security security, const string& file_name)
 	}
 
 
-	_file_out << security._staff_id << "," << security._name << "," << security._phone_number << "," << string(security._date_of_birth) << "," << string(security._address) << "," << security._base_salary << ",";
+	_file_out << security._staff_id << ",";
+	writePersonToExcelFile(security);
+	_file_out << security._base_salary << ",";
 }
+
+
+////		EXCEL IN/OUT FILE STREAM		////
+
 
 void ExcelFstream::open(string directory, ios_base::openmode mode)
 {
