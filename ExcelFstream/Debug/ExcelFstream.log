@@ -1,6 +1,0 @@
-﻿  ExcelFstream.cpp
-H:\PROGRAMMING\OOP\Project\OOP-Project---Fashion-Shop-Management-System\ExcelFstream\ExcelFstream.cpp(9,20): warning C4018: '<': signed/unsigned mismatch
-H:\PROGRAMMING\OOP\Project\OOP-Project---Fashion-Shop-Management-System\ExcelFstream\ExcelFstream.cpp(173,20): warning C4018: '<': signed/unsigned mismatch
-  main.cpp
-  Generating Code...
-  ExcelFstream.vcxproj -> H:\PROGRAMMING\OOP\Project\OOP-Project---Fashion-Shop-Management-System\Debug\ExcelFstream.exe
