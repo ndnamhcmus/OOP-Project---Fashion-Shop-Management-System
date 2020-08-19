@@ -25,7 +25,10 @@ public:
 
 	Person(string name, Date date_of_birth, string phone_number, Address address)
 	{
-
+		_name = name;
+		_date_of_birth = date_of_birth;
+		_phone_number = phone_number;
+		_address = address;
 	}
 
 
@@ -48,7 +51,7 @@ public:
 	////		Constructor			////
 	Customer(string name, Date date_of_birth, string phone_number, Address address, string customer_id) : Person(name, date_of_birth, phone_number, address)
 	{
-
+		_customer_id = customer_id;
 	}
 
 
@@ -69,9 +72,10 @@ protected:
 
 public:
 
-	Staff(string name, Date date_of_birth, string phone_number, Address address, string staff_id, double _base_salary) : Person(name, date_of_birth, phone_number, address)
+	Staff(string name, Date date_of_birth, string phone_number, Address address, string staff_id, double base_salary) : Person(name, date_of_birth, phone_number, address)
 	{
-
+		_staff_id = staff_id;
+		_base_salary = base_salary;
 	}
 
 
@@ -94,9 +98,11 @@ private:
 
 public:
 
-	Seller(string name, Date date_of_birth, string phone_number, Address address, string staff_id, double _base_salary, double commission, int goods_sale) : Staff(name, date_of_birth, phone_number, address, staff_id, _base_salary)
+	Seller(string name, Date date_of_birth, string phone_number, Address address, string staff_id, double _base_salary, double commission, int goods_sale, double real_salary) : Staff(name, date_of_birth, phone_number, address, staff_id, _base_salary)
 	{
-
+		_commission = commission;
+		_goods_sale = goods_sale;
+		_real_salary = real_salary;
 	}
 
 
@@ -114,7 +120,7 @@ private:
 
 public:
 
-	Security(string name, Date date_of_birth, string phone_number, Address address, string staff_id, double _base_salary, double commission, int goods_sale) : Staff(name, date_of_birth, phone_number, address, staff_id, _base_salary)
+	Security(string name, Date date_of_birth, string phone_number, Address address, string staff_id, double _base_salary) : Staff(name, date_of_birth, phone_number, address, staff_id, _base_salary)
 	{
 
 	}
