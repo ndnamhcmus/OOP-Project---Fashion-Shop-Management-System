@@ -149,7 +149,7 @@
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="Bill.cpp" />
-    <ClCompile Include="Membership_Level.cpp" />
+    <ClCompile Include="MembershipLevel.cpp" />
     <ClCompile Include="Person_Customer_Staff_Seller_Security.cpp" />
     <ClCompile Include="Product.cpp" />
   </ItemGroup>

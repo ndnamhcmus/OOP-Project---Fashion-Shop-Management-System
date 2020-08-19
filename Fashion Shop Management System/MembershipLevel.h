@@ -16,8 +16,13 @@ private:
 
 public:
 
-
-
+	void setLevel(string);
+	string getLevel();
+	void setCumulativePoints(int);
+	int getCummulativePoints();
+	int increaseCumulativePoints();
+	double getDiscount(string _level);
+	void updateLevel();
 
 	friend class ExcelFstream;
 
