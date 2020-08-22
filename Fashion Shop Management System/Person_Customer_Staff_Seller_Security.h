@@ -23,22 +23,24 @@ protected:
 
 public:
 
-	Person(string name, Date date_of_birth, string phone_number, Address address)
-	{
-		_name = name;
-		_date_of_birth = date_of_birth;
-		_phone_number = phone_number;
-		_address = address;
-	}
+	Person(string name = "", Date date= Date (0,0,0), string phone = "", Address add= Address("", "", "", "", ""));
+	void setName(string _name);
+	void setDoB(Date dob);
+	void setPhoneNumber(int phone);
+	void setAddress(Address add);
+	string getName();
+	Date getDoB();
+	string getPhoneNumber();
+	Address getAddress();
 
-
+	////////     Friend    //////////
 
 	friend class ExcelFstream;
-
 	friend class ExcelIfstream;
-
 	friend class ExcelOfstream;
 };
+
+
 
 class Customer : public Person
 {
@@ -48,21 +50,23 @@ private:
 
 public:
 
-	////		Constructor			////
-	Customer(string name, Date date_of_birth, string phone_number, Address address, string customer_id) : Person(name, date_of_birth, phone_number, address)
-	{
-		_customer_id = customer_id;
-	}
-
+	Customer(string name = "", Date date = Date(0, 0, 0), string phone = "", Address add = Address("", "", "", "", ""),string customer_id = "") ;
+	void setCustomerInfo(string name, Date dob, int phone, Address add, string customer_id);
+	Customer getCustomerInfo();
+	string toString();
+	string getCustomerID();
+	void showCustomerInfo();
 
 	////		Friend		////
+
 	friend class ExcelFstream;
-
 	friend class ExcelIfstream;
-
 	friend class ExcelOfstream;
+
 };
 
+
+///////////////////////////// Do-ING /////////////////////
 class Staff : public Person
 {
 protected:
@@ -70,23 +74,27 @@ protected:
 	string _staff_id;
 	double _base_salary = 0;
 
+private:
+
+	void setStaffID(string staff_id);
+	void setBaseSalary(double salary);
+	void setStaffInfo(string name, Date date, string phone, Address add, string staff_id, double base_salary);
+
 public:
 
-	Staff(string name, Date date_of_birth, string phone_number, Address address, string staff_id, double base_salary) : Person(name, date_of_birth, phone_number, address)
-	{
-		_staff_id = staff_id;
-		_base_salary = base_salary;
-	}
+	Staff(string name = "", Date date = Date(0, 0, 0), string phone = "", Address add = Address("", "", "", "", ""), string staff_id = "", double base_salary = 0);
+	string getStaffID();
+	void showStaffInfo();
+	void saveStaffInfoToFile();
 
-
-
+	////  Friend //
 
 	friend class ExcelFstream;
-
 	friend class ExcelIfstream;
-
 	friend class ExcelOfstream;
 };
+
+
 
 class Seller : public Staff
 {
@@ -113,6 +121,8 @@ public:
 	friend class ExcelOfstream;
 };
 
+
+
 class Security : public Staff
 {
 private:
@@ -124,9 +134,6 @@ public:
 	{
 
 	}
-
-
-
 
 	friend class ExcelFstream;
 
