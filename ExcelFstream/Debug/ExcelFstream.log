@@ -1,0 +1,6 @@
+﻿  ExcelFstream.cpp
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\ExcelFstream\ExcelFstream.cpp(9,20): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+  Generating Code...
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\ExcelFstream\ExcelFstream.cpp(173,20): warning C4018: '<': signed/unsigned mismatch
+  ExcelFstream.vcxproj -> D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Debug\ExcelFstream.exe

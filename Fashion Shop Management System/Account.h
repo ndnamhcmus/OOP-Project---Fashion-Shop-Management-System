@@ -21,8 +21,9 @@ private:
 	MembershipLevel _membership_level;
 
 public:
-	Account();
+	Account(string account_id = "", MembershipLevel membership_level = MembershipLevel(), Customer customer = Customer());
 	~Account();
+
 
 
 

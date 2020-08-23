@@ -54,7 +54,7 @@ public:
 		_customer_id = customer_id;
 	}
 
-
+	Customer();
 	////		Friend		////
 	friend class ExcelFstream;
 

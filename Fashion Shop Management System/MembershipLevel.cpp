@@ -2,6 +2,12 @@
 
 int MembershipLevel::_cumulative_points = 0;
 
+MembershipLevel::MembershipLevel(string level, int cumulative_points)
+{
+		_level = level;
+		_cumulative_points = cumulative_points;
+}
+
 void MembershipLevel::setLevel(string level)
 {
 	_level = level;
