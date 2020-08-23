@@ -50,6 +50,7 @@ public:
 
 	MyTime& operator=(const int& time);
 
+	MyTime& operator=(const MyTime& time);
 };
 
 
