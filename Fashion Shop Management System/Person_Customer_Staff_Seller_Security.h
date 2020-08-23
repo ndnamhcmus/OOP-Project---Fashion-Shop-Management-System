@@ -23,7 +23,14 @@ protected:
 
 public:
 
-	Person(string name = "", Date date= Date (0,0,0), string phone = "", Address add= Address("", "", "", "", ""));
+	Person(string name = "", Date date= Date (0,0,0), string phone = "", Address add= Address("", "", "", "", ""))
+	{
+
+			_name = name;
+			_date_of_birth = date;
+			_phone_number = phone;
+			_address = add;
+	};
 	void setName(string _name);
 	void setDoB(Date dob);
 	void setPhoneNumber(int phone);
@@ -50,7 +57,10 @@ private:
 
 public:
 
-	Customer(string name = "", Date date = Date(0, 0, 0), string phone = "", Address add = Address("", "", "", "", ""),string customer_id = "") ;
+	Customer(string name = "", Date date = Date(0, 0, 0), string phone = "", Address add = Address("", "", "", "", ""), string customer_id = "")
+	{
+		_customer_id = customer_id;
+	};
 	void setCustomerInfo(string name, Date dob, int phone, Address add, string customer_id);
 	Customer getCustomerInfo();
 	string toString();
@@ -65,7 +75,7 @@ public:
 
 };
 
-
+/*
 ///////////////////////////// Do-ING /////////////////////
 class Staff : public Person
 {
@@ -141,6 +151,6 @@ public:
 
 	friend class ExcelOfstream;
 };
-
+*/
 
 #endif // !_PERSON_CUSTOMER_STAFF_SELLER_SECURITY_

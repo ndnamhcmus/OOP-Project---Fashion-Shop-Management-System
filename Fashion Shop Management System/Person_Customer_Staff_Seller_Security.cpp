@@ -4,13 +4,8 @@
 
 ////////      PERSON      ////////
 
-Person::Person(string name = "", Date date = Date(0, 0, 0), string phone = "", Address add = Address("", "", "", "", ""))
-{
-	_name = name;
-	_date_of_birth = date;
-	_phone_number = phone;
-	_address = add;
-}
+//Person::Person(string name = "", Date date = Date(0, 0, 0), string phone = "", Address add = Address("", "", "", "", ""))
+
 
 void Person::setName(string name) { _name = name; }
 
@@ -31,10 +26,8 @@ Address Person::getAddress() { return _address; }
 
 ////////////    CUSTOMER    /////////
 
-Customer::Customer(string name = "", Date date = Date(0, 0, 0), string phone = "", Address add = Address("", "", "", "", ""), string customer_id = ""): Person(name , date,  phone ,  add )
-{
-	_customer_id = customer_id;
-}
+//Customer::Customer(string name = "", Date date = Date(0, 0, 0), string phone = "", Address add = Address("", "", "", "", ""), string customer_id = ""): Person(name , date,  phone ,  add )
+	
 
 void Customer:: setCustomerInfo(string name, Date dob, int phone, Address add,string customer_id)
 {
@@ -55,7 +48,7 @@ string Customer:: toString()
 {
 	string cus;
 	cus = _name;
-	cus +="     "+ _date_of_birth.toString+ "     "+_phone_number+ "     "+_address+ "     "+_customer_id;
+	cus +="     "+ _date_of_birth.toString() + "     "+_phone_number+ "     "+_address.Address_to_string()+ "     "+_customer_id;
 	return cus;
 }
 
@@ -69,7 +62,7 @@ void Customer::showCustomerInfo()
 	cout << "Customer Information : " << endl;
 	cout << toString() << endl;
 }
-
+/*
 ///////    STAFF /////////
 
 Staff::Staff(string name = "", Date date = Date(0, 0, 0), string phone = "", Address add = Address("", "", "", "", ""), string staff_id = "", double base_salary = 0) :Person(name, date, phone, add)
@@ -77,3 +70,4 @@ Staff::Staff(string name = "", Date date = Date(0, 0, 0), string phone = "", Add
 	_staff_id = staff_id;
 	_base_salary = base_salary;
 }
+*/
