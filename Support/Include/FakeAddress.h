@@ -15,7 +15,9 @@ using namespace std;
 class FakeHouseNumber
 {
 public:
+
 	static string generateRandomHouseNumber();
+
 };
 
 class Address
@@ -50,6 +52,8 @@ public:
 	operator string();
 
 	friend ostream& operator<<(ostream& out, Address address);
+
+	Address operator=(const Address& address);
 };
 
 class FakeHCMAddress
