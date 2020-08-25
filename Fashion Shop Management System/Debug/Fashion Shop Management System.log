@@ -1,0 +1,36 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(438,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Account.cpp
+  Person_Customer_Staff_Seller_Security.cpp
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(7,30): error C2572: 'Person::Person': redefinition of default argument: parameter 1
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(26): message : see declaration of 'Person::Person'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(7,50): error C2572: 'Person::Person': redefinition of default argument: parameter 2
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(26): message : see declaration of 'Person::Person'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(7,76): error C2572: 'Person::Person': redefinition of default argument: parameter 3
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(26): message : see declaration of 'Person::Person'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(7,101): error C2572: 'Person::Person': redefinition of default argument: parameter 4
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(26): message : see declaration of 'Person::Person'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(34,34): error C2572: 'Customer::Customer': redefinition of default argument: parameter 1
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(53): message : see declaration of 'Customer::Customer'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(34,54): error C2572: 'Customer::Customer': redefinition of default argument: parameter 2
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(53): message : see declaration of 'Customer::Customer'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(34,80): error C2572: 'Customer::Customer': redefinition of default argument: parameter 3
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(53): message : see declaration of 'Customer::Customer'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(34,105): error C2572: 'Customer::Customer': redefinition of default argument: parameter 4
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(53): message : see declaration of 'Customer::Customer'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(34,148): error C2572: 'Customer::Customer': redefinition of default argument: parameter 5
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(53): message : see declaration of 'Customer::Customer'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(58,40): error C3867: 'Date::toString': non-standard syntax; use '&' to create a pointer to member
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(58,40): error C2297: '+': illegal, right operand has type 'std::string (__thiscall Date::* )(void)'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(75,28): error C2572: 'Staff::Staff': redefinition of default argument: parameter 1
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(85): message : see declaration of 'Staff::Staff'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(75,48): error C2572: 'Staff::Staff': redefinition of default argument: parameter 2
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(85): message : see declaration of 'Staff::Staff'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(75,74): error C2572: 'Staff::Staff': redefinition of default argument: parameter 3
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(85): message : see declaration of 'Staff::Staff'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(75,99): error C2572: 'Staff::Staff': redefinition of default argument: parameter 4
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(85): message : see declaration of 'Staff::Staff'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(75,139): error C2572: 'Staff::Staff': redefinition of default argument: parameter 5
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(85): message : see declaration of 'Staff::Staff'
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.cpp(75,164): error C2572: 'Staff::Staff': redefinition of default argument: parameter 6
+  Generating Code...
+D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(85): message : see declaration of 'Staff::Staff'
