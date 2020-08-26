@@ -1,3 +1,7 @@
+﻿#ifndef _EXCEL_FSTREAM_
+#define _EXCEL_FSTREAM_
+
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -7,16 +11,16 @@
 #include <Bill.h>
 #include <Person_Customer_Staff_Seller_Security.h>
 #include <FakeAddress.h>
-/////
+
 using namespace std;
+
 
 class ExcelIfstream
 {
-protected:
+	
+protected:		////		Protected attributes		////
 
 	ifstream _file_in;
-
-	void readExcelFile(Customer& customer, const string& file_name = "Product.csv");
 
 public:
 
@@ -25,22 +29,53 @@ public:
 		_file_in.close();
 	}
 
+	
+protected:		////		Private method: chỉ dùng trong Input Fstream		////
 
+	void inputToPerson(Person& person, vector <string> container, int& curr_pos);
 
-	////		Method		////
+	void inputToObject(Product& product, vector <string> container);
+
+	void inputToObject(Account& account, vector <string> container);
+
+	void inputToObject(Bill& bill, vector <string> container);		//		method này chưa đúng
+
+	void inputToObject(Security& security, vector <string> container);
+
+	//void inputToObject(Seller& seller, vector <string> container);
+
+	
+protected:		////		Protected method: có thể dùng ở derived class		////
+
+	/*void readExcelFile(Customer& customer, const string& file_name = "Product.csv");
+
+	void readExcelFile(MembershipLevel& membership);
+
+	void readStaffInfoFromFile(Staff& staff);*/
+
+public:
+
 	void open(string directory, ios_base::openmode mode = ios::in);
 
 	void close();
 
+public:
 
+	template <class T>
+	void readExcelFile(T& object, const string& file_name = "File.csv");
 
-	void readExcelFile(Product& product, const string& file_name = "Product.csv");
+	//void readExcelFile(Account& account, const string& file_name = "Account.csv");
 
-	void readExcelFile(Account& account, const string& file_name = "Account.csv");
+	//void readExcelFile(Bill& bill, const string& file_name = "Bill.csv");
 
-	void readExcelFile(Bill& bill, const string& file_name = "Bill.csv");
+	/*void readExcelFile(Seller& seller, const string& file_name = "Staff.csv");*/
 
-	void readExcelFile(Staff staff, const string& file_name = "Staff.csv");
+	//void readExcelfile(Security& security, const string& file_name = "Staff.csv");
+
+protected:
+
+	static vector <string> parse(const string& line);
+
 };
 
 class ExcelOfstream
@@ -49,54 +84,83 @@ protected:
 
 	ofstream _file_out;
 
-	void writePersonToExcelFile(Person person);
-
-	void writeExcelFile(Customer customer);
-
-	void writeExcelFile(MembershipLevel membership_level);
-
-	void writeStaffInfoToExcelFile(Staff staff);
-	
+	stringstream _buffer;
 
 public:
 
 	~ExcelOfstream()
 	{
 		_file_out.close();
+
+
+		_buffer.str("");
+		_buffer.clear();
 	}
 
+protected:		////		Buffer: lưu tạm để input vào object chính		////
 
-	////		OPEN/CLOSE		////
+	void inputPersonToBuffer(Person person);
+
+	void inputBuffer(Customer customer);
+
+	void inputBuffer(MembershipLevel membership_level);
+
+	
+public:		////		OPEN/CLOSE		////
 	void open(string directory, ios_base::openmode mode = ios::out);
 
 	void close();
 
+public:		////		Main write file		////
 
-	////		Write file		////
-	void writeExcelFile(const Product& product, const string& file_name = "Product.csv");
+	
+	void writeExcelFile(Product product, const string& file_name = "Product.csv");
 
-	void writeExcelFile(const Account& account, const string& file_name="Account.csv");
+	void writeExcelFile(Account account, const string& file_name="Account.csv");
 						
 	void writeExcelfile(Bill bill, const string& file_name = "Bill.csv");
 						
-	void writeExcelFile(Seller seller, const string& file_name = "Staff.csv");
+	/*void writeExcelFile(Seller seller, const string& file_name = "Staff.csv");*/
 
 	void writeExcelFile(Security security, const string& file_name = "Staff.csv");
 };
 
 class ExcelFstream : public ExcelIfstream, public ExcelOfstream
 {
-private:
-
-	fstream _file;
-
 public:
 	~ExcelFstream()
 	{
-		_file.close();
+		close();
 	}
 
 	void open(string directory, ios_base::openmode mode = 0);
 
 	void close();
 };
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class ExcelFstreamException : public exception
+{
+private:
+
+	string _exception_mess;
+
+public:
+
+	ExcelFstreamException(string exception_mess)
+	{
+		this->_exception_mess = exception_mess;
+	}
+
+
+	const char* what() const throw()
+	{
+		return _exception_mess.c_str();
+	}
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#endif // !_EXCEL_FSTREAM_
