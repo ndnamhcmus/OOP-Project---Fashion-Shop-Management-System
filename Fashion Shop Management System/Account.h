@@ -21,12 +21,44 @@ private:
 	MembershipLevel _membership_level;
 
 public:
-	Account(string account_id = "", MembershipLevel membership_level = MembershipLevel(), Customer customer = Customer());
-	~Account();
+	Account(string account_id = "", Customer customer = Customer() ,MembershipLevel membership_level = MembershipLevel());
 
 
+	void sort(vector <Account> accounts, string sort_by);
 
+	Account search(vector <Account> accounts, string search_by);
 
+	void setAccountInfo();
+
+	string findLastAccount_ID_InFile();
+
+	void addAccountToFile(Account account);
+
+	void deleteAccountInFile(string account_id);
+
+	void modifyAccountInFile(string account_id);
+
+	vector <Bill> getBillListFromFile(string account_id);
+
+	string getAccount_ID();
+
+	string getMemberShipLevel();
+
+	double getDiscount();
+
+	//+sign_in: account_id: string 
+		
+	void sign_up();
+
+	void showBillList();
+
+	void showAccountInfo();
+
+	Account saveAccount();
+
+	string deleteAccount();
+
+	string modifyAccount();
 
 
 	friend class ExcelFstream;

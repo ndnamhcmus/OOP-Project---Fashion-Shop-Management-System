@@ -1,9 +1,0 @@
-﻿  Account.cpp
-  Bill.cpp
-  MembershipLevel.cpp
-  Person_Customer_Staff_Seller_Security.cpp
-D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Bill.h(7,10): fatal error C1083: Cannot open include file: 'Date.h': No such file or directory
-  Product.cpp
-D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Person_Customer_Staff_Seller_Security.h(9,10): fatal error C1083: Cannot open include file: 'Date.h': No such file or directory
-  Generating Code...
-D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Fashion Shop Management System\Product.h(8,10): fatal error C1083: Cannot open include file: 'Date.h': No such file or directory
