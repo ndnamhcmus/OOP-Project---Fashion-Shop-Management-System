@@ -24,6 +24,7 @@ public:
 	////		Constuctor		////
 	Date(int day = 0, int month = 0, int year = 0);
 
+
 	////		Methods			////
 
 	int getDay();
@@ -51,8 +52,6 @@ public:
 	bool operator!=(const Date& date);
 
 	operator string();
-
-	Date& operator=(const Date& date);
 };
 
 

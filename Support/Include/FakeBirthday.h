@@ -14,20 +14,16 @@ class FakeBirthday
 {
 private:
 
-	int _day;
-	int _month;
-	int _year;
-	int _age;
+	static int _age;
 
-public:
+private:
 
-	////		Constructor		////
-	FakeBirthday(int day = 0, int month = 0, int year = 0, int age = 0);
+	static Date generateFakeBirthday();
 
-	////		Method		////
-	Date next();
+public:		////		Method		////
+	static Date next();
 
-	int getAge();
+	static int getAge();
 };
 
 
