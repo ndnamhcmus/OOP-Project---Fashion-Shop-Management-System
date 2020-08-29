@@ -15,17 +15,22 @@ using namespace std;
 
 class FakeVnTel
 {
+
+private:
+	string _header_list[30] = { "086", "096", "097", "098", "032", "033", "034", "035", "036", "037", "038", "039", "089", "090", "093", "070", "079", "077", "076", "078", "088", "091", "094", "083", "084", "085", "081", "082", "099", "059" };
+		
+
 private:
 
 	string _telephone_number;
 
-	void readFile();
+	void generateRandomHeader(string& telephone_number);
 
 public:
 	FakeVnTel(string telephone_number = "");
 
 public:
-	void generateRandomPhoneNumber();
+	void generateRandomPhoneNumber(string& telephone_number);
 
 	string toString();
 

@@ -28,6 +28,27 @@ public:
 	}
 
 
+	void sort(vector <Bill> bills, string sort_by);
+
+	Bill search(vector <Bill> bills, string search_by);
+
+	void setBillInfo();
+
+	Bill getBill();
+
+	string lastBill_ID_InFile();
+
+	string getID();
+
+	Date getDate();
+
+	string toString();
+
+	void showBillInfo();
+
+	Bill saveBillToFile();
+
+
 
 
 	friend class ExcelFstream;

@@ -15,7 +15,7 @@ private:
 	static int _cumulative_points;
 
 public:
-
+	MembershipLevel(string level = "", int cumulative_points = 0);
 	void setLevel(string);
 	string getLevel();
 	void setCumulativePoints(int);
