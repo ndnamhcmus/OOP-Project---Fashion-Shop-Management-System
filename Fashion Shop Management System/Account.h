@@ -23,7 +23,6 @@ private:
 public:
 	Account(string account_id = "", Customer customer = Customer() ,MembershipLevel membership_level = MembershipLevel());
 
-
 	void sort(vector <Account> accounts, string sort_by);
 
 	Account search(vector <Account> accounts, string search_by);

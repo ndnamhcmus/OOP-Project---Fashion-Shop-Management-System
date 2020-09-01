@@ -41,8 +41,20 @@ private:
 
 public:
 
+	Product();
+	Product(string, string, string, string, string, string, double, double, double, TimeOfProduct, TimeOfProduct, TimeOfProduct);
+	void addProductInFile(Product);
+	void deleteProductInFile(Product);
+	void modifyProductInFile(string, string);
+	void parse(string);
+	void showProductInfo();
 
-
+	string getProductName(){ return _product_name; }
+	string getProductId() { return _product_id; }
+	string getFirmName() { return _firm_name; }
+	string getProductType() { return _product_type; }
+	string getProductColor() { return _product_color; }
+	string getProductSize() { return _product_size; }
 
 	////		Friend function		////
 	friend class ExcelFstream;
