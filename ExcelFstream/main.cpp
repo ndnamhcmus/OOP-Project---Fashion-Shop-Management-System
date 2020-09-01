@@ -2,9 +2,8 @@
 
 int main()
 {
-	Product product;
 	ExcelFstream file;
+	file.open("Account.csv", ios::out);
 
 
-	file.readExcelFile(product);
 }
