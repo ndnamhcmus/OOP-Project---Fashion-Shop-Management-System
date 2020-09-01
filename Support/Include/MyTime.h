@@ -12,7 +12,7 @@
 
 using namespace std;
 
-class Time
+class MyTime
 {
 private:
 	int _hour;
@@ -20,15 +20,15 @@ private:
 	int _second;
 
 public:
-	Time(int hour = 0, int minute = 0, int second = 0);
+	MyTime(int hour = 0, int minute = 0, int second = 0);
 
 
 	////		Methods		////
 	string toString();
 
-	static Time parse(const string& time);
+	static MyTime parse(const string& time);
 
-	static bool tryParse(const string& s_time = "", Time time = Time(0, 0, 0));
+	static bool tryParse(const string& s_time = "", MyTime time = MyTime(0, 0, 0));
 
 	static bool isValid(const string& time);
 
@@ -36,20 +36,21 @@ public:
 
 
 	////		Operators		////
-	friend ostream& operator<<(ostream& out, const Time& time);
+	friend ostream& operator<<(ostream& out, const MyTime& time);
 
-	bool operator>(Time time);
+	bool operator>(MyTime time);
 
-	bool operator==(Time time);
+	bool operator==(MyTime time);
 
-	bool operator!=(Time time);
+	bool operator!=(MyTime time);
 
-	bool operator<(Time time);
+	bool operator<(MyTime time);
 
-	bool operator>=(Time time);
+	bool operator>=(MyTime time);
 
-	Time& operator=(const int& time);
+	MyTime& operator=(const int& time);
 
+	MyTime& operator=(const MyTime& time);
 };
 
 
