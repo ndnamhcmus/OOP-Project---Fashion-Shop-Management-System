@@ -6,11 +6,14 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+
+#include <FakeAddress.h>
 #include <Product.h>
 #include <Account.h>
 #include <Bill.h>
 #include <Person_Customer_Staff_Seller_Security.h>
 #include <FakeAddress.h>
+#include <MyTime.h>
 
 using namespace std;
 
@@ -43,6 +46,8 @@ protected:		////		Private method: chỉ dùng trong Input Fstream		////
 	void inputToObject(Security& security, vector <string> container);
 
 	//void inputToObject(Seller& seller, vector <string> container);
+
+	void inputToProductInBill(Product product, vector <string> container, int& curr_pos);
 
 	
 protected:		////		Protected method: có thể dùng ở derived class		////
@@ -163,4 +168,36 @@ public:
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+template<class T>
+inline void ExcelIfstream::readExcelFile(T& object, const string& file_name)
+{
+	try
+	{
+		if (!(this->_file_in))
+		{
+			stringstream writer;
+			writer << file_name << " is not open";
+			throw ExcelFstreamException(writer.str());
+		}
+	}
+	catch (const exception& mess)
+	{
+		cout << mess.what() << endl;
+		exit(EXIT_FAILURE);
+	}
+
+
+	string buffer;
+	while (getline(_file_in, buffer))
+	{
+		auto container = this->parse(buffer);
+
+
+		inputToObject(object, container);
+	}
+}
+
+
 #endif // !_EXCEL_FSTREAM_
+
+

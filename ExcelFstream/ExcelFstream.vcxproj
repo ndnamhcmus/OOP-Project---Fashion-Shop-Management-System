@@ -94,7 +94,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Support\Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Fashion Shop Management System.lib;Date.lib;Tokenizer.lib;MyTime.lib;FakeAddress.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Fashion Shop Management System.lib;Date.lib;Tokenizer.lib;MyTime.lib;FakeAddress.lib;Random.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -113,7 +113,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Support\Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Fashion Shop Management System.lib;Date.lib;Tokenizer.lib;MyTime.lib;FakeAddress.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Fashion Shop Management System.lib;Date.lib;Tokenizer.lib;MyTime.lib;FakeAddress.lib;Random.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -149,6 +149,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExcelFstream.cpp" />
+    <ClCompile Include="ExcelIfstream.cpp" />
+    <ClCompile Include="ExcelOfstream.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
