@@ -1,15 +1,3 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(477,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  Account.cpp
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Account.cpp(14,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Account.cpp(15,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Account.cpp(21,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Account.cpp(22,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Account.cpp(32,21): warning C4018: '<': signed/unsigned mismatch
-  Bill.cpp
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Bill.cpp(7,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Bill.cpp(8,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Bill.cpp(18,20): warning C4018: '<': signed/unsigned mismatch
-  Product.cpp
-  Generating Code...
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Account.cpp(35): warning C4715: 'Account::search': not all control paths return a value
+  Person_Customer_Staff_Seller_Security.cpp
   Fashion Shop Management System.vcxproj -> F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Debug\Fashion Shop Management System.exe
