@@ -56,6 +56,14 @@ public:
 	string getProductColor() { return _product_color; }
 	string getProductSize() { return _product_size; }
 
+	double getProductCost() { return _product_cost; }
+	double getProductPrice() { return _product_cost; }
+	double getDiscount() { return _discount; }
+
+	TimeOfProduct getStockInTime() { return _stock_in_time; }
+	TimeOfProduct getStockOutTime() { return _stock_out_time; }
+	TimeOfProduct getStockCoverTime() { return _stock_cover_time; }
+
 	////		Friend function		////
 	friend class ExcelFstream;
 	friend class ExcelOfstream;
