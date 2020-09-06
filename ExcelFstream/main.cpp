@@ -3,7 +3,18 @@
 int main()
 {
 	ExcelFstream file;
-	file.open("Account.csv", ios::out);
+	file.open("test.csv", ios::app);
+	file.writeExcelString("Nguyen Duc Nam");
+	file.close();
+
+	
+	file.open("test.csv", ios::app);
+	vector <vector <string>> container;
+	file.readExcelString(container);
 
 
+	file.close();
+
+	system("pause");
+	return 0;
 }

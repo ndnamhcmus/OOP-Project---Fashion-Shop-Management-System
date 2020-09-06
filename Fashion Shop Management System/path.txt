@@ -1,5 +1,0 @@
-001 - Ngo Dinh Truc - 10000000
-002 - Ho Dieu Tam - 20000000
-003 - Vu Dieu Minh - 30000000
-004 - Le Ba Nghiem - 40000000
-005 - Vo Nu Lu - 50000000
