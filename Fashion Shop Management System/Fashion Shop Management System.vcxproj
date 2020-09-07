@@ -149,16 +149,21 @@
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="Bill.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="MembershipLevel.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Person_Customer_Staff_Seller_Security.cpp" />
     <ClCompile Include="Product.cpp" />
+    <ClCompile Include="Shop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
     <ClInclude Include="Bill.h" />
     <ClInclude Include="MembershipLevel.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Person_Customer_Staff_Seller_Security.h" />
     <ClInclude Include="Product.h" />
+    <ClInclude Include="Shop.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -40,9 +40,9 @@ void ExcelFstream::readExcelString(vector<vector <string>>& container)
 	}
 }
 
-void ExcelFstream::writeExcelString(const string& String)
+void ExcelFstream::writeExcelString(const string& String, const string& needle)
 {
-	vector <string> Tok = Tokenizer::parse(String, " ");
+	vector <string> Tok = Tokenizer::parse(String, needle);
 	vector <string>::iterator iter;
 	for (iter = Tok.begin(); iter != Tok.end(); iter++)
 	{

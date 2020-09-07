@@ -4,7 +4,7 @@ int main()
 {
 	ExcelFstream file;
 	file.open("test.csv", ios::app);
-	file.writeExcelString("Nguyen Duc Nam");
+	file.writeExcelString("Nguyen - Duc - Nam");
 	file.close();
 
 	
