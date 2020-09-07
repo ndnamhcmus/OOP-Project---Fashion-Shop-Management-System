@@ -3,6 +3,7 @@
 
 
 #include <iostream>
+#include<sstream>
 #include <vector>
 #include <ctime>
 #include <Date.h>
@@ -43,15 +44,20 @@ public:
 
 	Product();
 	Product(string, string, string, string, string, string, double, double, double, TimeOfProduct, TimeOfProduct, TimeOfProduct);
-	void addProductInFile(Product);
-	void deleteProductInFile(Product);
-	void modifyProductInFile(string, string);
+	string toString();
 	void setInfoProduct(vector<string>);
 	void showProductInfo();
 
 	static void setInfoProducts(vector<Product>&, vector<vector<string>>);
+	static void showProductsInfo(vector<Product>);
 	static void sort(vector<Product>&, string);
 	static Product search_by_ProductId(vector<Product>&, string);
+	static void addProduct(vector<Product>&, Product);
+	static void deleteProduct(vector<Product>&, Product);
+	static void modifyProduct(string, string);
+	static void addProductInFile(vector<Product>&, vector<vector<string>>, Product);
+	static void deleteProductInFile(vector<Product>&, vector<vector<string>>, Product);
+	static void modifyProductInFile(string, string);
 
 	string getProductName(){ return _product_name; }
 	string getProductId() { return _product_id; }

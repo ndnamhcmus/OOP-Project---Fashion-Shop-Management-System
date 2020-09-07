@@ -22,11 +22,43 @@ Product::Product(string product_name, string product_id, string firm_name, strin
 
 }
 
-void Product::addProductInFile(Product) {
+string Product::toString() {
+	stringstream writer;
+	writer << _product_name << " - " << _product_id << " - " << _firm_name << " - " << _product_type << " - " << _product_color << " - " 
+		<< _product_size << " - " << _product_cost << " - " << _product_price << " - " << _discount << " - " << _stock_in_time.date.toString()
+		<< " - " << _stock_in_time.time.toString() << " - " << _stock_out_time.date.toString() << " - " << _stock_out_time.time.toString()
+		<< " - " << _stock_cover_time.date.toString() << " - " << _stock_cover_time.time.toString();
+	return writer.str();
+}
+
+void Product::addProduct(vector<Product>& products, Product prd) {
+	products.push_back(prd);
+}
+
+void Product::deleteProduct(vector<Product>& products, Product prd) {
+	int index = -1;
+	for (int i = 0; i < products.size(); i++) {
+		if (products[i].getProductId() == prd.getProductId()) {
+			index = i;
+			break;
+		}
+	}
+	if (index == -1) {
+		cout << "Product not found" << endl;
+	}
+	else
+		products.erase(products.begin() + index);
+}
+
+void Product::modifyProduct(string, string) { 
 
 }
 
-void Product::deleteProductInFile(Product) {
+void Product::addProductInFile(vector<Product>& products, vector<vector<string>> container, Product prd) {
+
+}
+
+void Product::deleteProductInFile(vector<Product>& products, vector<vector<string>> container, Product prd) {
 
 }
 
@@ -34,7 +66,23 @@ void Product::modifyProductInFile(string, string) {
 
 }
 
-void Product::setInfoProduct(vector<string>) {
+void Product::setInfoProduct(vector<string> Tok) {
+
+	this->_product_name = Tok[0];
+	this->_product_id = Tok[1];
+	this->_firm_name = Tok[2];
+	this->_product_type = Tok[3];
+	this->_product_color = Tok[4];
+	this->_product_size = Tok[5];
+	this->_product_cost = stod(Tok[6]);
+	this->_product_price = stod(Tok[7]);
+	this->_discount = stod(Tok[8]);
+	this->_stock_in_time.date.parse(Tok[9]);
+	this->_stock_in_time.time.parse(Tok[10]);
+	this->_stock_out_time.date.parse(Tok[11]);
+	this->_stock_out_time.time.parse(Tok[12]);
+	this->_stock_cover_time.date.parse(Tok[13]);
+	this->_stock_cover_time.time.parse(Tok[14]);
 
 }
 
@@ -43,7 +91,17 @@ void Product::showProductInfo() {
 }
 
 
-void Product::setInfoProducts(vector<Product>&, vector<vector<string>>) {
+void Product::setInfoProducts(vector<Product>& products, vector<vector<string>> container) {
+	
+	for (int i = 0; i < container.size(); i++){
+		Product prd;
+		prd.setInfoProduct(container[i]);
+		products.push_back(prd);
+	}
+
+}
+
+void Product::showProductsInfo(vector<Product> products) {
 
 }
 
