@@ -20,6 +20,18 @@ void Shop::sortStaff(string sort_by)
 {
 }
 
+void Shop::showProductList()
+{
+	for (int i = 0; i < _products.size(); i++)
+	{
+		cout << i + 1 << ": ";
+		_products[i].showProductInfo();
+		cout << endl;
+	}
+}
+
+////////////////////		SWITCH\CASE		////////////////////
+
 void Shop::Start()
 {
 	string is_continue;
@@ -29,6 +41,7 @@ void Shop::Start()
 	Menu::showMenu();
 	cout << "Choose: ";
 	cin >> choice;
+	cin.ignore();
 	while (!(is_continue == "n" || is_continue == "N"))
 	{
 		switch (choice)
@@ -40,16 +53,25 @@ void Shop::Start()
 
 		case 2:
 
+			AddProduct();
+			break;
+
+		case 3:
+
 			StaffInfo();
 			break;
+
+		case 4:
+
+			is_continue = "n";
+			continue;
 
 		}
 
 
 		system("cls");
 		Menu::showMenu();
-		Menu::continueMenu();
-		cin.ignore();
+		Menu::continueMenu(55, 3);
 		getline(cin, is_continue);
 		system("cls");
 		if (is_continue == "n")
@@ -58,20 +80,11 @@ void Shop::Start()
 		}
 
 
+		Menu::showMenu();
 		cout << "Choose: ";
 		cin >> choice;
 	}
 	
-}
-
-void Shop::showProductList()
-{
-	for (int i = 0; i < _products.size(); i++)
-	{
-		cout << i + 1 << ": ";
-		_products[i].showProductInfo();
-		cout << endl;
-	}
 }
 
 void Shop::Trading()
@@ -97,6 +110,11 @@ void Shop::Trading()
 
 }
 
+void Shop::AddProduct()
+{
+
+}
+
 void Shop::StaffInfo()
 {
 	system("cls");
@@ -106,6 +124,7 @@ void Shop::StaffInfo()
 	int choice;
 	Menu::showStaffMenu();
 	cin >> choice;
+	cin.ignore();
 	while (!(is_continue == "n" || is_continue == "N"))
 	{
 		switch (choice)
@@ -121,7 +140,7 @@ void Shop::StaffInfo()
 
 		case 3:
 
-			Menu::showSecurityMenu();
+			SecurityInfo();
 			break;
 
 		case 4:
@@ -134,8 +153,7 @@ void Shop::StaffInfo()
 
 		system("cls");
 		Menu::showStaffMenu();
-		Menu::continueMenu();
-		cin.ignore();
+		Menu::continueMenu(55, 4);
 		getline(cin, is_continue);
 		system("cls");
 		if (is_continue == "n")
@@ -144,6 +162,7 @@ void Shop::StaffInfo()
 		}
 
 
+		Menu::showStaffMenu();
 		cout << "Choose: ";
 		cin >> choice;
 	}
@@ -161,6 +180,7 @@ void Shop::SellerInfo()
 
 	Menu::showSellerMenu();
 	cin >> choice;
+	cin.ignore();
 	while (!(is_continue == "n" || is_continue == "N"))
 	{
 		switch (choice)
@@ -200,8 +220,7 @@ void Shop::SellerInfo()
 
 		system("cls");
 		Menu::showSellerMenu();
-		Menu::continueMenu();
-		cin.ignore();
+		Menu::continueMenu(55, 5);
 		getline(cin, is_continue);
 		system("cls");
 		if (is_continue == "n")
@@ -210,6 +229,57 @@ void Shop::SellerInfo()
 		}
 
 
+		Menu::showSellerMenu();
+		cout << "Choose: ";
+		cin >> choice;
+	}
+}
+
+void Shop::SecurityInfo()
+{
+	system("cls");
+	string is_continue;
+	int choice;
+
+
+	string id;
+
+
+	Menu::showSecurityMenu();
+	cin >> choice;
+	cin.ignore();
+	while (!(is_continue == "n" || is_continue == "N"))
+	{
+		switch (choice)
+		{
+		case 1:
+
+			break;
+
+		case 2:
+
+			break;
+
+		case 3:
+
+			is_continue = "n";
+			continue;
+
+		}
+
+
+		system("cls");
+		Menu::showSecurityMenu();
+		Menu::continueMenu(55, 3);
+		getline(cin, is_continue);
+		system("cls");
+		if (is_continue == "n")
+		{
+			continue;
+		}
+
+
+		Menu::showSecurityMenu();
 		cout << "Choose: ";
 		cin >> choice;
 	}

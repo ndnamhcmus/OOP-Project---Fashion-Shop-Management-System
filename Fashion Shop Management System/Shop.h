@@ -1,5 +1,5 @@
-#ifndef _SHOP_
-#define _SHOP_
+//#ifndef _SHOP_
+//#define _SHOP_
 
 #include "Person_Customer_Staff_Seller_Security.h"
 #include "Product.h"
@@ -9,6 +9,7 @@
 
 #include <ExcelFstream.h>
 #include <string>
+#include <sstream>
 
 
 class Shop
@@ -53,10 +54,12 @@ private:
 
 	void Trading();
 
-	void StaffInfo();
+	void AddProduct();
 
+	void StaffInfo();
 	void SellerInfo();
+	void SecurityInfo();
 };
 
 
-#endif
+//#endif
