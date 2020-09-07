@@ -34,11 +34,16 @@ void Product::modifyProductInFile(string, string) {
 
 }
 
-void Product::parse(string) {
+void Product::setInfoProduct(vector<string>) {
 
 }
 
 void Product::showProductInfo() {
+
+}
+
+
+void Product::setInfoProducts(vector<Product>&, vector<vector<string>>) {
 
 }
 

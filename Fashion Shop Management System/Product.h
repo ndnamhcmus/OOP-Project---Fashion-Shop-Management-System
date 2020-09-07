@@ -46,9 +46,10 @@ public:
 	void addProductInFile(Product);
 	void deleteProductInFile(Product);
 	void modifyProductInFile(string, string);
-	void parse(string);
+	void setInfoProduct(vector<string>);
 	void showProductInfo();
 
+	static void setInfoProducts(vector<Product>&, vector<vector<string>>);
 	static void sort(vector<Product>&, string);
 	static Product search_by_ProductId(vector<Product>&, string);
 
