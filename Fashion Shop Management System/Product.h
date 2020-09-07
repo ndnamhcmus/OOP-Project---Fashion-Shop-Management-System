@@ -49,6 +49,9 @@ public:
 	void parse(string);
 	void showProductInfo();
 
+	static void sort(vector<Product>&, string);
+	static Product search_by_ProductId(vector<Product>&, string);
+
 	string getProductName(){ return _product_name; }
 	string getProductId() { return _product_id; }
 	string getFirmName() { return _firm_name; }
@@ -57,7 +60,7 @@ public:
 	string getProductSize() { return _product_size; }
 
 	double getProductCost() { return _product_cost; }
-	double getProductPrice() { return _product_cost; }
+	double getProductPrice() { return _product_price; }
 	double getDiscount() { return _discount; }
 
 	TimeOfProduct getStockInTime() { return _stock_in_time; }
