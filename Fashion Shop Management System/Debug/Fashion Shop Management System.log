@@ -1,0 +1,43 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(477,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Account.cpp
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Account.cpp(14,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Account.cpp(15,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Account.cpp(21,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Account.cpp(22,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Account.cpp(32,21): warning C4018: '<': signed/unsigned mismatch
+  Bill.cpp
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Bill.cpp(7,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Bill.cpp(8,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Bill.cpp(18,20): warning C4018: '<': signed/unsigned mismatch
+  MembershipLevel.cpp
+  Person_Customer_Staff_Seller_Security.cpp
+  Product.cpp
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(48,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(49,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(56,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(57,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(64,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(65,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(72,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(73,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(80,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(81,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(88,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(89,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(96,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(97,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(104,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(105,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(112,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(113,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(120,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(121,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(128,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(129,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(136,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(137,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(146,20): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(150): warning C4715: 'Product::search_by_ProductId': not all control paths return a value
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Account.cpp(35): warning C4715: 'Account::search': not all control paths return a value
+  Fashion Shop Management System.vcxproj -> F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Debug\Fashion Shop Management System.exe
