@@ -157,7 +157,7 @@ public:
 
 	void readExcelString(vector<vector <string>>& container);
 
-	void writeExcelString(const string& String);
+	void writeExcelString(const string& String, const string& needle = " - ");
 
 };
 
