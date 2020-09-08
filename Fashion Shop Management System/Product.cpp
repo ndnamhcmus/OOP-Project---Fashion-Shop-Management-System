@@ -30,6 +30,27 @@ string Product::toString() {
 	return writer.str();
 }
 
+void Product::setProductInfo(vector<string> Tok) {
+
+	this->_product_name = Tok[0];
+	this->_product_id = Tok[1];
+	this->_firm_name = Tok[2];
+	this->_product_type = Tok[3];
+	this->_product_color = Tok[4];
+	this->_product_size = Tok[5];
+	this->_product_cost = stod(Tok[6]);
+	this->_product_price = stod(Tok[7]);
+	this->_discount = stod(Tok[8]);
+	this->_stock_in_time.parse(Tok[9]);
+	this->_stock_out_time.parse(Tok[10]);
+	this->_stock_cover_time.parse(Tok[11]);
+
+}
+
+void Product::showProductInfo() {
+
+}
+
 void Product::addProduct(vector<Product>& products, Product prd) {
 	products.push_back(prd);
 }
@@ -49,10 +70,6 @@ void Product::deleteProduct(vector<Product>& products, Product prd) {
 		products.erase(products.begin() + index);
 }
 
-void Product::modifyProduct(string, string) { 
-
-}
-
 void Product::addProductInFile(vector<Product>& products, vector<vector<string>> &container, Product prd, ExcelFstream file) {
 	Product::addProduct(products, prd);
 	file.open("Product.csv", ios::app);
@@ -67,33 +84,8 @@ void Product::deleteProductInFile(vector<Product>& products, vector<vector<strin
 	for (auto& products : products) {
 		file.writeExcelString(products.toString());
 	}
-	file.readExcelFile(container);
+	file.readExcelString(container); 
 	file.close();
-}
-
-void Product::modifyProductInFile(string, string) {
-
-}
-
-void Product::setProductInfo(vector<string> Tok) {
-
-	this->_product_name = Tok[0];
-	this->_product_id = Tok[1];
-	this->_firm_name = Tok[2];
-	this->_product_type = Tok[3];
-	this->_product_color = Tok[4];
-	this->_product_size = Tok[5];
-	this->_product_cost = stod(Tok[6]);
-	this->_product_price = stod(Tok[7]);
-	this->_discount = stod(Tok[8]);
-	this->_stock_in_time.parse(Tok[9]);
-	this->_stock_out_time.parse(Tok[10]);
-	this->_stock_cover_time.parse(Tok[11]);
-	
-}
-
-void Product::showProductInfo() {
-
 }
 
 void Product::setProductsInfo(vector<Product>& products, vector<vector<string>> container) {
@@ -204,6 +196,14 @@ void Product::sort(vector<Product>& products, string sort_by) {
 		for (int i = 0; i < products.size(); i++)
 			for (int j = i + 1; j < products.size() - 1; j++)
 				if (products[i].getStockCoverTime() > products[j].getStockCoverTime())
+					swap(products[i], products[j]);
+		return;
+	}
+
+	if (sort_by == "_quantity_out_of_stock") {
+		for (int i = 0; i < products.size(); i++)
+			for (int j = i + 1; j < products.size() - 1; j++)
+				if (products[i].getQuantityOutOfStock() > products[j].getQuantityOutOfStock())
 					swap(products[i], products[j]);
 		return;
 	}

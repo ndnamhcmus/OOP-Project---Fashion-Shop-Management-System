@@ -49,10 +49,8 @@ public:
 	static Product search_by_ProductId(vector<Product>&, string);
 	static void addProduct(vector<Product>&, Product);
 	static void deleteProduct(vector<Product>&, Product);
-	static void modifyProduct(string, string);
 	static void addProductInFile(vector<Product>&, vector<vector<string>>&, Product, ExcelFstream);
 	static void deleteProductInFile(vector<Product>&, vector<vector<string>>&, Product, ExcelFstream);
-	static void modifyProductInFile(string, string);
 
 	string getProductName(){ return _product_name; }
 	string getProductId() { return _product_id; }
@@ -68,6 +66,8 @@ public:
 	Date getStockInTime() { return _stock_in_time; }
 	Date getStockOutTime() { return _stock_out_time; }
 	Date getStockCoverTime() { return _stock_cover_time; }
+
+	int getQuantityOutOfStock() { return _quantity_out_of_stock; }
 
 	////		Friend function		////
 	friend class ExcelFstream;
