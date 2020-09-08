@@ -69,7 +69,6 @@ void Product::deleteProductInFile(vector<Product>& products, vector<vector<strin
 	}
 	file.readExcelFile(container);
 	file.close();
-
 }
 
 void Product::modifyProductInFile(string, string) {
