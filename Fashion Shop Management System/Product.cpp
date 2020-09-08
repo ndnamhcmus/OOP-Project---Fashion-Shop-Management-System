@@ -5,7 +5,7 @@ int Product::_quantity_out_of_stock = 0;
 Product::Product(){}
 
 Product::Product(string product_name, string product_id, string firm_name, string product_type, string product_color, string product_size, 
-	double product_cost, double product_price, double discount, TimeOfProduct stock_in_time, TimeOfProduct stock_out_time, TimeOfProduct stock_cover_time) {
+	double product_cost, double product_price, double discount, Date stock_in_time, Date stock_out_time, Date stock_cover_time) {
 
 	_product_name = product_name;
 	_product_id = product_id;
@@ -24,10 +24,9 @@ Product::Product(string product_name, string product_id, string firm_name, strin
 
 string Product::toString() {
 	stringstream writer;
-	writer << _product_name << " - " << _product_id << " - " << _firm_name << " - " << _product_type << " - " << _product_color << " - " 
-		<< _product_size << " - " << _product_cost << " - " << _product_price << " - " << _discount << " - " << _stock_in_time.date.toString()
-		<< " - " << _stock_in_time.time.toString() << " - " << _stock_out_time.date.toString() << " - " << _stock_out_time.time.toString()
-		<< " - " << _stock_cover_time.date.toString() << " - " << _stock_cover_time.time.toString();
+	writer << _product_name << " - " << _product_id << " - " << _firm_name << " - " << _product_type << " - " << _product_color << " - "
+		<< _product_size << " - " << _product_cost << " - " << _product_price << " - " << _discount << " - " << _stock_in_time.toString()
+		<< " - " << _stock_out_time.toString() << " - " << _stock_cover_time.toString();
 	return writer.str();
 }
 
@@ -54,11 +53,22 @@ void Product::modifyProduct(string, string) {
 
 }
 
-void Product::addProductInFile(vector<Product>& products, vector<vector<string>> container, Product prd) {
-
+void Product::addProductInFile(vector<Product>& products, vector<vector<string>> &container, Product prd, ExcelFstream file) {
+	Product::addProduct(products, prd);
+	file.open("Product.csv", ios::app);
+	file.writeExcelString(prd.toString());
+	file.readExcelString(container);
+	file.close();
 }
 
-void Product::deleteProductInFile(vector<Product>& products, vector<vector<string>> container, Product prd) {
+void Product::deleteProductInFile(vector<Product>& products, vector<vector<string>> &container, Product prd, ExcelFstream file) {
+	Product::deleteProduct(products, prd);
+	file.open("Product.csv");
+	for (auto& products : products) {
+		file.writeExcelString(products.toString());
+	}
+	file.readExcelFile(container);
+	file.close();
 
 }
 
@@ -66,7 +76,7 @@ void Product::modifyProductInFile(string, string) {
 
 }
 
-void Product::setInfoProduct(vector<string> Tok) {
+void Product::setProductInfo(vector<string> Tok) {
 
 	this->_product_name = Tok[0];
 	this->_product_id = Tok[1];
@@ -77,25 +87,21 @@ void Product::setInfoProduct(vector<string> Tok) {
 	this->_product_cost = stod(Tok[6]);
 	this->_product_price = stod(Tok[7]);
 	this->_discount = stod(Tok[8]);
-	this->_stock_in_time.date.parse(Tok[9]);
-	this->_stock_in_time.time.parse(Tok[10]);
-	this->_stock_out_time.date.parse(Tok[11]);
-	this->_stock_out_time.time.parse(Tok[12]);
-	this->_stock_cover_time.date.parse(Tok[13]);
-	this->_stock_cover_time.time.parse(Tok[14]);
-
+	this->_stock_in_time.parse(Tok[9]);
+	this->_stock_out_time.parse(Tok[10]);
+	this->_stock_cover_time.parse(Tok[11]);
+	
 }
 
 void Product::showProductInfo() {
 
 }
 
-
-void Product::setInfoProducts(vector<Product>& products, vector<vector<string>> container) {
+void Product::setProductsInfo(vector<Product>& products, vector<vector<string>> container) {
 	
 	for (int i = 0; i < container.size(); i++){
 		Product prd;
-		prd.setInfoProduct(container[i]);
+		prd.setProductInfo(container[i]);
 		products.push_back(prd);
 	}
 
@@ -182,7 +188,7 @@ void Product::sort(vector<Product>& products, string sort_by) {
 	if (sort_by == "_stock_in_time") {
 		for (int i = 0; i < products.size(); i++)
 			for (int j = i + 1; j < products.size() - 1; j++)
-				if (products[i].getStockInTime().date > products[j].getStockInTime().date)
+				if (products[i].getStockInTime() > products[j].getStockInTime())
 					swap(products[i], products[j]);
 		return;
 	}
@@ -190,7 +196,7 @@ void Product::sort(vector<Product>& products, string sort_by) {
 	if (sort_by == "_stock_out_time") {
 		for (int i = 0; i < products.size(); i++)
 			for (int j = i + 1; j < products.size() - 1; j++)
-				if (products[i].getStockOutTime().date > products[j].getStockOutTime().date)
+				if (products[i].getStockOutTime() > products[j].getStockOutTime())
 					swap(products[i], products[j]);
 		return;
 	}
@@ -198,7 +204,7 @@ void Product::sort(vector<Product>& products, string sort_by) {
 	if (sort_by == "_stock_cover_time") {
 		for (int i = 0; i < products.size(); i++)
 			for (int j = i + 1; j < products.size() - 1; j++)
-				if (products[i].getStockCoverTime().date > products[j].getStockCoverTime().date)
+				if (products[i].getStockCoverTime() > products[j].getStockCoverTime())
 					swap(products[i], products[j]);
 		return;
 	}

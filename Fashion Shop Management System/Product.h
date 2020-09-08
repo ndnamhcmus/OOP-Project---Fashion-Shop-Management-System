@@ -9,14 +9,9 @@
 #include <Date.h>
 #include <Clock.h>
 #include <MyTime.h>
+#include "ExcelFstream.h"
 
 using namespace std;
-
-struct TimeOfProduct
-{
-	Date date;
-	MyTime time;
-};
 
 class Product
 {
@@ -36,27 +31,27 @@ private:
 	double _discount;
 
 	
-	TimeOfProduct _stock_in_time;
-	TimeOfProduct _stock_out_time;
-	TimeOfProduct _stock_cover_time;
+	Date _stock_in_time;
+	Date _stock_out_time;
+	Date _stock_cover_time;
 
 public:
 
 	Product();
-	Product(string, string, string, string, string, string, double, double, double, TimeOfProduct, TimeOfProduct, TimeOfProduct);
+	Product(string, string, string, string, string, string, double, double, double, Date, Date, Date);
 	string toString();
-	void setInfoProduct(vector<string>);
+	void setProductInfo(vector<string>);
 	void showProductInfo();
 
-	static void setInfoProducts(vector<Product>&, vector<vector<string>>);
+	static void setProductsInfo(vector<Product>&, vector<vector<string>>);
 	static void showProductsInfo(vector<Product>);
 	static void sort(vector<Product>&, string);
 	static Product search_by_ProductId(vector<Product>&, string);
 	static void addProduct(vector<Product>&, Product);
 	static void deleteProduct(vector<Product>&, Product);
 	static void modifyProduct(string, string);
-	static void addProductInFile(vector<Product>&, vector<vector<string>>, Product);
-	static void deleteProductInFile(vector<Product>&, vector<vector<string>>, Product);
+	static void addProductInFile(vector<Product>&, vector<vector<string>>&, Product, ExcelFstream);
+	static void deleteProductInFile(vector<Product>&, vector<vector<string>>&, Product, ExcelFstream);
 	static void modifyProductInFile(string, string);
 
 	string getProductName(){ return _product_name; }
@@ -70,9 +65,9 @@ public:
 	double getProductPrice() { return _product_price; }
 	double getDiscount() { return _discount; }
 
-	TimeOfProduct getStockInTime() { return _stock_in_time; }
-	TimeOfProduct getStockOutTime() { return _stock_out_time; }
-	TimeOfProduct getStockCoverTime() { return _stock_cover_time; }
+	Date getStockInTime() { return _stock_in_time; }
+	Date getStockOutTime() { return _stock_out_time; }
+	Date getStockCoverTime() { return _stock_cover_time; }
 
 	////		Friend function		////
 	friend class ExcelFstream;
