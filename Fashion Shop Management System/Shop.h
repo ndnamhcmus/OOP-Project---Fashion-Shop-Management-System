@@ -1,5 +1,5 @@
-//#ifndef _SHOP_
-//#define _SHOP_
+#ifndef _SHOP_
+#define _SHOP_
 
 #include "Person_Customer_Staff_Seller_Security.h"
 #include "Product.h"
@@ -62,4 +62,4 @@ private:
 };
 
 
-//#endif
+#endif
