@@ -96,7 +96,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Support\Library</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Client.lib;Clock.lib;Date.lib;FakeAddress.lib;FakeBirthday.lib;FakeEmail.lib;FakeName.lib;FakeVnTel.lib;MyTime.lib;Random.lib;Tokenizer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Client.lib;Clock.lib;Date.lib;FakeAddress.lib;FakeBirthday.lib;FakeEmail.lib;FakeName.lib;FakeVnTel.lib;MyTime.lib;Random.lib;Tokenizer.lib;ExcelFstream.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -115,7 +115,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Support\Library</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Client.lib;Clock.lib;Date.lib;FakeAddress.lib;FakeBirthday.lib;FakeEmail.lib;FakeName.lib;FakeVnTel.lib;MyTime.lib;Random.lib;Tokenizer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Client.lib;Clock.lib;Date.lib;FakeAddress.lib;FakeBirthday.lib;FakeEmail.lib;FakeName.lib;FakeVnTel.lib;MyTime.lib;Random.lib;Tokenizer.lib;ExcelFstream.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
