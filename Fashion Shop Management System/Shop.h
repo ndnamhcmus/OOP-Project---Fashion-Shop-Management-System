@@ -28,10 +28,6 @@ private:
 
 private:
 
-
-
-public:
-
 	void openProductList();
 	void openAccountList();
 	void openStaffList();
@@ -41,22 +37,21 @@ public:
 	void saveAccountList();
 	void saveStaffList();
 
-
 public:
 
 	void Start();
 
-public:
+private:
 
 	void showProductList();
+	void ProductManagement();
 
 private:
 
 	void Trading();
 
-	void AddProduct();
 
-	void StaffInfo();
+	void StaffInfoManagement();
 	void SellerInfo();
 	void SecurityInfo();
 };

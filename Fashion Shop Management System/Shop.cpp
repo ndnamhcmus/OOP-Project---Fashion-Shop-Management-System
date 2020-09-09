@@ -53,12 +53,12 @@ void Shop::Start()
 
 		case 2:
 
-			AddProduct();
+			ProductManagement();
 			break;
 
 		case 3:
 
-			StaffInfo();
+			StaffInfoManagement();
 			break;
 
 		case 4:
@@ -69,7 +69,7 @@ void Shop::Start()
 		}
 
 
-		system("cls");
+		/*system("cls");
 		Menu::showMenu();
 		Menu::continueMenu(55, 3);
 		getline(cin, is_continue);
@@ -77,12 +77,15 @@ void Shop::Start()
 		if (is_continue == "n")
 		{
 			continue;
-		}
+		}*/
+		system("pause");
+		system("cls");
 
 
 		Menu::showMenu();
 		cout << "Choose: ";
 		cin >> choice;
+		cin.ignore();
 	}
 	
 }
@@ -92,7 +95,6 @@ void Shop::Trading()
 	system("cls");
 
 
-	int choice;
 	int amount;
 
 
@@ -100,22 +102,34 @@ void Shop::Trading()
 	showProductList();
 
 
-	cout << "Choose: ";
 	Product product;
-	product;
+	string id;
+	cout << "Enter product id: ";
+	getline(cin, id);
+	product = Product::search_by_ProductId(_products, id);
+
+
+	vector <Product> cart;
 	cout << "Amount: ";
 	cin >> amount;
-
-
+	cin.ignore();
+	for (int i = 0; i < amount; i++)
+	{
+		cart.push_back(product);
+	}
 
 }
 
-void Shop::AddProduct()
+void Shop::ProductManagement()
 {
+	string id;
+	Product product;
 
+
+	product.addProduct(_products, product);
 }
 
-void Shop::StaffInfo()
+void Shop::StaffInfoManagement()
 {
 	system("cls");
 	string is_continue;
@@ -123,6 +137,7 @@ void Shop::StaffInfo()
 
 	int choice;
 	Menu::showStaffMenu();
+	cout << "Choose: ";
 	cin >> choice;
 	cin.ignore();
 	while (!(is_continue == "n" || is_continue == "N"))
@@ -151,20 +166,23 @@ void Shop::StaffInfo()
 		}
 
 
-		system("cls");
-		Menu::showStaffMenu();
+		
+		/*Menu::showStaffMenu();
 		Menu::continueMenu(55, 4);
 		getline(cin, is_continue);
 		system("cls");
 		if (is_continue == "n")
 		{
 			continue;
-		}
+		}*/
+		system("pause");
+		system("cls");
 
 
 		Menu::showStaffMenu();
 		cout << "Choose: ";
 		cin >> choice;
+		cin.ignore();
 	}
 }
 
@@ -179,6 +197,7 @@ void Shop::SellerInfo()
 
 
 	Menu::showSellerMenu();
+	cout << "Choose: ";
 	cin >> choice;
 	cin.ignore();
 	while (!(is_continue == "n" || is_continue == "N"))
@@ -218,7 +237,7 @@ void Shop::SellerInfo()
 		}
 
 
-		system("cls");
+		/*system("cls");
 		Menu::showSellerMenu();
 		Menu::continueMenu(55, 5);
 		getline(cin, is_continue);
@@ -226,7 +245,9 @@ void Shop::SellerInfo()
 		if (is_continue == "n")
 		{
 			continue;
-		}
+		}*/
+		system("pause");
+		system("cls");
 
 
 		Menu::showSellerMenu();
@@ -246,6 +267,7 @@ void Shop::SecurityInfo()
 
 
 	Menu::showSecurityMenu();
+	cout << "Choose: ";
 	cin >> choice;
 	cin.ignore();
 	while (!(is_continue == "n" || is_continue == "N"))
@@ -268,7 +290,7 @@ void Shop::SecurityInfo()
 		}
 
 
-		system("cls");
+		/*system("cls");
 		Menu::showSecurityMenu();
 		Menu::continueMenu(55, 3);
 		getline(cin, is_continue);
@@ -276,7 +298,9 @@ void Shop::SecurityInfo()
 		if (is_continue == "n")
 		{
 			continue;
-		}
+		}*/
+		system("pause");
+		system("cls");
 
 
 		Menu::showSecurityMenu();

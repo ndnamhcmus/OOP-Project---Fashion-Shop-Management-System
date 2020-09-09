@@ -20,12 +20,12 @@ void Menu::showMenu()
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "2. Add new product\n";
+	_buffer << "2. Product management\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "3. Staff information\n";
+	_buffer << "3. Staff information management\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
