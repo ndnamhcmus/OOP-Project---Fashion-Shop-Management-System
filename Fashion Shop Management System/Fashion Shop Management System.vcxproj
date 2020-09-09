@@ -96,7 +96,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Support\Library</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Tokenizer.lib;FakeAddress.lib;Date.lib;Clock.lib;MyTime.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Client.lib;Clock.lib;Date.lib;FakeAddress.lib;FakeBirthday.lib;FakeEmail.lib;FakeName.lib;FakeVnTel.lib;MyTime.lib;Random.lib;Tokenizer.lib;ExcelFstream.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -115,7 +115,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Support\Library</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Tokenizer.lib;FakeAddress.lib;Date.lib;Clock.lib;MyTime.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Client.lib;Clock.lib;Date.lib;FakeAddress.lib;FakeBirthday.lib;FakeEmail.lib;FakeName.lib;FakeVnTel.lib;MyTime.lib;Random.lib;Tokenizer.lib;ExcelFstream.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -149,16 +149,21 @@
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="Bill.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="MembershipLevel.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Person_Customer_Staff_Seller_Security.cpp" />
     <ClCompile Include="Product.cpp" />
+    <ClCompile Include="Shop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
     <ClInclude Include="Bill.h" />
     <ClInclude Include="MembershipLevel.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Person_Customer_Staff_Seller_Security.h" />
     <ClInclude Include="Product.h" />
+    <ClInclude Include="Shop.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

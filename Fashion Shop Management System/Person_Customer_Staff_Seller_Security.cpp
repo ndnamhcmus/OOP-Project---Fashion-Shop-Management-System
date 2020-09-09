@@ -47,7 +47,7 @@ string Customer:: toString()
 {
 	string cus;
 	cus = _name;
-	cus += "\t" +_customer_id + "\t"+  _date_of_birth.toString() + "\t"+_phone_number+ "\t"+_address.Address_to_string();
+	cus += "\t" +_customer_id + "\t"+  _date_of_birth.toString() + "\t"+_phone_number+ "\t"+_address.toString();
 	return cus;
 }
 
@@ -80,7 +80,7 @@ string Staff::getStaffID()
 
 void Staff:: showStaffInfo()
 {
-	cout << _name << "\t" << _staff_id << "\t" << _date_of_birth.toString() + "\t" + _phone_number + "\t" + _address.Address_to_string() << endl;
+	cout << _name << "\t" << _staff_id << "\t" << _date_of_birth.toString() + "\t" + _phone_number + "\t" + _address.toString() << endl;
 }
 
 

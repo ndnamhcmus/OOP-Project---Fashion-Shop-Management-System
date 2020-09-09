@@ -15,17 +15,9 @@ private:
 
 	string _bill_id;
 	Date _curr_date;
-	Product _product;
+	vector<Product> _products;
 
 public:
-	Bill()
-	{
-
-	}
-	~Bill()
-	{
-
-	}
 
 
 	void sort(vector <Bill> bills, string sort_by);

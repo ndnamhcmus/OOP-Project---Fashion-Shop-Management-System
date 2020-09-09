@@ -24,6 +24,7 @@ public:
 	////		Constuctor		////
 	Date(int day = 0, int month = 0, int year = 0);
 
+
 	////		Methods			////
 
 	int getDay();
@@ -50,9 +51,21 @@ public:
 
 	bool operator!=(const Date& date);
 
-	operator string();
+	bool operator>(const Date& date) {
 
-	Date& operator=(const Date& date);
+		if (this->_year > date._year)
+			return true;
+		if (this->_year == date._year) {
+			if (this->_month > date._month)
+				return true;
+			if (this->_month == date._month)
+				if (this->_day > date._day)
+					return true;
+		}
+		return false;
+	}
+
+	operator string();
 };
 
 

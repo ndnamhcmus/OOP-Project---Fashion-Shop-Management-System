@@ -58,7 +58,7 @@ string Bill::toString()
 
 void Bill::showBillInfo()
 {
-
+	cout << this->toString();
 
 }
 
