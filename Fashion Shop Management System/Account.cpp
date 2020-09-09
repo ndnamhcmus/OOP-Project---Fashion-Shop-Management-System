@@ -1,4 +1,4 @@
-#include "Account.h"
+﻿#include "Account.h"
 
 
 Account::Account(string account_id, Customer customer, MembershipLevel membership_level)
@@ -34,9 +34,12 @@ Account Account::search(vector<Account> accounts, string search_by)
 				return accounts[i];
 }
 
-void Account::setAccountInfo()
+void Account::setAccountInfo(vector<string>Tok)
 {
-
+	this->_account_id = Tok[0];
+	//this->_customer = ...Tok[1];
+	//this->_bills = ... Tok[2];
+	this->_membership_level = Tok[3];
 }
 
 string Account::findLastAccount_ID_InFile()
@@ -47,20 +50,7 @@ string Account::findLastAccount_ID_InFile()
 
 void Account::addAccountToFile(Account account)
 {
-	/*readFile;
-	vector <Account> accounts;
-	for (size_t i = 0; i < length; i++)
-	{
-		accounts.push_back(readFile);
-	}
-
-
-	sign_up;
-	accounts.push_back(sign_up);
-	for (size_t i = 0; i < length; i++)
-	{
-		writeFile(vector);
-	}*/
+	
 }
 
 void Account::deleteAccountInFile(string account_id)
@@ -97,14 +87,44 @@ double Account::getDiscount()
 	return _membership_level.getDiscount(_membership_level.getLevel());
 }
 
-void Account::sign_up()
+void Account::sign_up(vector<Account>&accounts)
 {
+	vector<string> st;
+	string s;
 
+	cout << "Full Name: ";
+	getline(cin, s);
+	st.push_back(s);
+
+	cout << "Date of birth: ";
+	getline(cin, s);
+	st.push_back(s);
+
+	cout << "Date of birth: ";
+	getline(cin, s);
+	st.push_back(s);
+
+	cout << "Phone number: ";
+	getline(cin, s);
+	st.push_back(s);
+
+	cout << "Address: ";
+	getline(cin, s);
+	st.push_back(s);
+
+	//còn id của customer với id của account
+
+	Account account(/*truyền vào mấy cái lấy được*/);
+
+	//accounts.push_back(account);
 }
 
 void Account::showBillList()
 {
-
+	for (int i = 0; i < _bills.size(); i++) {
+		cout << i + 1<<endl; 
+		_bills[i].showBillInfo();
+	}
 }
 
 void Account::showAccountInfo()

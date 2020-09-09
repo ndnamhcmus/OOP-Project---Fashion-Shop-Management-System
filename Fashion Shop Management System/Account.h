@@ -27,7 +27,7 @@ public:
 
 	Account search(vector <Account> accounts, string search_by);
 
-	void setAccountInfo();
+	void setAccountInfo(vector<string>Tok);
 
 	string findLastAccount_ID_InFile();
 
@@ -47,7 +47,7 @@ public:
 
 	//+sign_in: account_id: string 
 		
-	void sign_up();
+	void sign_up(vector<Account>&);
 
 	void showBillList();
 

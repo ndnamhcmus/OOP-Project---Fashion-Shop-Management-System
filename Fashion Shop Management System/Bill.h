@@ -15,16 +15,17 @@ private:
 
 	string _bill_id;
 	Date _curr_date;
-	vector<Product> _products;
+	vector<Product> _cart;
 
 public:
 
+	Bill(string id, Date d,vector<Product> p);
 
 	void sort(vector <Bill> bills, string sort_by);
 
 	Bill search(vector <Bill> bills, string search_by);
 
-	void setBillInfo();
+	void setBillInfo(vector<string>);
 
 	Bill getBill();
 
@@ -38,7 +39,7 @@ public:
 
 	void showBillInfo();
 
-	Bill saveBillToFile();
+	void saveBillToFile();
 
 
 
