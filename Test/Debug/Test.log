@@ -1,1 +1,9 @@
-﻿  Test.vcxproj -> D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Debug\Test.exe
+﻿  main.cpp
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Menu.h(27,15): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Menu.h(27,18): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+  Menu.cpp
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Menu.h(27,15): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Menu.h(27,18): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+  Generating Code...
+main.obj : error LNK2019: unresolved external symbol "public: void __thiscall Shop::Start(void)" (?Start@Shop@@QAEXXZ) referenced in function _main
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Debug\Test.exe : fatal error LNK1120: 1 unresolved externals

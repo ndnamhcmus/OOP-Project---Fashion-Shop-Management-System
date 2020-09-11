@@ -14,48 +14,42 @@ F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Managemen
 F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Bill.cpp(28,20): warning C4018: '<': signed/unsigned mismatch
 F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Bill.cpp(70,20): warning C4018: '<': signed/unsigned mismatch
 F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Bill.cpp(74,38): warning C4244: '+=': conversion from 'double' to 'long', possible loss of data
-  main.cpp
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Menu.h(27,15): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Menu.h(27,18): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-  MembershipLevel.cpp
-  Menu.cpp
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Menu.h(27,15): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Menu.h(27,18): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-  Person_Customer_Staff_Seller_Security.cpp
   Product.cpp
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(69,20): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(87,20): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(131,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(132,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(139,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(140,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(147,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(148,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(155,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(156,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(163,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(164,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(171,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(172,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(179,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(180,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(187,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(188,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(195,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(196,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(203,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(204,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(211,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(212,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(219,21): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(220,26): warning C4018: '<': signed/unsigned mismatch
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(229,20): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(67,20): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(77,20): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(89,20): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(133,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(134,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(141,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(142,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(149,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(150,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(157,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(158,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(165,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(166,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(173,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(174,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(181,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(182,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(189,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(190,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(197,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(198,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(205,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(206,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(213,21): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(214,26): warning C4018: '<': signed/unsigned mismatch
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(224,20): warning C4018: '<': signed/unsigned mismatch
   Shop.cpp
 F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Menu.h(27,15): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
 F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Menu.h(27,18): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
 F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Shop.cpp(25,20): warning C4018: '<': signed/unsigned mismatch
 F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Shop.cpp(218,22): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Menu.h(27,15): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Menu.h(27,18): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
   Generating Code...
-F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(233): warning C4715: 'Product::search_by_ProductId': not all control paths return a value
+F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Product.cpp(228): warning C4715: 'Product::search_by_ProductId': not all control paths return a value
 F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Fashion Shop Management System\Account.cpp(35): warning C4715: 'Account::search': not all control paths return a value
   Fashion Shop Management System.vcxproj -> F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Debug\Fashion Shop Management System.exe

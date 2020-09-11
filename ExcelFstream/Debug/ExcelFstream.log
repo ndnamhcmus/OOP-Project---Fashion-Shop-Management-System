@@ -1,10 +1,7 @@
-﻿  ExcelFstream.cpp
-D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\ExcelFstream\ExcelFstream.cpp(183,20): warning C4018: '<': signed/unsigned mismatch
-D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\ExcelFstream\ExcelFstream.cpp(256,20): warning C4018: '<': signed/unsigned mismatch
-D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\ExcelFstream\ExcelFstream.cpp(285,20): warning C4018: '<': signed/unsigned mismatch
-D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\ExcelFstream\ExcelFstream.cpp(306,20): warning C4018: '<': signed/unsigned mismatch
-D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\ExcelFstream\ExcelFstream.cpp(341,20): warning C4018: '<': signed/unsigned mismatch
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(477,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  ExcelFstream.cpp
+  ExcelIfstream.cpp
+  ExcelOfstream.cpp
   main.cpp
   Generating Code...
-D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\ExcelFstream\ExcelFstream.cpp(520,20): warning C4018: '<': signed/unsigned mismatch
-  ExcelFstream.vcxproj -> D:\FIRST YEAR\HK3\OOP\Đồ án quản lí shop\Debug\ExcelFstream.exe
+  ExcelFstream.vcxproj -> F:\Object Oriented Programing\Final Project\OOP-Project---Fashion-Shop-Management-System\Support/Library\ExcelFstream.lib
