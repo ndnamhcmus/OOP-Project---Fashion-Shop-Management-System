@@ -1,7 +1,5 @@
 #include "Product.h"
 
-int Product::_quantity_out_of_stock = 0;
-
 Product::Product(){}
 
 Product::Product(string product_name, string product_id, string firm_name, string product_type, string product_color, string product_size, 
@@ -53,9 +51,9 @@ void Product::setProductInfo(vector<string> Tok) {
 	this->_stock_cover_time.parse(Tok[11]);
 
 }
-
+ 
 void Product::showProductInfo() {
-
+	cout << this->toString() << endl;
 }
 
 void Product::setProductsInfo(vector<Product>& products) {
@@ -75,7 +73,11 @@ void Product::setProductsInfo(vector<Product>& products) {
 }
 
 void Product::showProductsInfo(vector<Product> products) {
-
+	cout << "Product's name - Product's Id - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time - Stock cover time" << endl;
+	for (int i = 0; i < products.size(); i++) {
+		cout << i << ") ";
+		products[i].showProductInfo();
+	}
 }
 
 void Product::addProduct(vector<Product>& products, Product prd) {
@@ -215,13 +217,6 @@ void Product::sort(vector<Product>& products, string sort_by) {
 		return;
 	}
 
-	if (sort_by == "_quantity_out_of_stock") {
-		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
-				if (products[i].getQuantityOutOfStock() > products[j].getQuantityOutOfStock())
-					swap(products[i], products[j]);
-		return;
-	}
 }
 
 Product Product::search_by_ProductId(vector<Product>& products, string search_by) {

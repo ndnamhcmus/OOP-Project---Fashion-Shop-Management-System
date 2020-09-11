@@ -24,7 +24,6 @@ private:
 	string _product_color;
 	string _product_size;
 
-	static int _quantity_out_of_stock;
 
 	double _product_cost;
 	double _product_price;
@@ -69,8 +68,6 @@ public:
 	Date getStockInTime() { return _stock_in_time; }
 	Date getStockOutTime() { return _stock_out_time; }
 	Date getStockCoverTime() { return _stock_cover_time; }
-
-	int getQuantityOutOfStock() { return _quantity_out_of_stock; }
 
 	////		Friend function		////
 	friend class ExcelFstream;
