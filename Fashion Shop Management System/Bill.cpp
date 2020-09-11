@@ -36,7 +36,7 @@ void Bill::setBillInfo(vector<string>Tok)
 	this->_bill_id = Tok[0];
 
 	vector<string>tokens = Tokenizer::parse(Tok[1], "/");
-	this->_curr_date = Date(stoi(tokens[0]), stoi(tokens[1]), stoi(tokens[2]));
+	this->_curr_date.parse(Tok[2]);
 
 }
 
