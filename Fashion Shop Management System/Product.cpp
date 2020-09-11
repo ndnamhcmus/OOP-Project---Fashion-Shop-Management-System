@@ -30,6 +30,13 @@ string Product::toString() {
 	return writer.str();
 }
 
+Product Product::parse(string line) {
+	auto Tok = Tokenizer::parse(line, ",");
+	Product prd;
+	prd.setProductInfo(Tok);
+	return prd;
+}
+
 void Product::setProductInfo(vector<string> Tok) {
 
 	this->_product_name = Tok[0];
@@ -48,6 +55,26 @@ void Product::setProductInfo(vector<string> Tok) {
 }
 
 void Product::showProductInfo() {
+
+}
+
+void Product::setProductsInfo(vector<Product>& products) {
+
+	vector<vector<string>> container;
+	ExcelFstream file;
+	file.open("Product.csv", ios::app);
+	file.readExcelString(container);
+	file.close();
+
+	for (int i = 0; i < container.size(); i++) {
+		Product prd;
+		prd.setProductInfo(container[i]);
+		products.push_back(prd);
+	}
+
+}
+
+void Product::showProductsInfo(vector<Product> products) {
 
 }
 
@@ -70,48 +97,36 @@ void Product::deleteProduct(vector<Product>& products, Product prd) {
 		products.erase(products.begin() + index);
 }
 
-void Product::addProductInFile(vector<Product>& products, vector<vector<string>> &container, Product prd, ExcelFstream file) {
+void Product::addProductInFile(vector<Product>& products, Product prd) {
+	vector<vector<string>> container;
+	ExcelFstream file;
 	Product::addProduct(products, prd);
 	file.open("Product.csv", ios::app);
 	file.writeExcelString(prd.toString());
-	file.readExcelString(container);
 	file.close();
 }
 
-void Product::deleteProductInFile(vector<Product>& products, vector<vector<string>> &container, Product prd, ExcelFstream file) {
+void Product::deleteProductInFile(vector<Product>& products, Product prd) {
+	vector<vector<string>> container;
+	ExcelFstream file;
 	Product::deleteProduct(products, prd);
 	file.open("Product.csv");
 	for (auto& products : products) {
 		file.writeExcelString(products.toString());
 	}
-	file.readExcelString(container); 
 	file.close();
 }
 
-void Product::setProductsInfo(vector<Product>& products, vector<vector<string>> container) {
-	
-	for (int i = 0; i < container.size(); i++){
-		Product prd;
-		prd.setProductInfo(container[i]);
-		products.push_back(prd);
-	}
-
-}
-
-void Product::showProductsInfo(vector<Product> products) {
-
+Product Product::getProduct(vector<Product>& products, string id) {
+	Product prd;
+	prd = Product::search_by_ProductId(products, id);
+	Product::deleteProduct(products, prd);
+	return prd;
 }
 
 void Product::sort(vector<Product>& products, string sort_by) {
 
-	if (sort_by == "_product_name") {
-		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
-				if (products[i].getProductName() > products[j].getProductName())
-					swap(products[i], products[j]);
-		return;
-	}
-
+ 
 	if (sort_by == "_product_id") {
 		for (int i = 0; i < products.size(); i++)
 			for (int j = i + 1; j < products.size() - 1; j++)
