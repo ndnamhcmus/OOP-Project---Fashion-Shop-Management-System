@@ -7,7 +7,7 @@
 
 void ExcelFstream::open(const string& path, ios_base::openmode mode)
 {
-	_file.open(path, ios::in | ios::out | mode);
+	_file.open(path, mode);
 
 
 	try
@@ -15,12 +15,12 @@ void ExcelFstream::open(const string& path, ios_base::openmode mode)
 		if (!(_file))
 		{
 			throw ExcelFstreamException("File is not open");
-			exit(EXIT_FAILURE);
 		}
 	}
 	catch (const std::exception& mess)
 	{
 		cout << mess.what() << endl;
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -52,4 +52,8 @@ void ExcelFstream::writeExcelString(const string& String, const string& needle)
 
 
 	_file << _buffer.str();
+
+
+	_buffer.str("");
+	_buffer.clear();
 }

@@ -33,11 +33,18 @@ Bill Bill::search(vector<Bill> bills, string search_by)
 
 void Bill::setBillInfo(vector<string>Tok)
 {
-	this->_bill_id = Tok[0];
+	_bill_id = Tok[0];
 
 	vector<string>tokens = Tokenizer::parse(Tok[1], "/");
-	this->_curr_date.parse(Tok[2]);
+	
+	_curr_date = Date(stoi(tokens[0]), stoi(tokens[1]), stoi(tokens[2]));
 
+
+	for (int i = 2; i < Tok.size() - 1; i = i + 2)
+	{
+		_cart.push_back(Product(Tok[i], "", "", "", "", "", 0.0, stod(Tok[i + 1]), 0.0, Date(), Date(), Date()));
+		continue;
+	}
 }
 
 Bill Bill::getBill()
@@ -47,8 +54,11 @@ Bill Bill::getBill()
 
 string Bill::lastBill_ID_InFile()
 {
+	vector<Bill> bills;
 
-	return string();
+	Bill::openBillFile(bills, "Bill.csv");
+
+	return bills[bills.size() - 1].getID();
 }
 
 string Bill::getID()
@@ -64,28 +74,77 @@ Date Bill::getDate()
 string Bill::toString()
 {
 	stringstream w;
-	long total = 0;
+	double total = 0;
 
-	w << _bill_id << "-" << _curr_date.toString() << "\n";
+	w << _bill_id << " - " << _curr_date.toString() << " - ";
 	for (int i = 0; i < _cart.size(); i++) {
-		w << _cart[i].getProductName() << "-" 
-		  << _cart[i].getProductPrice() * (1 - _cart[i].getDiscount()) << "\n";
+		w << _cart[i].getProductName() << " - " 
+		  << to_string(_cart[i].getProductPrice() * (1 - _cart[i].getDiscount())) << " - ";
 
-		total += _cart[i].getProductPrice();
+		total += _cart[i].getProductPrice() * (1 - _cart[i].getDiscount());
 	}
-	w << "Total:" << total << "\n";
+	w << "Total:" << to_string(total) << " - ";
 
 	return w.str();
 }
 
 void Bill::showBillInfo()
 {
-	cout << Bill::toString();
+	double total = 0;
+	cout << "---SHOP---" << endl;
+
+	cout << "Address: 19CLC6 HCMUS  \n";
+
+	cout << "Phone: 0123456789\n\n";
+
+	cout << "--------------------------------\n";
+
+	cout << "Bill No: " << _bill_id << "\t Date: " << _curr_date.toString() << endl;
+
+	cout << "--------------------------------\n";
+
+	cout << "Name Product\t\t\tRate\n";
+
+	for (int i = 0; i < _cart.size(); i++) {
+		cout << _cart[i].getProductName() 
+			 << "\t\t\t" << _cart[i].getProductPrice() * (1 - _cart[i].getDiscount());
+
+		total += _cart[i].getProductPrice() * (1 - _cart[i].getDiscount());
+	}
+
+	cout << "--------------------------------\n";
+	cout << "Total:\t\t\t" << total << endl;
+	cout << "\n---***   THANK YOU VISIT AGAIN   ***---\n";
 }
 
-void Bill::saveBillToFile()
+void Bill::saveBillToFile(vector <Bill> bills)
 {
+	string buffer;
+	ExcelFstream file;
+	file.open("Bill.csv", ios::out);
 
 
+	for (int i = 0; i < bills.size(); i++)
+	{
+		buffer = bills[i].toString();
+		file.writeExcelString(buffer);
+	}
+	file.close();
+}
 
+void Bill::openBillFile(vector <Bill>& bills, string path)
+{
+	ExcelFstream file;
+	file.open(path, ios::in);
+
+	vector <vector <string>> container;
+	file.readExcelString(container);
+
+	for (int i = 0; i < container.size(); i++)
+	{
+		Bill bill;
+		bill.setBillInfo(container[i]);
+		bills.push_back(bill);
+	}
+	file.close();
 }

@@ -1,7 +1,5 @@
 #include "Product.h"
 
-int Product::_quantity_out_of_stock = 0;
-
 Product::Product(){}
 
 Product::Product(string product_name, string product_id, string firm_name, string product_type, string product_color, string product_size, 
@@ -30,6 +28,11 @@ string Product::toString() {
 	return writer.str();
 }
 
+void Product::parse(string line) {
+	auto Tok = Tokenizer::parse(line, ",");
+	this->setProductInfo(Tok);
+}
+
 void Product::setProductInfo(vector<string> Tok) {
 
 	this->_product_name = Tok[0];
@@ -46,9 +49,33 @@ void Product::setProductInfo(vector<string> Tok) {
 	this->_stock_cover_time.parse(Tok[11]);
 
 }
-
+ 
 void Product::showProductInfo() {
+	cout << this->toString() << endl;
+}
 
+void Product::setProductsInfo(vector<Product>& products, string FileName) {
+
+	vector<vector<string>> container;
+	ExcelFstream file;
+	file.open(FileName, ios::in | ios::app);
+	file.readExcelString(container);
+	file.close();
+
+	for (int i = 0; i < container.size(); i++) {
+		Product prd;
+		prd.setProductInfo(container[i]);
+		products.push_back(prd);
+	}
+
+}
+
+void Product::showProductsInfo(vector<Product> products) {
+	cout << "Product's name - Product's Id - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time - Stock cover time" << endl;
+	for (int i = 0; i < products.size(); i++) {
+		cout << i << ") ";
+		products[i].showProductInfo();
+	}
 }
 
 void Product::addProduct(vector<Product>& products, Product prd) {
@@ -70,48 +97,34 @@ void Product::deleteProduct(vector<Product>& products, Product prd) {
 		products.erase(products.begin() + index);
 }
 
-void Product::addProductInFile(vector<Product>& products, vector<vector<string>> &container, Product prd, ExcelFstream file) {
+void Product::addProductInFile(vector<Product>& products, Product prd, string FileName) {
+	vector<vector<string>> container;
+	ExcelFstream file;
 	Product::addProduct(products, prd);
-	file.open("Product.csv", ios::app);
+	file.open(FileName, ios::out | ios::app);
 	file.writeExcelString(prd.toString());
-	file.readExcelString(container);
 	file.close();
 }
 
-void Product::deleteProductInFile(vector<Product>& products, vector<vector<string>> &container, Product prd, ExcelFstream file) {
+void Product::deleteProductInFile(vector<Product>& products, Product prd, string FileName) {
+	vector<vector<string>> container;
+	ExcelFstream file;
 	Product::deleteProduct(products, prd);
-	file.open("Product.csv");
+	file.open(FileName, ios::out);
 	for (auto& products : products) {
 		file.writeExcelString(products.toString());
 	}
-	file.readExcelString(container); 
 	file.close();
 }
 
-void Product::setProductsInfo(vector<Product>& products, vector<vector<string>> container) {
-	
-	for (int i = 0; i < container.size(); i++){
-		Product prd;
-		prd.setProductInfo(container[i]);
-		products.push_back(prd);
-	}
-
-}
-
-void Product::showProductsInfo(vector<Product> products) {
-
+void Product::buyProduct(vector<Product>& products, vector<Product>& productssold, Product prd) {
+	Product::addProduct(productssold, prd);
+	Product::deleteProduct(products, prd);
 }
 
 void Product::sort(vector<Product>& products, string sort_by) {
 
-	if (sort_by == "_product_name") {
-		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
-				if (products[i].getProductName() > products[j].getProductName())
-					swap(products[i], products[j]);
-		return;
-	}
-
+ 
 	if (sort_by == "_product_id") {
 		for (int i = 0; i < products.size(); i++)
 			for (int j = i + 1; j < products.size() - 1; j++)
@@ -200,19 +213,49 @@ void Product::sort(vector<Product>& products, string sort_by) {
 		return;
 	}
 
-	if (sort_by == "_quantity_out_of_stock") {
-		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
-				if (products[i].getQuantityOutOfStock() > products[j].getQuantityOutOfStock())
-					swap(products[i], products[j]);
-		return;
-	}
 }
 
-Product Product::search_by_ProductId(vector<Product>& products, string search_by) {
-
+bool Product::isValidInList(vector<Product>& products, string search_by, int &index) {
 	for (int i = 0; i < products.size(); i++)
-		if (products[i].getProductId() == search_by)
-			return products[i];
-
+		if (products[i].getProductId() == search_by) {
+			index = i;
+			return true;
+		}
+	return false;
 }
+
+Product Product::search_by_ProductId(vector<Product>& products, int index) {
+	return products[index];
+}
+
+//int main() {
+//	vector<Product> products;
+//	vector<Product> productssold;
+//
+//	Product::setProductsInfo(products, "Product.csv");
+//	Product::setProductsInfo(productssold, "Product sold.csv");
+//	
+//	////////////////////////// Buy a product ///////////////////////
+//	Product prd;
+//	string id;
+//	int index;
+//	if (Product::isValidInList(products, id, index)) {
+//		prd = Product::search_by_ProductId(products, index);
+//		Product::buyProduct(products, productssold, prd);
+//		cout << "Product has been purchased" << endl;
+//	}
+//	else
+//		cout << "The product is out of stock" << endl;
+//	/////////////////////////////////////////////////////////////////
+//
+//	////////////////////////// Add a product ///////////////////////
+//	Product prd1;
+//	string infomation;
+//	prd1.parse(infomation);
+//	Product::addProduct(products, prd1);
+//	/////////////////////////////////////////////////////////////////
+//
+//
+//
+//
+//}

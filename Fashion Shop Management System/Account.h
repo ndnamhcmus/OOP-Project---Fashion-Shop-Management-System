@@ -35,7 +35,7 @@ public:
 
 	void deleteAccountInFile(string account_id);
 
-	void modifyAccountInFile(string account_id);
+	//void modifyAccountInFile(string account_id);
 
 	vector <Bill> getBillListFromFile(string account_id);
 
@@ -45,7 +45,7 @@ public:
 
 	double getDiscount();
 
-	//+sign_in: account_id: string 
+	void sign_in(string  account_id);
 		
 	void sign_up(vector<Account>&);
 
@@ -53,12 +53,15 @@ public:
 
 	void showAccountInfo();
 
-	Account saveAccount();
+	void saveAccountToFile(vector<Account>accounts);
 
-	string deleteAccount();
+	void deleteAccount(vector<Account>& acc, string account_id);
 
-	string modifyAccount();
+	//string modifyAccount();
 
+	void openAccountFile(vector <Account>& accounts, string path = "Account.csv");
+
+	string toString();
 
 	friend class ExcelFstream;
 
