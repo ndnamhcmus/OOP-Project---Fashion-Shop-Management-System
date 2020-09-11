@@ -19,6 +19,11 @@ private:
 
 public:
 
+	Bill()
+	{
+
+	}
+
 	Bill(string id, Date d,vector<Product> p);
 
 	void sort(vector <Bill> bills, string sort_by);
@@ -39,9 +44,9 @@ public:
 
 	void showBillInfo();
 
-	void saveBillToFile();
+	static void saveBillToFile(vector <Bill> bills);
 
-
+	static void openBillFile(vector <Bill>& bills, string path = "Bill.csv");
 
 
 	friend class ExcelFstream;
