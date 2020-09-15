@@ -44,6 +44,8 @@ public:
 	static void showMenu();
 	
 	static void continueMenu(int x = 0, int y = 0);
+
+	static void showProductManagementMenu();
 	
 	static void showStaffMenu();
 

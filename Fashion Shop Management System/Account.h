@@ -53,13 +53,13 @@ public:
 
 	void showAccountInfo();
 
-	void saveAccountToFile(vector<Account>accounts);
+	static void saveAccountToFile(vector<Account>accounts);
 
 	void deleteAccount(vector<Account>& acc, string account_id);
 
 	//string modifyAccount();
 
-	void openAccountFile(vector <Account>& accounts, string path = "Account.csv");
+	static void openAccountFile(vector <Account>& accounts, string path = "Account.csv");
 
 	string toString();
 

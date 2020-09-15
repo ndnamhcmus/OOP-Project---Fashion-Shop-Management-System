@@ -15,11 +15,29 @@
 
 class Shop
 {
-private:
+private:	//		List		//
 
 	vector <Product> _products;
+	vector <Bill> _bills;
 	vector <Account> _accounts;
 	vector <Staff*> _staffs;
+
+public:		//		Constructor		//
+
+	Shop()
+	{
+		openProductList();
+		openBillList();
+		openAccountList();
+		openStaffList();
+	}
+	
+	~Shop()
+	{
+		saveProductList();
+		saveBillList();
+		saveAccountList();
+	}
 
 private:
 
@@ -30,11 +48,13 @@ private:
 private:
 
 	void openProductList();
+	void openBillList();
 	void openAccountList();
 	void openStaffList();
 
 
 	void saveProductList();
+	void saveBillList();
 	void saveAccountList();
 	void saveStaffList();
 
@@ -49,10 +69,11 @@ private:
 
 private:
 
-	void Trading();
+	void Purchase();
 
 
 	void StaffInfoManagement();
+
 	void SellerInfo();
 	void SecurityInfo();
 };
