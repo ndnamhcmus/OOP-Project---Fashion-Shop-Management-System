@@ -34,7 +34,7 @@ public:
 
 	Bill getBill();
 
-	string lastBill_ID_InFile();
+	static string lastBill_ID_InFile();
 
 	string getID();
 
@@ -48,6 +48,7 @@ public:
 
 	static void openBillFile(vector <Bill>& bills, string path = "Bill.csv");
 
+public:
 
 	friend class ExcelFstream;
 

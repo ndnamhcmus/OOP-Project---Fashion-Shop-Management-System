@@ -9,13 +9,13 @@ void Menu::showMenu()
 	int x = 55;
 	int y = 5;
 
-	_buffer << "Welcome to\n";
+	_buffer << "Welcome to 19CLC6\n";
 	gotoxy(x - _buffer.str().size() / 2, 0);
 	cout << _buffer.str();
 	_buffer.str("");
 
 
-	_buffer << "1. Start trading\n";
+	_buffer << "1. Starting to purchase\n";
 	gotoxy(x - _buffer.str().size() / 2, y);
 	cout << _buffer.str();
 	_buffer.str("");
@@ -44,6 +44,26 @@ void Menu::continueMenu(int x, int y)
 	_buffer.str("");
 
 	_buffer << "Press Y or N: ";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+}
+
+void Menu::showProductManagementMenu()
+{
+	int x = 55, y = 0;
+
+	_buffer << "1. Add new product\n";
+	gotoxy(x - _buffer.str().size() / 2, y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "2. Delete product\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "3. Cancel\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");

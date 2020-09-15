@@ -103,7 +103,7 @@ void Bill::showBillInfo()
 
 	cout << "--------------------------------\n";
 
-	cout << "Name Product\t\t\tRate\n";
+	cout << "Name Product\t\tRate\n";
 
 	for (int i = 0; i < _cart.size(); i++) {
 		cout << _cart[i].getProductName() 
@@ -112,7 +112,7 @@ void Bill::showBillInfo()
 		total += _cart[i].getProductPrice() * (1 - _cart[i].getDiscount());
 	}
 
-	cout << "--------------------------------\n";
+	cout << "\n--------------------------------\n";
 	cout << "Total:\t\t\t" << total << endl;
 	cout << "\n---***   THANK YOU VISIT AGAIN   ***---\n";
 }

@@ -23,7 +23,7 @@ Product::Product(string product_name, string product_id, string firm_name, strin
 string Product::toString() {
 	stringstream writer;
 	writer << _product_name << " - " << _product_id << " - " << _firm_name << " - " << _product_type << " - " << _product_color << " - "
-		<< _product_size << " - " << _product_cost << " - " << _product_price << " - " << _discount << " - " << _stock_in_time.toString()
+		<< _product_size << " - " << to_string(_product_cost) << " - " << to_string(_product_price) << " - " << to_string(_discount) << " - " << _stock_in_time.toString()
 		<< " - " << _stock_out_time.toString() << " - " << _stock_cover_time.toString();
 	return writer.str();
 }
@@ -71,7 +71,7 @@ void Product::setProductsInfo(vector<Product>& products, string FileName) {
 }
 
 void Product::showProductsInfo(vector<Product> products) {
-	cout << "Product's name - Product's Id - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time - Stock cover time" << endl;
+	cout << "Product's name - Product's ID - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time - Stock cover time" << endl;
 	for (int i = 0; i < products.size(); i++) {
 		cout << i << ") ";
 		products[i].showProductInfo();

@@ -44,7 +44,7 @@ public:
 	void setProductInfo(vector<string> Tok);
 	void showProductInfo();
 
-	static void setProductsInfo(vector<Product>& products, string FileName);
+	static void setProductsInfo(vector<Product>& products, string FileName = "Product.csv");
 	static void showProductsInfo(vector<Product> products);
 	static void addProduct(vector<Product>& products, Product prd);
 	static void deleteProduct(vector<Product>& products, Product prd);

@@ -1,13 +1,55 @@
 #include "Shop.h"
 
+/// <summary>
+/// Load list
+/// </summary>
+
 void Shop::openProductList()
+{
+	Product::setProductsInfo(_products);
+}
+
+void Shop::openBillList()
+{
+	Bill::openBillFile(_bills);
+}
+
+void Shop::openAccountList()
+{
+	Account::openAccountFile(_accounts);
+}
+
+void Shop::openStaffList()
+{
+}
+
+/// <summary>
+///		Save	///
+/// </summary>
+
+void Shop::saveProductList()
 {
 
 }
 
+void Shop::saveBillList()
+{
+	Bill::saveBillToFile(_bills);
+}
+
+void Shop::saveAccountList()
+{
+	Account::saveAccountToFile(_accounts);
+}
+
+/// <summary>
+///		Sort	///
+/// </summary>
+/// <param name="sort_by"></param>
+
 void Shop::sortProduct(string sort_by)
 {
-	Product product;
+	Product::sort(_products, "");
 }
 
 void Shop::sortAccount(string sort_by)
@@ -20,14 +62,12 @@ void Shop::sortStaff(string sort_by)
 {
 }
 
+/// <summary>
+///		Show	///
+/// </summary>
 void Shop::showProductList()
 {
-	for (int i = 0; i < _products.size(); i++)
-	{
-		cout << i + 1 << ": ";
-		_products[i].showProductInfo();
-		cout << endl;
-	}
+	Product::showProductsInfo(_products);
 }
 
 ////////////////////		SWITCH\CASE		////////////////////
@@ -48,7 +88,7 @@ void Shop::Start()
 		{
 		case 1:
 
-			Trading();
+			Purchase();
 			break;
 
 		case 2:
@@ -69,15 +109,6 @@ void Shop::Start()
 		}
 
 
-		/*system("cls");
-		Menu::showMenu();
-		Menu::continueMenu(55, 3);
-		getline(cin, is_continue);
-		system("cls");
-		if (is_continue == "n")
-		{
-			continue;
-		}*/
 		system("pause");
 		system("cls");
 
@@ -90,43 +121,104 @@ void Shop::Start()
 	
 }
 
-void Shop::Trading()
+void Shop::Purchase()
 {
 	system("cls");
-
-
-	int amount;
 
 
 	cout << "Product list\n";
 	showProductList();
 
 
+	vector <Product> products_sold;
 	Product product;
+
+	int index;
 	string id;
-	cout << "Enter product id: ";
+	cout << "Enter product's id: ";
 	getline(cin, id);
-	product = Product::search_by_ProductId(_products, id);
 
-
-	vector <Product> cart;
+	int amount;
 	cout << "Amount: ";
 	cin >> amount;
 	cin.ignore();
+
+	vector <Product> cart;
+
 	for (int i = 0; i < amount; i++)
 	{
-		cart.push_back(product);
+		if (Product::isValidInList(_products, id, index)) {
+			product = Product::search_by_ProductId(_products, index);
+			Product::buyProduct(_products, products_sold, product);
+
+			cart.push_back(product);
+
+			cout << "product has been purchased" << endl;
+		}
+		else
+		{
+			cout << "the product is out of stock" << endl;
+		}
 	}
 
+
+	long long int new_id = stoll(Bill::lastBill_ID_InFile()) + 1;
+	Bill bill(to_string(new_id), Date(), cart);
+	_bills.push_back(bill);
+	bill.showBillInfo();
 }
 
 void Shop::ProductManagement()
 {
-	string id;
+
+	system("cls");
+	string is_continue;
+
+
 	Product product;
+	string id;
+	
+
+	int choice;
+	Menu::showProductManagementMenu();
+	cout << "Choose: ";
+	cin >> choice;
+	cin.ignore();
+	while (!(is_continue == "n" || is_continue == "N"))
+	{
+		switch (choice)
+		{
+		case 1:
 
 
-	product.addProduct(_products, product);
+			//Product::addProductInFile()
+			break;
+
+		case 2:
+
+			showProductList();
+			cout << "Enter product's ID: ";
+			getline(cin, id);
+			//Product::deleteProductInFile();
+			break;
+
+		case 3:
+
+			is_continue = "n";
+			continue;
+
+		}
+
+
+		system("pause");
+		system("cls");
+
+
+		Menu::showProductManagementMenu();
+		cout << "Choose: ";
+		cin >> choice;
+		cin.ignore();
+	}
 }
 
 void Shop::StaffInfoManagement()
@@ -165,16 +257,7 @@ void Shop::StaffInfoManagement()
 
 		}
 
-
 		
-		/*Menu::showStaffMenu();
-		Menu::continueMenu(55, 4);
-		getline(cin, is_continue);
-		system("cls");
-		if (is_continue == "n")
-		{
-			continue;
-		}*/
 		system("pause");
 		system("cls");
 
