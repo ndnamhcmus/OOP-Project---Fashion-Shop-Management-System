@@ -17,18 +17,20 @@ Product::Product(string product_name, string product_id, string firm_name, strin
 	_stock_in_time = stock_in_time;
 	_stock_out_time = stock_out_time;
 	_stock_cover_time = stock_cover_time;
-
 }
 
 string Product::toString() {
 	stringstream writer;
 	writer << _product_name << " - " << _product_id << " - " << _firm_name << " - " << _product_type << " - " << _product_color << " - "
-		<< _product_size << " - " << to_string(_product_cost) << " - " << to_string(_product_price) << " - " << to_string(_discount) << " - " << _stock_in_time.toString()
-		<< " - " << _stock_out_time.toString() << " - " << _stock_cover_time.toString();
+		<< _product_size << " - " << _product_cost << " - " << _product_price << " - " << _discount << " - " << _stock_in_time.toString() << " - " << _stock_out_time.toString() << endl;
 	return writer.str();
 }
 
-void Product::parse(string line) {
+void Product::set() { 
+	cout << "Product's name - Product's ID - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl;
+	cout << "Please enter the information in the form above" << endl;
+	string line;
+	getline(cin,line);
 	auto Tok = Tokenizer::parse(line, " - ");
 	this->setProductInfo(Tok);
 }
@@ -46,7 +48,6 @@ void Product::setProductInfo(vector<string> Tok) {
 	this->_discount = stod(Tok[8]);
 	this->_stock_in_time.parse(Tok[9]);
 	this->_stock_out_time.parse(Tok[10]);
-	this->_stock_cover_time.parse(Tok[11]);
 
 }
  
@@ -71,7 +72,7 @@ void Product::setProductsInfo(vector<Product>& products, string FileName) {
 }
 
 void Product::showProductsInfo(vector<Product> products) {
-	cout << "Product's name - Product's ID - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time - Stock cover time" << endl;
+	cout << "Product's name - Product's ID - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl;
 	for (int i = 0; i < products.size(); i++) {
 		cout << i << ") ";
 		products[i].showProductInfo();
@@ -80,21 +81,17 @@ void Product::showProductsInfo(vector<Product> products) {
 
 void Product::addProduct(vector<Product>& products, Product prd) {
 	products.push_back(prd);
+	cout << "Product has been added successfully" << endl; 
 }
 
 void Product::deleteProduct(vector<Product>& products, Product prd) {
-	int index = -1;
-	for (int i = 0; i < products.size(); i++) {
-		if (products[i].getProductId() == prd.getProductId()) {
-			index = i;
-			break;
-		}
-	}
-	if (index == -1) {
-		cout << "Product not found" << endl;
+	int index;
+	if (Product::isValidInList(products, prd.getProductId(), index)) {
+		products.erase(products.begin() + index);
+		cout << "Product deleted successfully" << endl;
 	}
 	else
-		products.erase(products.begin() + index);
+		cout << "Product not found" << endl;
 }
 
 void Product::addProductInFile(vector<Product>& products, Product prd, string FileName) {
@@ -205,14 +202,6 @@ void Product::sort(vector<Product>& products, string sort_by) {
 		return;
 	}
 
-	if (sort_by == "_stock_cover_time") {
-		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
-				if (products[i].getStockCoverTime() > products[j].getStockCoverTime())
-					swap(products[i], products[j]);
-		return;
-	}
-
 }
 
 bool Product::isValidInList(vector<Product>& products, string search_by, int &index) {
@@ -250,8 +239,7 @@ Product Product::search_by_ProductId(vector<Product>& products, int index) {
 //
 //	////////////////////////// Add a product ///////////////////////
 //	Product prd1;
-//	string infomation;
-//	prd1.parse(infomation);
+//	prd1.set();
 //	Product::addProduct(products, prd1);
 //	/////////////////////////////////////////////////////////////////
 //
