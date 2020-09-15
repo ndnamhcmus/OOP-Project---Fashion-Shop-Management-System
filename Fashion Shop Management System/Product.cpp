@@ -29,7 +29,7 @@ string Product::toString() {
 }
 
 void Product::parse(string line) {
-	auto Tok = Tokenizer::parse(line, ",");
+	auto Tok = Tokenizer::parse(line, " - ");
 	this->setProductInfo(Tok);
 }
 
@@ -58,7 +58,7 @@ void Product::setProductsInfo(vector<Product>& products, string FileName) {
 
 	vector<vector<string>> container;
 	ExcelFstream file;
-	file.open(FileName, ios::in | ios::app);
+	file.open(FileName, ios::in);
 	file.readExcelString(container);
 	file.close();
 
