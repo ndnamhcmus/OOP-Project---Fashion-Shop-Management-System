@@ -48,8 +48,8 @@ public:
 	static void showProductsInfo(vector<Product> products);
 	static void addProduct(vector<Product>& products, Product prd);
 	static void deleteProduct(vector<Product>& products, Product prd);
-	static void addProductInFile(vector<Product>& products, Product prd, string FileName);
-	static void deleteProductInFile(vector<Product>& products, Product prd, string FileName);
+	static void addProductInFile(vector<Product>& products, Product prd, string FileName = "Product.csv");
+	static void deleteProductInFile(vector<Product>& products, Product prd, string FileName = "Product.csv");
 	static void buyProduct(vector<Product>& products, vector<Product>& productssold, Product prd);
 	static void sort(vector<Product>& products, string sort_by);
 	static bool isValidInList(vector<Product>& products, string search_by, int& index);

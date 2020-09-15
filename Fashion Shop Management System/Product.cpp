@@ -74,7 +74,7 @@ void Product::setProductsInfo(vector<Product>& products, string FileName) {
 void Product::showProductsInfo(vector<Product> products) {
 	cout << "Product's name - Product's ID - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl;
 	for (int i = 0; i < products.size(); i++) {
-		cout << i << ") ";
+		cout << i + 1 << ": ";
 		products[i].showProductInfo();
 	}
 }

@@ -21,7 +21,7 @@ public:
 	void setCumulativePoints(int);
 	int getCummulativePoints();
 	int increaseCumulativePoints();
-	double getDiscount(string _level);
+	static double getDiscount(string _level);
 	void updateLevel();
 
 	friend class ExcelFstream;

@@ -1,5 +1,9 @@
 ﻿#include "Account.h"
 
+#include <FakeName.h>
+#include <FakeAddress.h>
+#include <FakeBirthday.h>
+#include <FakeVnTel.h>
 
 Account::Account(string account_id, Customer customer, MembershipLevel membership_level)
 {
@@ -57,6 +61,15 @@ void Account::setAccountInfo(vector<string>Tok)
 	_membership_level = Tok[6];
 }
 
+string Account::findLastCustomer_ID_InFile()
+{
+	vector<Account> acc;
+
+	Account::openAccountFile(acc);
+
+	return acc[acc.size() - 1]._customer.getCustomerID();
+}
+
 string Account::findLastAccount_ID_InFile()
 {
 	vector<Account> acc;
@@ -104,19 +117,19 @@ void Account::deleteAccountInFile(string account_id)
 
 }*/
 
-vector<Bill> Account::getBillListFromFile(string account_id)
+vector<Bill> Account::getBillListFromFile(string bill_id)
 {
-	vector<Account> acc;
+	vector<Bill> bills;
 
-	Account::openAccountFile(acc);
+	Bill::openBillFile(bills);
 
-	for (int i = 0; i < acc.size(); i++) {
-		if (acc[i]._account_id == account_id) {
-
-			return acc[i]._bills;
-
+	for (int i = 0; i < bills.size(); i++) {
+		if (bills[i].getID() != bill_id) {
+			bills.erase(bills.begin() + i);
 		}
 	}
+
+	return bills;
 }
 
 string Account::getAccount_ID()
@@ -134,52 +147,64 @@ double Account::getDiscount()
 	return _membership_level.getDiscount(_membership_level.getLevel());
 }
 
-void Account::sign_in(string account_id)
+Account Account::sign_in(vector<Account> accounts, string account_id)
 {
-	vector<Account> acc;
+	bool is_found = false;
+	for (int i = 0; i < accounts.size(); i++)
+	{
+		if (accounts[i]._account_id == account_id) {
 
-	Account::openAccountFile(acc);
-
-	for (int i = 0; i < acc.size(); i++) 
-
-		if (acc[i]._account_id == account_id) {
-
-			 acc[i].showAccountInfo();
+			is_found = true;
+			accounts[i].showAccountInfo();
+			return accounts[i];
 		}
+	}
+
+
+	if (!is_found)
+	{
+		throw AccountException("Account is not found");
+	}
 }
 
-void Account::sign_up(vector<Account>&accounts)
+Account Account::sign_up(vector<Account>&accounts)
 {
 	vector<string> st;
 	string s;
 
-	st.push_back(to_string(stoi(Account::findLastAccount_ID_InFile()) + 1));
+	st.push_back(to_string(stoi(findLastAccount_ID_InFile()) + 1));
 
 	cout << "Full Name: ";
-	getline(cin, s);
-	st.push_back(s);
+	/*getline(cin, s);
+	st.push_back(s);*/
+	st.push_back(string(FakeName::next()));
 
 	cout << "Date of birth: ";
-	getline(cin, s);
-	st.push_back(s);
+	/*getline(cin, s);
+	st.push_back(s);*/
+	st.push_back(FakeBirthday::next().toString());
 
 	cout << "Phone number: ";
 	getline(cin, s);
 	st.push_back(s);
 
 	cout << "Address: ";
-	getline(cin, s);
-	st.push_back(s);
+	/*getline(cin, s);
+	st.push_back(s);*/
+	st.push_back(FakeHCMAddress::next().toString());
 
-	st.push_back(to_string(stoi(_customer.getCustomerID()) + 1));
+	st.push_back(to_string(stoi(findLastCustomer_ID_InFile()) + 1));
 
-	st.push_back("0");  //membership level
+	st.push_back("none");  //membership level
 
 	Account account;
 
 	account.setAccountInfo(st);
 
 	accounts.push_back(account);
+
+
+	return account;
 }
 
 void Account::showBillList()
@@ -195,6 +220,7 @@ void Account::showAccountInfo()
 {
 	cout << "Account ID: " << _account_id << endl;
 
+	cout << "Customer ID\tDOB\tTel\tAddress\n";
 	cout << _customer.toString() << endl;
 
 	cout << "Number of bill: " << _bills.size() << endl;

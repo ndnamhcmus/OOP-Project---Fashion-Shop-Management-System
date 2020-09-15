@@ -65,15 +65,20 @@ public:
 private:
 
 	void showProductList();
-	void ProductManagement();
 
 private:
 
 	void Purchase();
 
+	Account AccountManagement();
+
+private:
+
+	void ProductManagement();
+
+private:
 
 	void StaffInfoManagement();
-
 	void SellerInfo();
 	void SecurityInfo();
 };
