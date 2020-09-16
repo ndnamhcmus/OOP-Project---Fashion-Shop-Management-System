@@ -1,5 +1,6 @@
 #include "Person_Customer_Staff_Seller_Security.h"
-
+#include"Tokenizer.h"
+#include<string>
 //int Seller::_goods_sale = 0;
 
 ////////      PERSON      ////////
@@ -20,6 +21,8 @@ Date Person::getDoB() { return _date_of_birth; }
 string Person::getPhoneNumber() { return _phone_number; }
 
 Address Person::getAddress() { return _address; }
+
+
 
 
 ////////////    CUSTOMER    /////////
@@ -47,7 +50,7 @@ string Customer:: toString()
 {
 	string cus;
 	cus = _name;
-	cus += "\t" +_customer_id + "\t"+  _date_of_birth.toString() + "\t"+_phone_number+ "\t"+_address.toString();
+	cus += " - " +_customer_id + " - "+  _date_of_birth.toString() + " - "+_phone_number+ " - "+_address.toString();
 	return cus;
 }
 
@@ -57,13 +60,26 @@ void Customer::showCustomerInfo()
 	cout << toString() << endl;
 }
 
+void Customer::parse(string line)
+{
+	auto Tok = Tokenizer::parse(line, " - ");
+	this->_name = Tok[0];
+	this->_customer_id = Tok[1];
+	this->_date_of_birth.toString() = Tok[2];
+	this->_phone_number = Tok[3];
+	this->_address = Tok[4];
+}
+
+
+
+
 ///////    STAFF /////////
 
 void Staff::setStaffID(string staff_id) { _staff_id = staff_id; }
 
 void Staff::setBaseSalary(double salary) { _base_salary = salary; }
 
-void Staff::setStaffInfo(string name, Date dob, string phone, Address add, string staff_id, double base_salary)
+void Staff::setStaff(string name, Date dob, string phone, Address add, string staff_id, double base_salary)
 {
 	Person::setName(name);
 	Person::setDoB(dob);
@@ -78,26 +94,196 @@ string Staff::getStaffID()
 	return _staff_id;
 }
 
-void Staff:: showStaffInfo()
+void Staff:: showBaseStaffInfo()
 {
-	cout << _name << "\t" << _staff_id << "\t" << _date_of_birth.toString() + "\t" + _phone_number + "\t" + _address.toString() << endl;
+	cout << _name << " - " << _staff_id << " - " << _date_of_birth.toString() + " - " + _phone_number + " - " + _address.toString() << endl;
+}
+
+Staff* Staff::search(vector<Staff*> staffs, string searchID)
+{
+	for (auto& Staff : staffs)
+	{
+		if (Staff->getStaffID() == searchID)
+			return Staff;
+	}
+}
+
+void Staff::saveStaffInfoToFile(vector<Staff*> staffs)
+{
+	string buffer;
+	ExcelFstream file;
+	file.open("Staff.csv", ios::out);
+
+
+	for (int i = 0; i < staffs.size(); i++)
+	{
+		buffer = staffs[i]->toString();
+		file.writeExcelString(buffer);
+	}
+	file.close();
+}
+
+void Staff::openStaffToRead(vector <Staff*>& staffs)
+{
+	ExcelFstream file;
+	file.open("Staff.csv", ios::in | ios::app);
+
+	vector <vector <string>> container;
+	file.readExcelString(container);
+	
+	for (int i = 0; i < container.size(); i++)
+	{
+		if (container[i].size() == 6)
+		{
+			Staff* staff= new Security;
+			staff->setStaffInfo(container[i]);
+			staffs.push_back(staff);
+		}
+		else
+		{
+			Staff* staff = new Seller;
+			staff->setStaffInfo(container[i]);
+			staffs.push_back(staff);
+		}
+	}
+	file.close();
 }
 
 
 
+
 ///////// Security ////////
+
+void Security::setSecurity(string name, Date dob, string phone, Address add, string staff_id, double base_salary)
+{
+	Staff::setStaff(name, dob, phone, add, staff_id, base_salary);
+}
+
+void Security::setStaffInfo(vector<string> Tok)
+{
+	this->_name = Tok[0];
+	this->_date_of_birth.toString() = Tok[1];
+	this->_phone_number = Tok[2];
+	this->_address = Tok[3];
+	this->_staff_id = Tok[4];
+	double a = this->_base_salary;
+	to_string(a) = Tok[5];
+}
 
 double Security::getSalary()
 {
 	return _base_salary;
 }
 
-void Security::setSecurityInfo(string name, Date dob, string phone, Address add, string staff_id, double base_salary)
+void Security::addSecurity(vector<Staff*>& staff, Staff* secu)
 {
-	Staff::setStaffInfo(name, dob, phone, add, staff_id, base_salary);
+	secu = new Security;
+	staff.push_back(secu);
 }
 
-void Security::saveStaffInfoToFile()
+string Security::toString()
 {
-	//waiting
+	string secu;
+	secu += _name + " - " + _date_of_birth.toString() + " - " + _phone_number + " - " + _address.toString() + " - " + _staff_id + " - " + to_string(_base_salary);
+	return secu;
+}
+
+void Security::parse(string line)
+{
+	auto Tok = Tokenizer::parse(line, " - ");
+	this->setStaffInfo(Tok);
+}
+
+void Security::showSecurityInfo()
+{
+	Staff::showBaseStaffInfo();
+	cout << " - " << _base_salary;
+
+}
+
+
+
+///////////////////// SELLER ///////////
+void Seller:: setSeller(string name, Date dob, string phone, Address add, string staff_id, double base_salary, double comission, int goodsale, double realsalary)
+{
+	Staff::setStaff(name, dob, phone, add, staff_id, base_salary);
+	_commission = comission;
+	_goods_sale = goodsale;
+	_real_salary = realsalary;
+}
+
+void Seller:: setCommission()
+{
+	if (_goods_sale < 10)
+	{
+		_commission = 0;
+	}
+	else if (_goods_sale >= 10 && _goods_sale <20 )
+	{
+		_commission = _base_salary / 10;
+	}
+	else
+	{
+		_commission = _base_salary / 15;
+	}
+
+}
+
+void Seller::setGoodsSale(int goodsale)
+{
+	_goods_sale = goodsale;
+}
+
+void Seller:: setRealSalary()
+{
+	_real_salary = _base_salary + _commission;
+}
+
+double Seller::getSalary()
+{
+	return _real_salary;
+}
+
+double Seller:: getCommission()
+{
+	return _commission;
+}
+void Seller::addSeller(vector<Staff*>& staff, Staff* sell)
+{
+
+	sell = new Seller;
+	staff.push_back(sell);
+}
+
+string Seller::toString()
+{
+	string sell;
+	sell += _name + " - " + _date_of_birth.toString() + " - " + _phone_number + " - " + _address.toString() + " - " + _staff_id + " - " + to_string(_base_salary) + " - " + to_string(_goods_sale) +" - "+ to_string(_real_salary);
+	return sell;
+}
+
+void Seller::setStaffInfo(vector<string> Tok)
+{
+	this->_name = Tok[0];
+	this->_date_of_birth.toString() = Tok[1];
+	this->_phone_number = Tok[2];
+	this->_address = Tok[3];
+	this->_staff_id = Tok[4];
+	double a = this->_base_salary;
+	to_string(a) = Tok[5];
+	double b = this->_goods_sale;
+	to_string(b) = Tok[6];
+	double c = this->_real_salary;
+	to_string(c) = Tok[7];
+}
+void Seller::showSellerInfo()
+{
+	Staff::showBaseStaffInfo();
+	cout << " - " << _base_salary<<" - "<<_goods_sale<<" - "<< _real_salary;
+}
+
+void Seller::parse(string line)
+{
+	auto Tok = Tokenizer::parse(line, " - ");
+	this->setStaffInfo(Tok);
 }
