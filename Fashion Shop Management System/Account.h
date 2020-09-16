@@ -44,7 +44,7 @@ public:
 
 	vector <Bill> getBillListFromFile(string account_id);
 
-	string getAccount_ID();
+	string getID();
 
 	string getMemberShipLevel();
 

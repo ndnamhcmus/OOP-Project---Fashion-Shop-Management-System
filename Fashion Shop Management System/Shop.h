@@ -25,13 +25,14 @@ private:	//		List		//
 private:
 
 	template <class T>
-	void updateList(vector <T> list, T element)
+	void updateList(vector <T>& list, T element)
 	{
 		for (int i = 0; i < list.size(); i++)
 		{
-			if (list[i].getAccount_ID() == element.getAccount_ID())
+			if (list[i].getID() == element.getID())
 			{
 				list[i] = element;
+				return;
 			}
 		}
 	}
@@ -55,8 +56,8 @@ public:		//		Constructor		//
 
 private:
 
-	void sortProduct(string sort_by);
-	void sortAccount(string sort_by);
+	void sortProduct();
+	void sortAccount();
 	void sortStaff(string sort_by);
 
 private:

@@ -40,7 +40,7 @@ public:
 	Product(string product_name, string product_id, string firm_name, string product_type, string product_color, string product_size,
 		double product_cost, double product_price, double discount, Date stock_in_time, Date stock_out_time, Date stock_cover_time);
 	string toString();
-	void set();
+	string set();
 	void setProductInfo(vector<string> Tok);
 	void showProductInfo();
 

@@ -30,7 +30,7 @@ int MembershipLevel::getCummulativePoints()
 
 void MembershipLevel::increaseCumulativePoints()
 {
-	_cumulative_points++;
+	++_cumulative_points;
 }
 
 double MembershipLevel::getDiscount(string _level)

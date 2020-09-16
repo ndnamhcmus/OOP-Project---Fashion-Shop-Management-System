@@ -134,7 +134,7 @@ vector<Bill> Account::getBillListFromFile(string bill_id)
 	return bills;
 }
 
-string Account::getAccount_ID()
+string Account::getID()
 {
 	return _account_id;
 }
@@ -165,7 +165,6 @@ Account Account::sign_in(vector<Account> accounts, string account_id)
 	for (int i = 0; i < accounts.size(); i++)
 	{
 		if (accounts[i]._account_id == account_id) {
-
 			is_found = true;
 			accounts[i].showAccountInfo();
 			return accounts[i];
@@ -216,7 +215,6 @@ Account Account::sign_up(vector<Account>&accounts)
 	account.setAccountInfo(st);
 
 	accounts.push_back(account);
-
 
 	return account;
 }

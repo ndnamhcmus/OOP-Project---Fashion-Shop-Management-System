@@ -35,11 +35,11 @@ void ExcelFstream::readExcelString(vector<vector <string>>& container)
 	vector <string> Tok;
 	while (getline(_file, buffer))
 	{
-		if (buffer == "")
+		Tok = Tokenizer::parse(buffer, ",");
+		if (!(Tok.size()))
 		{
 			continue;
 		}
-		Tok = Tokenizer::parse(buffer, ",");
 		container.push_back(Tok);
 	}
 }

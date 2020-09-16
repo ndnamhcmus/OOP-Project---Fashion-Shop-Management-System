@@ -49,15 +49,15 @@ void Shop::saveAccountList()
 /// </summary>
 /// <param name="sort_by"></param>
 
-void Shop::sortProduct(string sort_by)
+void Shop::sortProduct()
 {
-	Product::sort(_products, "");
+	Product::sort(_products, "_product_id");
 }
 
-void Shop::sortAccount(string sort_by)
+void Shop::sortAccount()
 {
 	Account account;
-	account.sort(_accounts, sort_by);
+	account.sort(_accounts, "id");
 }
 
 void Shop::sortStaff(string sort_by)
@@ -174,10 +174,10 @@ void Shop::Purchase()
 	_bills.push_back(bill);
 	bill.showBillInfo();
 
-	for (int i = 0; i < cart.size(); i++)
-	{
-		account.getMemberShip().increaseCumulativePoints();
-	}
+
+	MembershipLevel update(account.getMemberShip().getLevel(), account.getMemberShip().getCummulativePoints() + cart.size());
+	update.updateLevel();
+	account.setMemberShip(update);
 	updateList(_accounts, account);
 }
 
@@ -261,15 +261,25 @@ void Shop::ProductManagement()
 		{
 		case 1:
 
-			new_product.set();
+			system("cls");
+			if (new_product.set() == "cancel")
+			{
+				break;
+			}
 			Product::addProductInFile(_products, new_product);
 			break;
 
 		case 2:
 
+			system("cls");
 			showProductList();
 			cout << "Enter product's ID: ";
 			getline(cin, id);
+			if (id == "cancel")
+			{
+				cout << "Cancel!!!\n";
+				break;
+			}
 			
 
 			int index;
