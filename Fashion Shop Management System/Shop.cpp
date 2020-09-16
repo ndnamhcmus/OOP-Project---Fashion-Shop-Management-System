@@ -123,6 +123,10 @@ void Shop::Start()
 	
 }
 
+/// <summary>
+///			Purchase		///
+/// </summary>
+
 void Shop::Purchase()
 {
 	system("cls");
@@ -163,17 +167,24 @@ void Shop::Purchase()
 	}
 
 
-	long long int new_id = stoll(Bill::lastBill_ID_InFile()) + 1;
+	long long int new_id = stoll(Bill::getLastBillID(_bills)) + 1;
 	Account account;
 	account = AccountManagement();
-	if (!account)
-	{
-		return;
-	}
-	Bill bill(to_string(new_id), account.getMemberShipLevel(), Date(), cart);
+	Bill bill(to_string(new_id), account.getMemberShipLevel(), account.getMemberShip(), Date(), cart);
 	_bills.push_back(bill);
 	bill.showBillInfo();
+
+	for (int i = 0; i < cart.size(); i++)
+	{
+		account.getMemberShip().increaseCumulativePoints();
+	}
+	updateList(_accounts, account);
 }
+
+/// <summary>
+///			Account Management		////
+/// </summary>
+/// return Account
 
 Account Shop::AccountManagement()
 {
@@ -223,6 +234,10 @@ Account Shop::AccountManagement()
 
 	return new_account;
 }
+
+/// <summary>
+///			Product management		///
+/// </summary>
 
 void Shop::ProductManagement()
 {
@@ -286,6 +301,10 @@ void Shop::ProductManagement()
 		cin.ignore();
 	}
 }
+
+/// <summary>
+///			Staff management		///
+/// </summary>
 
 void Shop::StaffInfoManagement()
 {

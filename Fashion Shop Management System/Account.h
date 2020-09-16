@@ -48,6 +48,10 @@ public:
 
 	string getMemberShipLevel();
 
+	MembershipLevel getMemberShip();
+
+	void setMemberShip(MembershipLevel membership);
+
 	double getDiscount();
 
 	static Account sign_in(vector <Account> accounts, string  account_id);

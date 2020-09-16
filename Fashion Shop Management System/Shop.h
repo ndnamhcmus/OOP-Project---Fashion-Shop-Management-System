@@ -22,6 +22,20 @@ private:	//		List		//
 	vector <Account> _accounts;
 	vector <Staff*> _staffs;
 
+private:
+
+	template <class T>
+	void updateList(vector <T> list, T element)
+	{
+		for (int i = 0; i < list.size(); i++)
+		{
+			if (list[i].getAccount_ID() == element.getAccount_ID())
+			{
+				list[i] = element;
+			}
+		}
+	}
+
 public:		//		Constructor		//
 
 	Shop()
@@ -70,11 +84,12 @@ private:
 
 	void Purchase();
 
-	Account AccountManagement();
+	void ProductManagement();
 
 private:
 
-	void ProductManagement();
+	Account AccountManagement();
+
 
 private:
 

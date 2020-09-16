@@ -1,11 +1,12 @@
 #include "Bill.h"
 #include"Tokenizer.h"
 
-Bill::Bill(string id, string level, Date d, vector<Product> p)
+Bill::Bill(string id, string level, MembershipLevel membership, Date d, vector<Product> p)
 {
 	_bill_id = id;
 	_curr_date = d;
 	_level = level;
+	_membership = membership;
 	_cart.resize(p.size());
 	for (int i = 0; i < p.size(); i++)
 		_cart[i] = p[i];
@@ -51,6 +52,11 @@ void Bill::setBillInfo(vector<string>Tok)
 Bill Bill::getBill()
 {
 	return *this;
+}
+
+string Bill::getLastBillID(vector <Bill> bills)
+{
+	return bills[bills.size() - 1].getID();
 }
 
 string Bill::lastBill_ID_InFile()
@@ -112,29 +118,46 @@ void Bill::showBillInfo()
 
 	cout << "--------------------------------\n";
 
-	cout << "Name\t\t\tCost\tDiscount\tRate\n";
+	//cout << "Name\t\t\tCost\tDiscount\tRate\n";
 
-	for (int i = 0; i < _cart.size(); i++) {
+	cout << "Name:\n";
+	for (int i = 0; i < _cart.size(); i++) 
+	{
+		cout << _cart[i].getProductName() << endl;
+	}
+
+	cout << "Cost:\n";
+	for (int i = 0; i < _cart.size(); i++)
+	{
+		cout << _cart[i].getProductPrice() << endl;
+	}
+
+	cout << "Discount\n";
+	for (int i = 0; i < _cart.size(); i++)
+	{
 		buffer << to_string(static_cast<int>(_cart[i].getDiscount() * 100)) << "%";
-		cout << _cart[i].getProductName() << "\t\t\t" << _cart[i].getProductPrice() << "\t" << buffer.str() << "\t\t" << _cart[i].getProductPrice() * (1 - _cart[i].getDiscount());
+		cout << buffer.str() << endl;
+
 		buffer.str("");
 		buffer.clear();
+	}
 
+	cout << "Rate:\n";
+	for (int i = 0; i < _cart.size(); i++) {
+		
+		cout << _cart[i].getProductPrice() * (1 - _cart[i].getDiscount()) << endl;
 
 		total += _cart[i].getProductPrice() * (1 - _cart[i].getDiscount());
 	}
 
 	buffer << to_string(static_cast<int>(MembershipLevel::getDiscount(_level) * 100)) << "%";
-
 	total = total * (1 - MembershipLevel::getDiscount(_level));
+
+
 	cout << "\n--------------------------------\n";
 	cout << "Member discounts:\t\t" << buffer.str() << endl;
 	cout << "Total:\t\t\t" << total << endl;
 	cout << "\n---***   THANK YOU VISIT AGAIN   ***---\n";
-
-
-	buffer.str("");
-	buffer.clear();
 }
 
 void Bill::saveBillToFile(vector <Bill> bills)

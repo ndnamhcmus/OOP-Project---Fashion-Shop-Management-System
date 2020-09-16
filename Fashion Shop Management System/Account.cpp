@@ -58,7 +58,9 @@ void Account::setAccountInfo(vector<string>Tok)
 
 	_bills.resize(0);
 
-	_membership_level = Tok[6];
+	_membership_level.setCumulativePoints(stoi(Tok[6]));
+
+	_membership_level.setLevel(Tok[7]);
 }
 
 string Account::findLastCustomer_ID_InFile()
@@ -142,6 +144,16 @@ string Account::getMemberShipLevel()
 	return _membership_level.getLevel();
 }
 
+MembershipLevel Account::getMemberShip()
+{
+	return _membership_level;
+}
+
+void Account::setMemberShip(MembershipLevel membership)
+{
+	_membership_level = membership;
+}
+
 double Account::getDiscount()
 {
 	return _membership_level.getDiscount(_membership_level.getLevel());
@@ -195,6 +207,8 @@ Account Account::sign_up(vector<Account>&accounts)
 
 	st.push_back(to_string(stoi(findLastCustomer_ID_InFile()) + 1));
 
+	st.push_back("0");
+
 	st.push_back("none");  //membership level
 
 	Account account;
@@ -225,7 +239,7 @@ void Account::showAccountInfo()
 
 	cout << "Number of bill: " << _bills.size() << endl;
 
-	cout << _membership_level.getLevel() << endl;
+	cout << "Level: " << _membership_level.getLevel() << endl;
 }
 
 void Account::saveAccountToFile(vector<Account>accounts)
@@ -282,7 +296,7 @@ string Account::toString()
 
 	w << _account_id << " - " << _customer.getName() << " - " << _customer.getDoB().toString()
 		<< " - " << _customer.getPhoneNumber() << " - " << _customer.getAddress().toString() << " - "
-		<< _customer.getCustomerID() << " - " << _membership_level.getLevel();
+		<< _customer.getCustomerID() << " - " << to_string(_membership_level.getCummulativePoints()) << " - " << _membership_level.getLevel();
 
 	return w.str();
 }

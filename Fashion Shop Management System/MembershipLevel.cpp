@@ -1,6 +1,6 @@
 #include "MembershipLevel.h"
 
-int MembershipLevel::_cumulative_points = 0;
+//int MembershipLevel::_cumulative_points;
 
 MembershipLevel::MembershipLevel(string level, int cumulative_points)
 {
@@ -11,7 +11,6 @@ MembershipLevel::MembershipLevel(string level, int cumulative_points)
 void MembershipLevel::setLevel(string level)
 {
 	_level = level;
-
 }
 
 string MembershipLevel::getLevel()
@@ -29,10 +28,9 @@ int MembershipLevel::getCummulativePoints()
 	return _cumulative_points;
 }
 
-int MembershipLevel::increaseCumulativePoints()
+void MembershipLevel::increaseCumulativePoints()
 {
 	_cumulative_points++;
-	return _cumulative_points;
 }
 
 double MembershipLevel::getDiscount(string _level)
@@ -49,12 +47,17 @@ void MembershipLevel::updateLevel()
 		setLevel("Gold");
 		return;
 	}
-	if (_cumulative_points >= 50) {
+	else if (_cumulative_points >= 50) {
 		setLevel("Silver");
 		return;
 	}
-	if (_cumulative_points >= 30) {
+	else if (_cumulative_points >= 30) {
 		setLevel("Bronze");
+		return;
+	}
+	else
+	{
+		setLevel("none");
 		return;
 	}
 }
