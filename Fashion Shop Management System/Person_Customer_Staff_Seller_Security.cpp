@@ -89,14 +89,24 @@ void Staff::setStaff(string name, Date dob, string phone, Address add, string st
 	setBaseSalary(base_salary);
 }
 
-void Staff::set()
+void Staff::setNewStaff()
 {
-	cout << "Name - DD/MM/YY(Date of Birth) - Phone Number - Address - Base Salary";
+	cout << "Name - DD/MM/YYYY(Date of Birth) - Phone Number - Address - Base Salary\n";
 	cout << "PLEASE ENTER THE INFORMATION IN THE FORM ABOVE\n";
 	string line;
 	getline(cin, line);
+	if (line == "cancel")
+	{
+		throw StaffException(line);
+	}
+
 
 	auto Tok = Tokenizer::parse(line, " - ");
+	Tok.insert(Tok.begin() + 4, getNewID());
+	Tok.push_back("0");
+	Tok.push_back(Tok[5]);
+
+
 	setStaffInfo(Tok);
 }
 
@@ -105,17 +115,15 @@ string Staff::getStaffID()
 	return _staff_id;
 }
 
-void Staff::showStaffInfo()
+Staff* Staff::search(vector<Staff*> staffs)
 {
-	//toString();
-	//cout << _name << " - " << _staff_id << " - " << _date_of_birth.toString() + " - " + _phone_number + " - " + _address.toString() << " - " << _base_salary;
-}
+	string ID;
+	cout << "Enter your Staff ID: ";
+	getline(cin, ID);
 
-Staff* Staff::search(vector<Staff*> staffs, string searchID)
-{
 	for (const auto& Staff : staffs)
 	{
-		if (Staff->getStaffID() == searchID)
+		if (Staff->getStaffID() == ID)
 			return Staff;
 	}
 
@@ -165,13 +173,24 @@ void Staff::openStaffToRead(vector <Staff*>& staffs)
 }
 
 
+void Staff::setLastID(vector<Staff*> staffs)
+{
+	last_ID = staffs[staffs.size() - 1]->getStaffID();
+}
+
+string Staff::getNewID()
+{
+	return to_string(stoi(last_ID) + 1);
+}
+
+
 
 
 ///////// Security ////////
 
-void Security::set()
+void Security::setNewStaff()
 {
-	Staff::set();
+	Staff::setNewStaff();
 }
 
 void Security::setSecurity(string name, Date dob, string phone, Address add, string staff_id, double base_salary)
@@ -320,10 +339,7 @@ void Seller::parse(string line)
 	this->setStaffInfo(Tok);
 }
 
-void Seller::set()
+void Seller::setNewStaff()
 {
-	Staff::set();
-	_commission = 0;
-	_goods_sale = 0;
-	_real_salary = _base_salary;
+	Staff::setNewStaff();
 }

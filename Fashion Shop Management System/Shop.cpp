@@ -87,6 +87,31 @@ void Shop::showStaffList()
 	}
 }
 
+void Shop::showSellerList()
+{
+	cout << "Name\tDate of Birth\tPhone Number\tAddress\tStaff ID\tBase Salary\tGoods Sale\tSalary\n";
+	for (int i = 0; i < _staffs.size(); i++)
+	{
+		if (dynamic_cast<Seller*> (_staffs[i]))
+		{
+			_staffs[i]->showStaffInfo();
+			cout << endl;
+		}
+	}
+}
+
+void Shop::showSecurityList()
+{
+	for (int i = 0; i < _staffs.size(); i++)
+	{
+		if (dynamic_cast<Security*> (_staffs[i]))
+		{
+			_staffs[i]->showStaffInfo();
+			cout << endl;
+		}
+	}
+}
+
 ////////////////////		SWITCH\CASE		////////////////////
 
 void Shop::Start()
@@ -337,7 +362,6 @@ void Shop::StaffInfoManagement()
 	bool is_continue = true;
 
 
-	string id;
 	Staff* staff = nullptr;
 
 
@@ -352,12 +376,14 @@ void Shop::StaffInfoManagement()
 		{
 		case 1:
 
-			cout << "Enter your Staff ID: ";
-			getline(cin, id);
+			showStaffList();
+			break;
+
+		case 2:
 
 			try
 			{
-				staff = Staff::search(_staffs, id);
+				staff = Staff::search(_staffs);
 			}
 			catch (const std::exception& error)
 			{
@@ -372,21 +398,20 @@ void Shop::StaffInfoManagement()
 
 			break;
 
-		case 2:
-
-			SellerInfo();
-			break;
-
 		case 3:
 
-			SecurityInfo();
+			SellerInfoManagement();
 			break;
 
 		case 4:
 
+			SecurityInfoManagement();
+			break;
+
+		case 5:
+
 			is_continue = false;
 			continue;
-
 		}
 
 		
@@ -401,14 +426,14 @@ void Shop::StaffInfoManagement()
 	}
 }
 
-void Shop::SellerInfo()
+void Shop::SellerInfoManagement()
 {
 	system("cls");
 	bool is_continue = true;
 	int choice;
 
 
-	string id;
+	Staff* seller;
 
 
 	Menu::showSellerMenu();
@@ -421,30 +446,89 @@ void Shop::SellerInfo()
 		{
 		case 1:
 
+			showSellerList();
 			break;
 
 		case 2:
 
-			cout << "Enter seller id: ";
-			
-			getline(cin, id);
-
-			
-			for (int i = 0; i < _staffs.size(); i++)
+			try
 			{
-
+				seller = Staff::search(_staffs);
 			}
+			catch (const std::exception& error)
+			{
+				cout << error.what() << endl;
+				break;
+			}
+
+
+			seller->showStaffInfo();
+			cout << endl;
+
+
 			break;
 
 		case 3:
+
+			try
+			{
+				seller = Staff::search(_staffs);
+			}
+			catch (const std::exception& error)
+			{
+				cout << error.what() << endl;
+				break;
+			}
+
+			cout << "Salary: " << dynamic_cast<Seller*> (seller)->getSalary() << endl;
 
 			break;
 
 		case 4:
 
+			try
+			{
+				seller = Staff::search(_staffs);
+
+			}
+			catch (const std::exception& error)
+			{
+				cout << error.what() << endl;
+				break;
+			}
+
+			cout << "Commission: " << dynamic_cast<Seller*> (seller)->getCommission() << endl;
+
 			break;
 
 		case 5:
+
+			break;
+
+		case 6:
+
+			seller = new Seller;
+			seller->setLastID(_staffs);
+
+			try
+			{
+				seller->setNewStaff();
+			}
+			catch (const std::exception& error)
+			{
+				cout << error.what() << endl;
+				if (seller)
+				{
+					delete seller;
+				}
+				break;
+			}
+
+			_staffs.push_back(seller);
+
+			break;
+
+		case 7:
 
 			is_continue = false;
 			continue;
@@ -462,7 +546,7 @@ void Shop::SellerInfo()
 	}
 }
 
-void Shop::SecurityInfo()
+void Shop::SecurityInfoManagement()
 {
 	system("cls");
 	bool is_continue = true;
@@ -470,6 +554,7 @@ void Shop::SecurityInfo()
 
 
 	string id;
+	Staff* security;
 
 
 	Menu::showSecurityMenu();
@@ -482,13 +567,66 @@ void Shop::SecurityInfo()
 		{
 		case 1:
 
+			showSecurityList();
 			break;
 
 		case 2:
 
+			try
+			{
+				security = Staff::search(_staffs);
+			}
+			catch (const std::exception& error)
+			{
+				cout << error.what() << endl;
+				break;
+			}
+			
+			security->showStaffInfo();
+
 			break;
 
 		case 3:
+
+			try
+			{
+				security = Staff::search(_staffs);
+			}
+			catch (const std::exception& error)
+			{
+				cout << error.what() << endl;
+				break;
+			}
+
+			cout << "Salary: " << dynamic_cast<Security*> (security)->getSalary() << endl;
+			break;
+
+		case 4:
+
+			security = new Security;
+			security->setLastID(_staffs);
+			
+
+			try
+			{
+				security->setNewStaff();
+			}
+			catch (const std::exception& error)
+			{
+				cout << error.what() << endl;
+				if (security)
+				{
+					delete security;
+				}
+				break;
+			}
+
+
+			_staffs.push_back(security);
+
+			break;
+
+		case 5:
 
 			is_continue = false;
 			continue;

@@ -92,9 +92,11 @@ public:
 
 private:
 
-	void showProductList();
-
 	void showStaffList();
+	void showSellerList();
+	void showSecurityList();
+
+	void showProductList();
 
 private:
 
@@ -106,12 +108,11 @@ private:
 
 	Account AccountManagement();
 
-
 private:
 
 	void StaffInfoManagement();
-	void SellerInfo();
-	void SecurityInfo();
+	void SellerInfoManagement();
+	void SecurityInfoManagement();
 };
 
 

@@ -93,23 +93,27 @@ void Menu::showStaffMenu()
 {
 	int x = 55, y = 0;
 
-
-	_buffer << "1. Search information\n";
+	_buffer << "1. Show Staff list\n";
 	gotoxy(x - _buffer.str().size() / 2, y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "2. Seller\n";
+	_buffer << "2. Search information\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "3. Security\n";
+	_buffer << "3. Seller\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "4. Cancel\n";
+	_buffer << "4. Security\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "5. Cancel\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
@@ -119,27 +123,39 @@ void Menu::showStaffMenu()
 void Menu::showSellerMenu()
 {
 	int x = 55, y = 0;
-	_buffer << "1. Search information\n";
+
+
+	_buffer << "1. Show Seller list\n";
 	gotoxy(x - _buffer.str().size() / 2, y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "2. Show salary\n";
+	_buffer << "2. Search information\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "3. Show commission\n";
+	_buffer << "3. Show salary\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "4. Seller of the month\n";
+	_buffer << "4. Show commission\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "5. Cancel\n";
+	_buffer << "5. Seller of the month\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "6. Add new Staff\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "7. Cancel\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
@@ -148,17 +164,29 @@ void Menu::showSellerMenu()
 void Menu::showSecurityMenu()
 {
 	int x = 55, y = 0;
-	_buffer << "1. Search information\n";
+
+
+	_buffer << "1. Show Securtity list\n";
 	gotoxy(x - _buffer.str().size() / 2, y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "2. Show salary\n";
+	_buffer << "2. Search information\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "3. Cancel\n";
+	_buffer << "3. Show salary\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "4. Add new staff\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "5. Cancel\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
