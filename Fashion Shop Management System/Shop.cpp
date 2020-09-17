@@ -355,10 +355,20 @@ void Shop::StaffInfoManagement()
 			cout << "Enter your Staff ID: ";
 			getline(cin, id);
 
+			try
+			{
+				staff = Staff::search(_staffs, id);
+			}
+			catch (const std::exception& error)
+			{
+				cout << error.what() << endl;
+				break;
+			}
 
-			staff = Staff::search(_staffs, id);
+
 			staff->showStaffInfo();
 			cout << endl;
+
 
 			break;
 

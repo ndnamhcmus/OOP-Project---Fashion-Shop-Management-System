@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <exception>
+
 #include <Date.h>
 #include <FakeAddress.h>
 #include <ExcelFstream.h>
@@ -209,6 +211,26 @@ public:
 	friend class ExcelOfstream;
 };
 
+class StaffException : public exception
+{
+private:
 
+	string _mess;
+
+public:
+
+	StaffException(string mess)
+	{
+		_mess = mess;
+	}
+
+public:
+
+	const char* what() const throw()
+	{
+		return _mess.c_str();
+	}
+
+};
 
 #endif // !_PERSON_CUSTOMER_STAFF_SELLER_SECURITY_

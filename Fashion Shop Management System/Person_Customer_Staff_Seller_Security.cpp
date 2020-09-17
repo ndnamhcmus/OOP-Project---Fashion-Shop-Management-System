@@ -107,7 +107,8 @@ string Staff::getStaffID()
 
 void Staff::showStaffInfo()
 {
-	cout << _name << " - " << _staff_id << " - " << _date_of_birth.toString() + " - " + _phone_number + " - " + _address.toString() << " - " << _base_salary;
+	//toString();
+	//cout << _name << " - " << _staff_id << " - " << _date_of_birth.toString() + " - " + _phone_number + " - " + _address.toString() << " - " << _base_salary;
 }
 
 Staff* Staff::search(vector<Staff*> staffs, string searchID)
@@ -117,6 +118,9 @@ Staff* Staff::search(vector<Staff*> staffs, string searchID)
 		if (Staff->getStaffID() == searchID)
 			return Staff;
 	}
+
+
+	throw StaffException("Not found");
 }
 
 void Staff::saveStaffInfoToFile(vector<Staff*> staffs)
@@ -219,7 +223,7 @@ void Security::parse(string line)
 
 void Security::showStaffInfo()
 {
-	Staff::showStaffInfo();
+	cout << toString();
 }
 
 
@@ -305,8 +309,9 @@ void Seller::setStaffInfo(vector<string> Tok)
 }
 void Seller::showStaffInfo()
 {
-	Staff::showStaffInfo();
-	cout << " - " << _goods_sale << " - " << _real_salary;
+	/*Staff::showStaffInfo();
+	cout << " - " << _goods_sale << " - " << _real_salary;*/
+	cout << toString();
 }
 
 void Seller::parse(string line)
