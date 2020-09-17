@@ -78,6 +78,15 @@ void Shop::showProductList()
 	Product::showProductsInfo(_products);
 }
 
+void Shop::showStaffList()
+{
+	for (int i = 0; i< _staffs.size(); i++)
+	{
+		_staffs[i]->showStaffInfo();
+		cout << endl;
+	}
+}
+
 ////////////////////		SWITCH\CASE		////////////////////
 
 void Shop::Start()
@@ -329,7 +338,7 @@ void Shop::StaffInfoManagement()
 
 
 	string id;
-
+	Staff* staff = nullptr;
 
 
 	int choice;
@@ -345,6 +354,12 @@ void Shop::StaffInfoManagement()
 
 			cout << "Enter your Staff ID: ";
 			getline(cin, id);
+
+
+			staff = Staff::search(_staffs, id);
+			staff->showStaffInfo();
+			cout << endl;
+
 			break;
 
 		case 2:
@@ -427,15 +442,6 @@ void Shop::SellerInfo()
 		}
 
 
-		/*system("cls");
-		Menu::showSellerMenu();
-		Menu::continueMenu(55, 5);
-		getline(cin, is_continue);
-		system("cls");
-		if (is_continue == "n")
-		{
-			continue;
-		}*/
 		system("pause");
 		system("cls");
 

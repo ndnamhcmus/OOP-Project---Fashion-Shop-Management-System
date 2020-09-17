@@ -88,7 +88,7 @@ string Bill::toString()
 	w << _bill_id << " - " << _curr_date.toString() << " - ";
 	for (int i = 0; i < _cart.size(); i++) {
 		w << _cart[i].getProductName() << " - " 
-		  << to_string(_cart[i].getProductPrice() * (1 - _cart[i].getDiscount())) << " - ";
+		  << to_string(_cart[i].getProductPrice()) << " - ";
 
 		total += _cart[i].getProductPrice() * (1 - _cart[i].getDiscount());
 	}

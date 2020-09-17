@@ -140,6 +140,10 @@ public:
 
 	Security(string name = "", Date dob = Date(0, 0, 0), string phone = "", Address add = Address("", "", "", "", ""), string staff_id = "", double base_salary = 0) : Staff(name, dob, phone, add, staff_id, base_salary) {};
 
+public:
+
+	void set();
+
 	void setSecurity(string name, Date dob, string phone, Address add, string staff_id, double base_salary);
 	void setStaffInfo(vector<string> Tok);
 	double getSalary();
@@ -181,7 +185,7 @@ public:
 
 public:
 
-	
+	void set();
 
 	void setSeller(string name, Date dob, string phone, Address add, string staff_id, double base_salary, double comission, int goodsale, double realsalary);
 	void setCommission();

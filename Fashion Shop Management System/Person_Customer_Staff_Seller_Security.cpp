@@ -89,6 +89,17 @@ void Staff::setStaff(string name, Date dob, string phone, Address add, string st
 	setBaseSalary(base_salary);
 }
 
+void Staff::set()
+{
+	cout << "Name - DD/MM/YY(Date of Birth) - Phone Number - Address - Base Salary";
+	cout << "PLEASE ENTER THE INFORMATION IN THE FORM ABOVE\n";
+	string line;
+	getline(cin, line);
+
+	auto Tok = Tokenizer::parse(line, " - ");
+	setStaffInfo(Tok);
+}
+
 string Staff::getStaffID()
 {
 	return _staff_id;
@@ -96,12 +107,12 @@ string Staff::getStaffID()
 
 void Staff::showStaffInfo()
 {
-	cout << _name << " - " << _staff_id << " - " << _date_of_birth.toString() + " - " + _phone_number + " - " + _address.toString() << endl;
+	cout << _name << " - " << _staff_id << " - " << _date_of_birth.toString() + " - " + _phone_number + " - " + _address.toString() << " - " << _base_salary;
 }
 
 Staff* Staff::search(vector<Staff*> staffs, string searchID)
 {
-	for (auto& Staff : staffs)
+	for (const auto& Staff : staffs)
 	{
 		if (Staff->getStaffID() == searchID)
 			return Staff;
@@ -154,6 +165,11 @@ void Staff::openStaffToRead(vector <Staff*>& staffs)
 
 ///////// Security ////////
 
+void Security::set()
+{
+	Staff::set();
+}
+
 void Security::setSecurity(string name, Date dob, string phone, Address add, string staff_id, double base_salary)
 {
 	Staff::setStaff(name, dob, phone, add, staff_id, base_salary);
@@ -161,13 +177,21 @@ void Security::setSecurity(string name, Date dob, string phone, Address add, str
 
 void Security::setStaffInfo(vector<string> Tok)
 {
-	this->_name = Tok[0];
-	this->_date_of_birth.toString() = Tok[1];
-	this->_phone_number = Tok[2];
-	this->_address = Tok[3];
-	this->_staff_id = Tok[4];
-	double a = this->_base_salary;
-	to_string(a) = Tok[5];
+	auto tokens = Tokenizer::parse(Tok[1], "/");
+
+
+	_name = Tok[0];
+	_date_of_birth = Date(stoi(tokens[0]), stoi(tokens[1]), stoi(tokens[2]));
+	_phone_number = Tok[2];
+
+
+	tokens.clear();
+	tokens = Tokenizer::parse(Tok[3], "-");
+
+
+	_address = Address(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4]);
+	_staff_id = Tok[4];
+	_base_salary = stod(Tok[5]);
 }
 
 double Security::getSalary()
@@ -196,9 +220,9 @@ void Security::parse(string line)
 void Security::showStaffInfo()
 {
 	Staff::showStaffInfo();
-	cout << " - " << _base_salary;
-
 }
+
+
 
 
 
@@ -261,26 +285,40 @@ string Seller::toString()
 
 void Seller::setStaffInfo(vector<string> Tok)
 {
-	this->_name = Tok[0];
-	this->_date_of_birth.toString() = Tok[1];
-	this->_phone_number = Tok[2];
-	this->_address = Tok[3];
-	this->_staff_id = Tok[4];
-	double a = this->_base_salary;
-	to_string(a) = Tok[5];
-	double b = this->_goods_sale;
-	to_string(b) = Tok[6];
-	double c = this->_real_salary;
-	to_string(c) = Tok[7];
+	auto tokens = Tokenizer::parse(Tok[1], "/");
+
+
+	_name = Tok[0];
+	_date_of_birth = Date(stoi(tokens[0]), stoi(tokens[1]), stoi(tokens[2]));
+	_phone_number = Tok[2];
+
+
+	tokens.clear();
+	tokens = Tokenizer::parse(Tok[3], "-");
+
+
+	_address = Address(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4]);
+	_staff_id = Tok[4];
+	_base_salary = stod(Tok[5]);
+	_goods_sale = stoi(Tok[6]);
+	_real_salary = stod(Tok[7]);
 }
 void Seller::showStaffInfo()
 {
 	Staff::showStaffInfo();
-	cout << " - " << _base_salary<<" - "<<_goods_sale<<" - "<< _real_salary;
+	cout << " - " << _goods_sale << " - " << _real_salary;
 }
 
 void Seller::parse(string line)
 {
 	auto Tok = Tokenizer::parse(line, " - ");
 	this->setStaffInfo(Tok);
+}
+
+void Seller::set()
+{
+	Staff::set();
+	_commission = 0;
+	_goods_sale = 0;
+	_real_salary = _base_salary;
 }

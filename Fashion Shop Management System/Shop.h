@@ -94,6 +94,8 @@ private:
 
 	void showProductList();
 
+	void showStaffList();
+
 private:
 
 	void Purchase();
