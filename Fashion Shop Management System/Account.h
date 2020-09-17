@@ -5,6 +5,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <exception>
+
+
 #include "Bill.h"
 #include "Person_Customer_Staff_Seller_Security.h"
 #include "MembershipLevel.h"
@@ -25,9 +28,11 @@ public:
 
 	void sort(vector <Account> accounts, string sort_by);
 
-	Account search(vector <Account> accounts, string search_by);
+	static Account search(vector <Account> accounts, string search_by);
 
 	void setAccountInfo(vector<string>Tok);
+
+	string findLastCustomer_ID_InFile();
 
 	string findLastAccount_ID_InFile();
 
@@ -39,15 +44,19 @@ public:
 
 	vector <Bill> getBillListFromFile(string account_id);
 
-	string getAccount_ID();
+	string getID();
 
 	string getMemberShipLevel();
 
+	MembershipLevel getMemberShip();
+
+	void setMemberShip(MembershipLevel membership);
+
 	double getDiscount();
 
-	void sign_in(string  account_id);
+	static Account sign_in(vector <Account> accounts, string  account_id);
 		
-	void sign_up(vector<Account>&);
+	Account sign_up(vector<Account>&);
 
 	void showBillList();
 
@@ -63,11 +72,44 @@ public:
 
 	string toString();
 
+public:
+
+	bool operator!()
+	{
+		if (_account_id == "")
+		{
+			return true;
+		}
+		return false;
+	}
+
+public:
+
 	friend class ExcelFstream;
 
 	friend class ExcelIfstream;
 
 	friend class ExcelOfstream;
+};
+
+
+class AccountException : public exception
+{
+private:
+
+	string _mess;
+
+public:
+	AccountException(string mess)
+	{
+		_mess = mess;
+	}
+
+
+	const char* what() const throw()
+	{
+		return _mess.c_str();
+	}
 };
 
 

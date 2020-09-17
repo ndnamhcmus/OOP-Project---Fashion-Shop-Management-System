@@ -22,6 +22,21 @@ private:	//		List		//
 	vector <Account> _accounts;
 	vector <Staff*> _staffs;
 
+private:
+
+	template <class T>
+	void updateList(vector <T>& list, T element)
+	{
+		for (int i = 0; i < list.size(); i++)
+		{
+			if (list[i].getID() == element.getID())
+			{
+				list[i] = element;
+				return;
+			}
+		}
+	}
+
 public:		//		Constructor		//
 
 	Shop()
@@ -37,12 +52,25 @@ public:		//		Constructor		//
 		saveProductList();
 		saveBillList();
 		saveAccountList();
+		saveStaffList();
+
+
+		if (_staffs.size())
+		{
+			for (int i = 0; i < _staffs.size(); i++)
+			{
+				if (_staffs[i])
+				{
+					delete _staffs[i];
+				}
+			}
+		}
 	}
 
 private:
 
-	void sortProduct(string sort_by);
-	void sortAccount(string sort_by);
+	void sortProduct();
+	void sortAccount();
 	void sortStaff(string sort_by);
 
 private:
@@ -65,15 +93,23 @@ public:
 private:
 
 	void showProductList();
-	void ProductManagement();
+
+	void showStaffList();
 
 private:
 
 	void Purchase();
 
+	void ProductManagement();
+
+private:
+
+	Account AccountManagement();
+
+
+private:
 
 	void StaffInfoManagement();
-
 	void SellerInfo();
 	void SecurityInfo();
 };

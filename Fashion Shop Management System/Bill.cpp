@@ -1,10 +1,12 @@
 #include "Bill.h"
 #include"Tokenizer.h"
 
-Bill::Bill(string id, Date d, vector<Product> p)
+Bill::Bill(string id, string level, MembershipLevel membership, Date d, vector<Product> p)
 {
 	_bill_id = id;
 	_curr_date = d;
+	_level = level;
+	_membership = membership;
 	_cart.resize(p.size());
 	for (int i = 0; i < p.size(); i++)
 		_cart[i] = p[i];
@@ -52,6 +54,11 @@ Bill Bill::getBill()
 	return *this;
 }
 
+string Bill::getLastBillID(vector <Bill> bills)
+{
+	return bills[bills.size() - 1].getID();
+}
+
 string Bill::lastBill_ID_InFile()
 {
 	vector<Bill> bills;
@@ -74,15 +81,20 @@ Date Bill::getDate()
 string Bill::toString()
 {
 	stringstream w;
+
 	double total = 0;
+
 
 	w << _bill_id << " - " << _curr_date.toString() << " - ";
 	for (int i = 0; i < _cart.size(); i++) {
 		w << _cart[i].getProductName() << " - " 
-		  << to_string(_cart[i].getProductPrice() * (1 - _cart[i].getDiscount())) << " - ";
+		  << to_string(_cart[i].getProductPrice()) << " - ";
 
 		total += _cart[i].getProductPrice() * (1 - _cart[i].getDiscount());
 	}
+
+
+	total = total * (1 - MembershipLevel::getDiscount(_level));
 	w << "Total:" << to_string(total) << " - ";
 
 	return w.str();
@@ -90,7 +102,10 @@ string Bill::toString()
 
 void Bill::showBillInfo()
 {
+	stringstream buffer;
 	double total = 0;
+
+
 	cout << "---SHOP---" << endl;
 
 	cout << "Address: 19CLC6 HCMUS  \n";
@@ -103,16 +118,44 @@ void Bill::showBillInfo()
 
 	cout << "--------------------------------\n";
 
-	cout << "Name Product\t\tRate\n";
+	//cout << "Name\t\t\tCost\tDiscount\tRate\n";
 
+	cout << "Name:\n";
+	for (int i = 0; i < _cart.size(); i++) 
+	{
+		cout << _cart[i].getProductName() << endl;
+	}
+
+	cout << "Cost:\n";
+	for (int i = 0; i < _cart.size(); i++)
+	{
+		cout << _cart[i].getProductPrice() << endl;
+	}
+
+	cout << "Discount\n";
+	for (int i = 0; i < _cart.size(); i++)
+	{
+		buffer << to_string(static_cast<int>(_cart[i].getDiscount() * 100)) << "%";
+		cout << buffer.str() << endl;
+
+		buffer.str("");
+		buffer.clear();
+	}
+
+	cout << "Rate:\n";
 	for (int i = 0; i < _cart.size(); i++) {
-		cout << _cart[i].getProductName() 
-			 << "\t\t\t" << _cart[i].getProductPrice() * (1 - _cart[i].getDiscount());
+		
+		cout << _cart[i].getProductPrice() * (1 - _cart[i].getDiscount()) << endl;
 
 		total += _cart[i].getProductPrice() * (1 - _cart[i].getDiscount());
 	}
 
+	buffer << to_string(static_cast<int>(MembershipLevel::getDiscount(_level) * 100)) << "%";
+	total = total * (1 - MembershipLevel::getDiscount(_level));
+
+
 	cout << "\n--------------------------------\n";
+	cout << "Member discounts:\t\t" << buffer.str() << endl;
 	cout << "Total:\t\t\t" << total << endl;
 	cout << "\n---***   THANK YOU VISIT AGAIN   ***---\n";
 }

@@ -1,5 +1,7 @@
 #include "Shop.h"
 
+
+
 /// <summary>
 /// Load list
 /// </summary>
@@ -21,6 +23,7 @@ void Shop::openAccountList()
 
 void Shop::openStaffList()
 {
+	Staff::openStaffToRead(_staffs);
 }
 
 /// <summary>
@@ -42,20 +45,25 @@ void Shop::saveAccountList()
 	Account::saveAccountToFile(_accounts);
 }
 
+void Shop::saveStaffList()
+{
+	Staff::saveStaffInfoToFile(_staffs);
+}
+
 /// <summary>
 ///		Sort	///
 /// </summary>
 /// <param name="sort_by"></param>
 
-void Shop::sortProduct(string sort_by)
+void Shop::sortProduct()
 {
-	Product::sort(_products, "");
+	Product::sort(_products, "_product_id");
 }
 
-void Shop::sortAccount(string sort_by)
+void Shop::sortAccount()
 {
 	Account account;
-	account.sort(_accounts, sort_by);
+	account.sort(_accounts, "id");
 }
 
 void Shop::sortStaff(string sort_by)
@@ -70,11 +78,20 @@ void Shop::showProductList()
 	Product::showProductsInfo(_products);
 }
 
+void Shop::showStaffList()
+{
+	for (int i = 0; i< _staffs.size(); i++)
+	{
+		_staffs[i]->showStaffInfo();
+		cout << endl;
+	}
+}
+
 ////////////////////		SWITCH\CASE		////////////////////
 
 void Shop::Start()
 {
-	string is_continue;
+	bool is_continue = true;
 	int choice;
 
 
@@ -82,7 +99,7 @@ void Shop::Start()
 	cout << "Choose: ";
 	cin >> choice;
 	cin.ignore();
-	while (!(is_continue == "n" || is_continue == "N"))
+	while (is_continue)
 	{
 		switch (choice)
 		{
@@ -103,7 +120,7 @@ void Shop::Start()
 
 		case 4:
 
-			is_continue = "n";
+			is_continue = false;
 			continue;
 
 		}
@@ -120,6 +137,10 @@ void Shop::Start()
 	}
 	
 }
+
+/// <summary>
+///			Purchase		///
+/// </summary>
 
 void Shop::Purchase()
 {
@@ -152,30 +173,95 @@ void Shop::Purchase()
 			Product::buyProduct(_products, products_sold, product);
 
 			cart.push_back(product);
-
-			cout << "product has been purchased" << endl;
 		}
 		else
 		{
 			cout << "the product is out of stock" << endl;
+			return;
 		}
 	}
 
 
-	long long int new_id = stoll(Bill::lastBill_ID_InFile()) + 1;
-	Bill bill(to_string(new_id), Date(), cart);
+	long long int new_id = stoll(Bill::getLastBillID(_bills)) + 1;
+	Account account;
+	account = AccountManagement();
+	Bill bill(to_string(new_id), account.getMemberShipLevel(), account.getMemberShip(), Date(), cart);
 	_bills.push_back(bill);
 	bill.showBillInfo();
+
+
+	MembershipLevel update(account.getMemberShip().getLevel(), account.getMemberShip().getCummulativePoints() + cart.size());
+	update.updateLevel();
+	account.setMemberShip(update);
+	updateList(_accounts, account);
 }
+
+/// <summary>
+///			Account Management		////
+/// </summary>
+/// return Account
+
+Account Shop::AccountManagement()
+{
+	system("cls");
+	bool is_continue = true;
+
+
+	string id;
+	Account new_account;
+
+
+	int choice;
+	Menu::showAccountMenu();
+	cout << "Choose: ";
+	cin >> choice;
+	cin.ignore();
+	while (is_continue)
+	{
+		switch (choice)
+		{
+		case 1:
+
+			cout << "Enter your account id: ";
+			getline(cin, id);
+			try
+			{
+				return Account::sign_in(_accounts, id);
+			}
+			catch (const std::exception& error)
+			{
+				cout << error.what() << endl;
+			}
+			break;
+
+		case 2:
+
+			new_account = new_account.sign_up(_accounts);
+			return new_account;
+
+		case 3:
+
+			is_continue = false;
+			continue;
+		}
+	}
+
+
+	return new_account;
+}
+
+/// <summary>
+///			Product management		///
+/// </summary>
 
 void Shop::ProductManagement()
 {
 
 	system("cls");
-	string is_continue;
+	bool is_continue = true;
 
 
-	Product product;
+	Product new_product;
 	string id;
 	
 
@@ -184,27 +270,47 @@ void Shop::ProductManagement()
 	cout << "Choose: ";
 	cin >> choice;
 	cin.ignore();
-	while (!(is_continue == "n" || is_continue == "N"))
+	while (is_continue)
 	{
 		switch (choice)
 		{
 		case 1:
 
-
-			//Product::addProductInFile()
+			system("cls");
+			if (new_product.set() == "cancel")
+			{
+				break;
+			}
+			Product::addProductInFile(_products, new_product);
 			break;
 
 		case 2:
 
+			system("cls");
 			showProductList();
 			cout << "Enter product's ID: ";
 			getline(cin, id);
-			//Product::deleteProductInFile();
+			if (id == "cancel")
+			{
+				cout << "Cancel!!!\n";
+				break;
+			}
+			
+
+			int index;
+			while (Product::isValidInList(_products, id, index))
+			{
+				if (!(Product::isValidInList(_products, id, index)))
+				{
+					cout << "Not found\n";
+				}
+				Product::deleteProductInFile(_products, Product::search_by_ProductId(_products, index));
+			}
 			break;
 
 		case 3:
 
-			is_continue = "n";
+			is_continue = false;
 			continue;
 
 		}
@@ -221,10 +327,18 @@ void Shop::ProductManagement()
 	}
 }
 
+/// <summary>
+///			Staff management		///
+/// </summary>
+
 void Shop::StaffInfoManagement()
 {
 	system("cls");
-	string is_continue;
+	bool is_continue = true;
+
+
+	string id;
+	Staff* staff = nullptr;
 
 
 	int choice;
@@ -232,11 +346,29 @@ void Shop::StaffInfoManagement()
 	cout << "Choose: ";
 	cin >> choice;
 	cin.ignore();
-	while (!(is_continue == "n" || is_continue == "N"))
+	while (is_continue)
 	{
 		switch (choice)
 		{
 		case 1:
+
+			cout << "Enter your Staff ID: ";
+			getline(cin, id);
+
+			try
+			{
+				staff = Staff::search(_staffs, id);
+			}
+			catch (const std::exception& error)
+			{
+				cout << error.what() << endl;
+				break;
+			}
+
+
+			staff->showStaffInfo();
+			cout << endl;
+
 
 			break;
 
@@ -252,7 +384,7 @@ void Shop::StaffInfoManagement()
 
 		case 4:
 
-			is_continue = "n";
+			is_continue = false;
 			continue;
 
 		}
@@ -272,7 +404,7 @@ void Shop::StaffInfoManagement()
 void Shop::SellerInfo()
 {
 	system("cls");
-	string is_continue;
+	bool is_continue = true;
 	int choice;
 
 
@@ -283,7 +415,7 @@ void Shop::SellerInfo()
 	cout << "Choose: ";
 	cin >> choice;
 	cin.ignore();
-	while (!(is_continue == "n" || is_continue == "N"))
+	while (is_continue)
 	{
 		switch (choice)
 		{
@@ -314,21 +446,12 @@ void Shop::SellerInfo()
 
 		case 5:
 
-			is_continue = "n";
+			is_continue = false;
 			continue;
 
 		}
 
 
-		/*system("cls");
-		Menu::showSellerMenu();
-		Menu::continueMenu(55, 5);
-		getline(cin, is_continue);
-		system("cls");
-		if (is_continue == "n")
-		{
-			continue;
-		}*/
 		system("pause");
 		system("cls");
 
@@ -342,7 +465,7 @@ void Shop::SellerInfo()
 void Shop::SecurityInfo()
 {
 	system("cls");
-	string is_continue;
+	bool is_continue = true;
 	int choice;
 
 
@@ -353,7 +476,7 @@ void Shop::SecurityInfo()
 	cout << "Choose: ";
 	cin >> choice;
 	cin.ignore();
-	while (!(is_continue == "n" || is_continue == "N"))
+	while (is_continue)
 	{
 		switch (choice)
 		{
@@ -367,21 +490,12 @@ void Shop::SecurityInfo()
 
 		case 3:
 
-			is_continue = "n";
+			is_continue = false;
 			continue;
 
 		}
 
 
-		/*system("cls");
-		Menu::showSecurityMenu();
-		Menu::continueMenu(55, 3);
-		getline(cin, is_continue);
-		system("cls");
-		if (is_continue == "n")
-		{
-			continue;
-		}*/
 		system("pause");
 		system("cls");
 

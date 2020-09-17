@@ -6,7 +6,10 @@
 #include <string>
 #include <Date.h>
 #include <Time.h>
+
+
 #include "Product.h"
+#include "MembershipLevel.h"
 
 
 class Bill
@@ -14,6 +17,8 @@ class Bill
 private:
 
 	string _bill_id;
+	string _level;
+	MembershipLevel _membership;
 	Date _curr_date;
 	vector<Product> _cart;
 
@@ -24,7 +29,9 @@ public:
 
 	}
 
-	Bill(string id, Date d,vector<Product> p);
+	Bill(string id, string level, MembershipLevel membership, Date d, vector<Product> p);
+
+public:
 
 	void sort(vector <Bill> bills, string sort_by);
 
@@ -33,6 +40,8 @@ public:
 	void setBillInfo(vector<string>);
 
 	Bill getBill();
+
+	static string getLastBillID(vector <Bill> bills);
 
 	static string lastBill_ID_InFile();
 

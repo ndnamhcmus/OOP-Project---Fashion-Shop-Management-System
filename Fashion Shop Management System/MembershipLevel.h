@@ -12,7 +12,14 @@ class MembershipLevel
 private:
 
 	string _level;
-	static int _cumulative_points;
+	int _cumulative_points;
+
+public:
+
+	~MembershipLevel()
+	{
+		updateLevel();
+	}
 
 public:
 	MembershipLevel(string level = "", int cumulative_points = 0);
@@ -20,8 +27,8 @@ public:
 	string getLevel();
 	void setCumulativePoints(int);
 	int getCummulativePoints();
-	int increaseCumulativePoints();
-	double getDiscount(string _level);
+	void increaseCumulativePoints();
+	static double getDiscount(string _level);
 	void updateLevel();
 
 	friend class ExcelFstream;

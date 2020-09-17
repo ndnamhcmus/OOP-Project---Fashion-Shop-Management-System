@@ -26,11 +26,20 @@ string Product::toString() {
 	return writer.str();
 }
 
-void Product::set() { 
+string Product::set() { 
 	cout << "Product's name - Product's ID - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl;
 	cout << "Please enter the information in the form above" << endl;
 	string line;
 	getline(cin,line);
+
+
+	if (line == "cancel")
+	{
+		cout << "Cancel!!!\n";
+		return line;
+	}
+
+
 	auto Tok = Tokenizer::parse(line, " - ");
 	this->setProductInfo(Tok);
 }
@@ -74,7 +83,7 @@ void Product::setProductsInfo(vector<Product>& products, string FileName) {
 void Product::showProductsInfo(vector<Product> products) {
 	cout << "Product's name - Product's ID - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl;
 	for (int i = 0; i < products.size(); i++) {
-		cout << i << ") ";
+		cout << i + 1 << ": ";
 		products[i].showProductInfo();
 	}
 }

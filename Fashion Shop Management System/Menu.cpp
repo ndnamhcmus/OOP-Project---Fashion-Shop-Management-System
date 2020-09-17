@@ -69,6 +69,26 @@ void Menu::showProductManagementMenu()
 	_buffer.str("");
 }
 
+void Menu::showAccountMenu()
+{
+	int x = 55, y = 0;
+
+	_buffer << "1. Sign in\n";
+	gotoxy(x - _buffer.str().size() / 2, y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "2. Sign up\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "3. Cancel\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+}
+
 void Menu::showStaffMenu()
 {
 	int x = 55, y = 0;

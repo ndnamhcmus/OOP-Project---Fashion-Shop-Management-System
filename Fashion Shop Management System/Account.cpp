@@ -1,5 +1,9 @@
 ﻿#include "Account.h"
 
+#include <FakeName.h>
+#include <FakeAddress.h>
+#include <FakeBirthday.h>
+#include <FakeVnTel.h>
 
 Account::Account(string account_id, Customer customer, MembershipLevel membership_level)
 {
@@ -54,7 +58,18 @@ void Account::setAccountInfo(vector<string>Tok)
 
 	_bills.resize(0);
 
-	_membership_level = Tok[6];
+	_membership_level.setCumulativePoints(stoi(Tok[6]));
+
+	_membership_level.setLevel(Tok[7]);
+}
+
+string Account::findLastCustomer_ID_InFile()
+{
+	vector<Account> acc;
+
+	Account::openAccountFile(acc);
+
+	return acc[acc.size() - 1]._customer.getCustomerID();
 }
 
 string Account::findLastAccount_ID_InFile()
@@ -104,22 +119,22 @@ void Account::deleteAccountInFile(string account_id)
 
 }*/
 
-vector<Bill> Account::getBillListFromFile(string account_id)
+vector<Bill> Account::getBillListFromFile(string bill_id)
 {
-	vector<Account> acc;
+	vector<Bill> bills;
 
-	Account::openAccountFile(acc);
+	Bill::openBillFile(bills);
 
-	for (int i = 0; i < acc.size(); i++) {
-		if (acc[i]._account_id == account_id) {
-
-			return acc[i]._bills;
-
+	for (int i = 0; i < bills.size(); i++) {
+		if (bills[i].getID() != bill_id) {
+			bills.erase(bills.begin() + i);
 		}
 	}
+
+	return bills;
 }
 
-string Account::getAccount_ID()
+string Account::getID()
 {
 	return _account_id;
 }
@@ -129,57 +144,79 @@ string Account::getMemberShipLevel()
 	return _membership_level.getLevel();
 }
 
+MembershipLevel Account::getMemberShip()
+{
+	return _membership_level;
+}
+
+void Account::setMemberShip(MembershipLevel membership)
+{
+	_membership_level = membership;
+}
+
 double Account::getDiscount()
 {
 	return _membership_level.getDiscount(_membership_level.getLevel());
 }
 
-void Account::sign_in(string account_id)
+Account Account::sign_in(vector<Account> accounts, string account_id)
 {
-	vector<Account> acc;
-
-	Account::openAccountFile(acc);
-
-	for (int i = 0; i < acc.size(); i++) 
-
-		if (acc[i]._account_id == account_id) {
-
-			 acc[i].showAccountInfo();
+	bool is_found = false;
+	for (int i = 0; i < accounts.size(); i++)
+	{
+		if (accounts[i]._account_id == account_id) {
+			is_found = true;
+			accounts[i].showAccountInfo();
+			return accounts[i];
 		}
+	}
+
+
+	if (!is_found)
+	{
+		throw AccountException("Account is not found");
+	}
 }
 
-void Account::sign_up(vector<Account>&accounts)
+Account Account::sign_up(vector<Account>&accounts)
 {
 	vector<string> st;
 	string s;
 
-	st.push_back(to_string(stoi(Account::findLastAccount_ID_InFile()) + 1));
+	st.push_back(to_string(stoi(findLastAccount_ID_InFile()) + 1));
 
 	cout << "Full Name: ";
-	getline(cin, s);
-	st.push_back(s);
+	/*getline(cin, s);
+	st.push_back(s);*/
+	st.push_back(string(FakeName::next()));
 
 	cout << "Date of birth: ";
-	getline(cin, s);
-	st.push_back(s);
+	/*getline(cin, s);
+	st.push_back(s);*/
+	st.push_back(FakeBirthday::next().toString());
 
 	cout << "Phone number: ";
 	getline(cin, s);
 	st.push_back(s);
 
 	cout << "Address: ";
-	getline(cin, s);
-	st.push_back(s);
+	/*getline(cin, s);
+	st.push_back(s);*/
+	st.push_back(FakeHCMAddress::next().toString());
 
-	st.push_back(to_string(stoi(_customer.getCustomerID()) + 1));
+	st.push_back(to_string(stoi(findLastCustomer_ID_InFile()) + 1));
 
-	st.push_back("0");  //membership level
+	st.push_back("0");
+
+	st.push_back("none");  //membership level
 
 	Account account;
 
 	account.setAccountInfo(st);
 
 	accounts.push_back(account);
+
+	return account;
 }
 
 void Account::showBillList()
@@ -195,11 +232,12 @@ void Account::showAccountInfo()
 {
 	cout << "Account ID: " << _account_id << endl;
 
+	cout << "Customer ID\tDOB\tTel\tAddress\n";
 	cout << _customer.toString() << endl;
 
 	cout << "Number of bill: " << _bills.size() << endl;
 
-	cout << _membership_level.getLevel() << endl;
+	cout << "Level: " << _membership_level.getLevel() << endl;
 }
 
 void Account::saveAccountToFile(vector<Account>accounts)
@@ -256,7 +294,7 @@ string Account::toString()
 
 	w << _account_id << " - " << _customer.getName() << " - " << _customer.getDoB().toString()
 		<< " - " << _customer.getPhoneNumber() << " - " << _customer.getAddress().toString() << " - "
-		<< _customer.getCustomerID() << " - " << _membership_level.getLevel();
+		<< _customer.getCustomerID() << " - " << to_string(_membership_level.getCummulativePoints()) << " - " << _membership_level.getLevel();
 
 	return w.str();
 }
