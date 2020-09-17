@@ -23,6 +23,7 @@ void Shop::openAccountList()
 
 void Shop::openStaffList()
 {
+	Staff::openStaffToRead(_staffs);
 }
 
 /// <summary>
@@ -42,6 +43,11 @@ void Shop::saveBillList()
 void Shop::saveAccountList()
 {
 	Account::saveAccountToFile(_accounts);
+}
+
+void Shop::saveStaffList()
+{
+	Staff::saveStaffInfoToFile(_staffs);
 }
 
 /// <summary>
@@ -322,6 +328,10 @@ void Shop::StaffInfoManagement()
 	bool is_continue = true;
 
 
+	string id;
+
+
+
 	int choice;
 	Menu::showStaffMenu();
 	cout << "Choose: ";
@@ -333,6 +343,8 @@ void Shop::StaffInfoManagement()
 		{
 		case 1:
 
+			cout << "Enter your Staff ID: ";
+			getline(cin, id);
 			break;
 
 		case 2:

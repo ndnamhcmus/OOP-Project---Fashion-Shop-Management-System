@@ -108,14 +108,18 @@ public:
 		_base_salary = base_salary;
 	}
 
-	void virtual setStaffInfo(vector<string> Tok) {};
-	string getStaffID();
-	Staff* search(vector<Staff*>staffs, string searchID);
-	void showBaseStaffInfo();
+public:
 
-	string virtual toString() { return 0; };
-	void saveStaffInfoToFile(vector<Staff*> staffs);
-	void openStaffToRead(vector <Staff*>& staffs);
+	virtual void set();
+
+	virtual void setStaffInfo(vector<string> Tok) = 0;
+	string getStaffID();
+	static Staff* search(vector<Staff*>staffs, string searchID);
+	virtual void showStaffInfo();
+
+	virtual string toString() = 0;
+	static void saveStaffInfoToFile(vector<Staff*> staffs);
+	static void openStaffToRead(vector <Staff*>& staffs);
 
 	////  Friend //
 
@@ -143,7 +147,7 @@ public:
 	void addSecurity(vector<Staff*>& staff, Staff* secu);
 	
 	string toString();
-	void showSecurityInfo();
+	void showStaffInfo();
 	void parse(string line);
 
 	/// Friend ///
@@ -175,9 +179,13 @@ public:
 		_real_salary = real_salary;
 	}
 
+public:
+
+	
+
 	void setSeller(string name, Date dob, string phone, Address add, string staff_id, double base_salary, double comission, int goodsale, double realsalary);
 	void setCommission();
-	void setGoodsSale(int goodsale);
+	void setGoodsSale(int goodsale = 0);
 	void setRealSalary();
 	void setStaffInfo(vector<string> Tok);
 	double getSalary();
@@ -186,7 +194,7 @@ public:
 	void addSeller(vector<Staff*>& staff, Staff* sell);
 
 	string toString();
-	void showSellerInfo();
+	void showStaffInfo();
 	void parse(string line);
 
 

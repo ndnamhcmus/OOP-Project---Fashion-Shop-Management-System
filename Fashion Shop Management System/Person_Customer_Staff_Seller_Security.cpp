@@ -94,7 +94,7 @@ string Staff::getStaffID()
 	return _staff_id;
 }
 
-void Staff:: showBaseStaffInfo()
+void Staff::showStaffInfo()
 {
 	cout << _name << " - " << _staff_id << " - " << _date_of_birth.toString() + " - " + _phone_number + " - " + _address.toString() << endl;
 }
@@ -177,7 +177,6 @@ double Security::getSalary()
 
 void Security::addSecurity(vector<Staff*>& staff, Staff* secu)
 {
-	secu = new Security;
 	staff.push_back(secu);
 }
 
@@ -194,9 +193,9 @@ void Security::parse(string line)
 	this->setStaffInfo(Tok);
 }
 
-void Security::showSecurityInfo()
+void Security::showStaffInfo()
 {
-	Staff::showBaseStaffInfo();
+	Staff::showStaffInfo();
 	cout << " - " << _base_salary;
 
 }
@@ -250,8 +249,6 @@ double Seller:: getCommission()
 }
 void Seller::addSeller(vector<Staff*>& staff, Staff* sell)
 {
-
-	sell = new Seller;
 	staff.push_back(sell);
 }
 
@@ -276,9 +273,9 @@ void Seller::setStaffInfo(vector<string> Tok)
 	double c = this->_real_salary;
 	to_string(c) = Tok[7];
 }
-void Seller::showSellerInfo()
+void Seller::showStaffInfo()
 {
-	Staff::showBaseStaffInfo();
+	Staff::showStaffInfo();
 	cout << " - " << _base_salary<<" - "<<_goods_sale<<" - "<< _real_salary;
 }
 

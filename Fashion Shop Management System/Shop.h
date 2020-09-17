@@ -52,6 +52,19 @@ public:		//		Constructor		//
 		saveProductList();
 		saveBillList();
 		saveAccountList();
+		saveStaffList();
+
+
+		if (_staffs.size())
+		{
+			for (int i = 0; i < _staffs.size(); i++)
+			{
+				if (_staffs[i])
+				{
+					delete _staffs[i];
+				}
+			}
+		}
 	}
 
 private:
