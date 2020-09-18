@@ -26,6 +26,10 @@ void Shop::openStaffList()
 	Staff::openStaffToRead(_staffs);
 }
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 /// <summary>
 ///		Save	///
 /// </summary>
@@ -50,6 +54,10 @@ void Shop::saveStaffList()
 	Staff::saveStaffInfoToFile(_staffs);
 }
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 /// <summary>
 ///		Sort	///
 /// </summary>
@@ -70,12 +78,25 @@ void Shop::sortStaff(string sort_by)
 {
 }
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 /// <summary>
 ///		Show	///
 /// </summary>
+
 void Shop::showProductList()
 {
 	Product::showProductsInfo(_products);
+}
+
+void Shop::showBillList()
+{
+	for (int i = 0; i < _bills.size(); i++)
+	{
+		cout << _bills[i].toString() << endl;
+	}
 }
 
 void Shop::showStaffList()
@@ -112,8 +133,13 @@ void Shop::showSecurityList()
 	}
 }
 
-////////////////////		SWITCH\CASE		////////////////////
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/// <summary>
+///			SWITCH\CASE			///
+/// </summary>
 void Shop::Start()
 {
 	bool is_continue = true;
@@ -163,6 +189,10 @@ void Shop::Start()
 	
 }
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 /// <summary>
 ///			Purchase		///
 /// </summary>
@@ -211,7 +241,8 @@ void Shop::Purchase()
 	Account account;
 	account = AccountManagement();
 	Bill bill(to_string(new_id), account.getMemberShipLevel(), account.getMemberShip(), Date(), cart);
-	_bills.push_back(bill);
+	addToList(_bills, bill);
+	//_bills.push_back(bill);
 	bill.showBillInfo();
 
 
@@ -220,6 +251,10 @@ void Shop::Purchase()
 	account.setMemberShip(update);
 	updateList(_accounts, account);
 }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 /// <summary>
 ///			Account Management		////
@@ -275,6 +310,10 @@ Account Shop::AccountManagement()
 	return new_account;
 }
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 /// <summary>
 ///			Product management		///
 /// </summary>
@@ -287,7 +326,7 @@ void Shop::ProductManagement()
 
 
 	Product new_product;
-	string id;
+	string ID;
 	
 
 	int choice;
@@ -314,8 +353,8 @@ void Shop::ProductManagement()
 			system("cls");
 			showProductList();
 			cout << "Enter product's ID: ";
-			getline(cin, id);
-			if (id == "cancel")
+			getline(cin, ID);
+			if (ID == "cancel")
 			{
 				cout << "Cancel!!!\n";
 				break;
@@ -323,17 +362,37 @@ void Shop::ProductManagement()
 			
 
 			int index;
-			while (Product::isValidInList(_products, id, index))
+			while (Product::isValidInList(_products, ID, index))
 			{
-				if (!(Product::isValidInList(_products, id, index)))
+				if (!(Product::isValidInList(_products, ID, index)))
 				{
 					cout << "Not found\n";
+					break;
 				}
 				Product::deleteProductInFile(_products, Product::search_by_ProductId(_products, index));
 			}
 			break;
 
 		case 3:
+
+			showBillList();
+			break;
+
+		case 4:
+
+			while (Bill::isFoundInList(_bills, ID))
+			{
+				if (!Bill::isFoundInList(_bills, ID))
+				{
+					cout << "Not found\n";
+					break;
+				}
+				Bill::deleteBill(_bills, Bill::search(_bills, ID));
+			}
+
+			break;
+
+		case 5:
 
 			is_continue = false;
 			continue;
@@ -351,6 +410,10 @@ void Shop::ProductManagement()
 		cin.ignore();
 	}
 }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 /// <summary>
 ///			Staff management		///
@@ -524,7 +587,8 @@ void Shop::SellerInfoManagement()
 				break;
 			}
 
-			_staffs.push_back(seller);
+			addToList(_staffs, seller);
+			//_staffs.push_back(seller);
 
 			break;
 
@@ -622,7 +686,8 @@ void Shop::SecurityInfoManagement()
 			}
 
 
-			_staffs.push_back(security);
+			addToList(_staffs, security);
+			//_staffs.push_back(security);
 
 			break;
 

@@ -31,19 +31,33 @@ public:
 
 	Bill(string id, string level, MembershipLevel membership, Date d, vector<Product> p);
 
-public:
-
-	void sort(vector <Bill> bills, string sort_by);
-
-	Bill search(vector <Bill> bills, string search_by);
+private:
 
 	void setBillInfo(vector<string>);
 
-	Bill getBill();
+public:
+
+	static void sort(vector <Bill> bills, string sort_by);
+
+	static Bill search(vector <Bill> bills, string search_by);
+
+
+	void showBillInfo();
+
+public:
 
 	static string getLastBillID(vector <Bill> bills);
 
 	static string lastBill_ID_InFile();
+
+
+	static int isFoundInList(vector <Bill>& bills, string ID);
+
+	static void deleteBill(vector<Bill>& bills, Bill bill);
+
+public:
+
+	Bill getBill();
 
 	string getID();
 
@@ -51,7 +65,7 @@ public:
 
 	string toString();
 
-	void showBillInfo();
+public:
 
 	static void saveBillToFile(vector <Bill> bills);
 
@@ -66,5 +80,24 @@ public:
 	friend class ExcelOfstream;
 };
 
+
+class BillException : public exception
+{
+private:
+
+	string _mess;
+
+public:
+	BillException(const string& mess)
+	{
+		_mess = mess;
+	}
+
+	const char* what() const throw()
+	{
+		return _mess.c_str();
+	}
+
+};
 
 #endif // !_BILL_

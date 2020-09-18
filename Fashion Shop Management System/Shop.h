@@ -37,6 +37,16 @@ private:
 		}
 	}
 
+	///		Add new element		///
+	template <class T>
+	void addToList(vector <T>& list, T element)
+	{
+		list.push_back(element);
+	}
+
+
+	///		Delete element		///
+
 public:		//		Constructor		//
 
 	Shop()
@@ -86,10 +96,6 @@ private:
 	void saveAccountList();
 	void saveStaffList();
 
-public:
-
-	void Start();
-
 private:
 
 	void showStaffList();
@@ -97,6 +103,8 @@ private:
 	void showSecurityList();
 
 	void showProductList();
+
+	void showBillList();
 
 private:
 
@@ -113,6 +121,10 @@ private:
 	void StaffInfoManagement();
 	void SellerInfoManagement();
 	void SecurityInfoManagement();
+
+public:
+
+	void Start();
 };
 
 

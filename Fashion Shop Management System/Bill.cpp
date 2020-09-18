@@ -68,6 +68,25 @@ string Bill::lastBill_ID_InFile()
 	return bills[bills.size() - 1].getID();
 }
 
+int Bill::isFoundInList(vector<Bill>& bills, string ID)
+{
+	for (int i = 0; i < bills.size(); i++)
+		if (bills[i].getID() == ID) {
+			return i;
+		}
+	return 0;
+}
+
+void Bill::deleteBill(vector<Bill>& bills, Bill bill)
+{
+	int index;
+	if (isFoundInList(bills, bill.getID())) {
+		bills.erase(bills.begin() + isFoundInList(bills, bill.getID()));
+	}
+	else
+		throw BillException("Not found");
+}
+
 string Bill::getID()
 {
 	return _bill_id;
