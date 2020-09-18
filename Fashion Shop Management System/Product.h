@@ -54,6 +54,7 @@ public:
 	static void sort(vector<Product>& products, string sort_by);
 	static bool isValidInList(vector<Product>& products, string search_by, int& index);
 	static Product search_by_ProductId(vector<Product>& products, int index);
+
 	
 
 	string getProductName(){ return _product_name; }

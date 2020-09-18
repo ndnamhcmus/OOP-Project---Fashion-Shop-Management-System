@@ -22,7 +22,7 @@ Product::Product(string product_name, string product_id, string firm_name, strin
 string Product::toString() {
 	stringstream writer;
 	writer << _product_name << " - " << _product_id << " - " << _firm_name << " - " << _product_type << " - " << _product_color << " - "
-		<< _product_size << " - " << _product_cost << " - " << _product_price << " - " << _discount << " - " << _stock_in_time.toString() << " - " << _stock_out_time.toString() << endl;
+		<< _product_size << " - " << _product_price << " - " << _discount << " - " << _stock_in_time.toString() << " - " << _stock_out_time.toString() << endl;
 	return writer.str();
 }
 
@@ -30,15 +30,13 @@ string Product::set() {
 	cout << "Product's name - Product's ID - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl;
 	cout << "Please enter the information in the form above" << endl;
 	string line;
-	getline(cin,line);
-
+	getline(cin, line);
 
 	if (line == "cancel")
 	{
 		cout << "Cancel!!!\n";
 		return line;
 	}
-
 
 	auto Tok = Tokenizer::parse(line, " - ");
 	this->setProductInfo(Tok);
@@ -81,7 +79,7 @@ void Product::setProductsInfo(vector<Product>& products, string FileName) {
 }
 
 void Product::showProductsInfo(vector<Product> products) {
-	cout << "Product's name - Product's ID - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl;
+	cout << "Product's name - Product's ID - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time- Stock out time" << endl;
 	for (int i = 0; i < products.size(); i++) {
 		cout << i + 1 << ": ";
 		products[i].showProductInfo();
@@ -130,6 +128,13 @@ void Product::buyProduct(vector<Product>& products, vector<Product>& productssol
 
 void Product::sort(vector<Product>& products, string sort_by) {
 
+	if (sort_by == "_product_name") {
+		for (int i = 0; i < products.size(); i++)
+			for (int j = i + 1; j < products.size() - 1; j++)
+				if (products[i].getProductName() > products[j].getProductName())
+					swap(products[i], products[j]);
+		return;
+	}
  
 	if (sort_by == "_product_id") {
 		for (int i = 0; i < products.size(); i++)
@@ -194,23 +199,6 @@ void Product::sort(vector<Product>& products, string sort_by) {
 					swap(products[i], products[j]);
 		return;
 	}
-
-	if (sort_by == "_stock_in_time") {
-		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
-				if (products[i].getStockInTime() > products[j].getStockInTime())
-					swap(products[i], products[j]);
-		return;
-	}
-
-	if (sort_by == "_stock_out_time") {
-		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
-				if (products[i].getStockOutTime() > products[j].getStockOutTime())
-					swap(products[i], products[j]);
-		return;
-	}
-
 }
 
 bool Product::isValidInList(vector<Product>& products, string search_by, int &index) {
