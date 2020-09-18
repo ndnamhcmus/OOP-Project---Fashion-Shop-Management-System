@@ -15,7 +15,7 @@ void Menu::showMenu()
 	_buffer.str("");
 
 
-	_buffer << "1. Starting to purchase\n";
+	_buffer << "1. Purchase\n";
 	gotoxy(x - _buffer.str().size() / 2, y);
 	cout << _buffer.str();
 	_buffer.str("");

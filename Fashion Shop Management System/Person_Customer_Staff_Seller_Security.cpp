@@ -120,18 +120,27 @@ Staff* Staff::search(vector<Staff*> staffs)
 	string ID;
 	cout << "Enter your Staff ID: ";
 	getline(cin, ID);
+	if (ID == "cancel")
+	{
+		throw exception("Cancel!!!");
+	}
 
 	for (const auto& Staff : staffs)
 	{
 		if (Staff->getStaffID() == ID)
+		{
+			if (!(dynamic_cast<Seller*> (Staff)))
+			{
+				throw StaffException("Not a Seller");
+			}
 			return Staff;
+		}
 	}
 
-
-	throw StaffException("Not found");
+	throw exception("Not found");
 }
 
-void Staff::saveStaffInfoToFile(vector<Staff*> staffs)
+void Staff::saveStaffList(vector<Staff*> staffs)
 {
 	string buffer;
 	ExcelFstream file;
@@ -146,7 +155,7 @@ void Staff::saveStaffInfoToFile(vector<Staff*> staffs)
 	file.close();
 }
 
-void Staff::openStaffToRead(vector <Staff*>& staffs)
+void Staff::openStaffList(vector <Staff*>& staffs)
 {
 	ExcelFstream file;
 	file.open("Staff.csv", ios::in | ios::app);
@@ -170,6 +179,33 @@ void Staff::openStaffToRead(vector <Staff*>& staffs)
 		}
 	}
 	file.close();
+}
+
+bool Staff::login(vector <Staff*> staffs)
+{
+	bool is_login = false;
+	do
+	{
+		try
+		{
+			if (Staff::search(staffs))
+			{
+				is_login = true;
+			}
+		}
+		catch (const exception& mess)
+		{
+			if (!(strcmp(mess.what(), "Cancel!!!")))
+			{
+				break;
+			}
+
+
+			cout << mess.what() << endl;
+			is_login = false;
+		}
+	} while (!(is_login));
+	return is_login;
 }
 
 

@@ -18,6 +18,7 @@ class Shop
 private:	//		List		//
 
 	vector <Product> _products;
+	vector <Product> _products_sold;
 	vector <Bill> _bills;
 	vector <Account> _accounts;
 	vector <Staff*> _staffs;
@@ -45,7 +46,20 @@ private:
 	}
 
 
-	///		Delete element		///
+	///		Release Pointer		///
+	void releaseStaffPtr()
+	{
+		if (_staffs.size())
+		{
+			for (int i = 0; i < _staffs.size(); i++)
+			{
+				if (_staffs[i])
+				{
+					delete _staffs[i];
+				}
+			}
+		}
+	}
 
 public:		//		Constructor		//
 
@@ -65,23 +79,15 @@ public:		//		Constructor		//
 		saveStaffList();
 
 
-		if (_staffs.size())
-		{
-			for (int i = 0; i < _staffs.size(); i++)
-			{
-				if (_staffs[i])
-				{
-					delete _staffs[i];
-				}
-			}
-		}
+		releaseStaffPtr();
 	}
 
 private:
 
-	void sortProduct();
-	void sortAccount();
-	void sortStaff(string sort_by);
+	void sortProductList(vector <Product> products, string sort_by = "id");
+	void sortBillList(string sort_by = "id");
+	void sortAccountList(string sort_by ="id");
+	void sortStaffList(string sort_by = "id");
 
 private:
 

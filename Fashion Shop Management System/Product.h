@@ -6,6 +6,8 @@
 #include<sstream>
 #include <vector>
 #include <ctime>
+
+
 #include <Date.h>
 #include <Clock.h>
 #include <MyTime.h>
@@ -39,24 +41,39 @@ public:
 	Product();
 	Product(string product_name, string product_id, string firm_name, string product_type, string product_color, string product_size,
 		double product_cost, double product_price, double discount, Date stock_in_time, Date stock_out_time, Date stock_cover_time);
-	string toString();
-	string set();
+
+private:
+
 	void setProductInfo(vector<string> Tok);
-	void showProductInfo();
+	string toString();
+
+public:
+	
+	void set();
 	void setStockOutTime(Date date);
 
-	static void setProductsInfo(vector<Product>& products, string FileName = "Product.csv");
-	static void showProductsInfo(vector<Product> products);
-	static void addProduct(vector<Product>& products, Product prd);
-	static void deleteProduct(vector<Product>& products, Product prd);
+public:
+
+	static void openProductList(vector<Product>& products, string FileName = "Product.csv");
+	static void saveProductList(vector<Product> products, string FileName = "Product.csv");
+
 	static void addProductInFile(vector<Product>& products, Product prd, string FileName = "Product.csv");
 	static void deleteProductInFile(vector<Product>& products, Product prd, string FileName = "Product.csv");
-	static void buyProduct(vector<Product>& products, vector<Product>& productssold, Product prd);
-	static void sort(vector<Product>& products, string sort_by);
-	static bool isValidInList(vector<Product> products, string search_by, int& index);
-	static Product search_by_ProductId(vector<Product> products, int index);
-	static void savetoFile(vector<Product> products, string FileName = "Product.csv");
+
 	static vector<string> getBestSelling(string FileName = "Product Sold.csv");
+
+	void showProductInfo();
+	static void showProductsInfo(vector<Product> products);
+	static void sort(vector<Product>& products, string sort_by);
+
+	static void addProduct(vector<Product>& products, Product prd);
+	static void deleteProduct(vector<Product>& products, Product prd);
+	static bool isValidInList(vector<Product> products, string search_by, int& index);
+
+	static void buyProduct(vector<Product>& products, vector<Product>& productssold, Product prd);
+	static Product search_by_ProductId(vector<Product> products, int index);
+
+public:
 
 	string getProductName(){ return _product_name; }
 	string getProductId() { return _product_id; }
@@ -76,6 +93,26 @@ public:
 	friend class ExcelFstream;
 	friend class ExcelOfstream;
 	friend class ExcelIfstream;
+};
+
+
+class ProductException : public exception
+{
+private:
+
+	string _mess;
+
+public:
+	ProductException(const string& mess)
+	{
+		_mess = mess;
+	}
+
+	const char* what() const throw()
+	{
+		return _mess.c_str();
+	}
+
 };
 
 

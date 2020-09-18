@@ -22,26 +22,32 @@ Product::Product(string product_name, string product_id, string firm_name, strin
 string Product::toString() {
 	stringstream writer;
 	writer << _product_name << " - " << _product_id << " - " << _firm_name << " - " << _product_type << " - " << _product_color << " - "
-		<< _product_size << " - " << to_string(_product_price) << " - " << to_string(_discount) << " - " << _stock_in_time.toString(); 
+		<< _product_size << " - " << to_string(_product_cost) << " - " << to_string(_product_price) << " - " << to_string(_discount) << " - " << _stock_in_time.toString();
 	if (!_stock_out_time.getDay() && !_stock_out_time.getMonth() && !_stock_out_time.getYear()) {
-		writer << " - " << "Products are not out of stock" << endl;
+		writer << " - " << "Products are not out of stock";
 	}
 	else
-		writer << " - " << _stock_out_time.toString() << endl;
+		writer << " - " << _stock_out_time.toString();
+	writer << endl;
 	return writer.str();
 }
 
-string Product::set() { 
-	cout << "Product's name - Product's ID - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl;
+void Product::set() { 
+	cout << "Product name - Product ID - Firm name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time" << endl;
 	cout << "Please enter the information in the form above" << endl;
 	string line;
 	getline(cin, line);
 
+
 	if (line == "cancel")
 	{
-		cout << "Cancel!!!\n";
-		return line;
+		throw ProductException("Cancel!!!");
 	}
+
+
+	stringstream buffer;
+	buffer << line << " - 0/0/0";
+
 
 	auto Tok = Tokenizer::parse(line, " - ");
 	this->setProductInfo(Tok);
@@ -60,7 +66,6 @@ void Product::setProductInfo(vector<string> Tok) {
 	this->_discount = stod(Tok[8]);
 	this->_stock_in_time.parse(Tok[9]);
 	this->_stock_out_time.parse(Tok[10]);
-
 }
  
 void Product::showProductInfo() {
@@ -71,7 +76,7 @@ void Product::setStockOutTime(Date date) {
 	_stock_cover_time = date;
 }
 
-void Product::setProductsInfo(vector<Product>& products, string FileName) {
+void Product::openProductList(vector<Product>& products, string FileName) {
 
 	vector<vector<string>> container;
 	ExcelFstream file;
@@ -88,7 +93,7 @@ void Product::setProductsInfo(vector<Product>& products, string FileName) {
 }
 
 void Product::showProductsInfo(vector<Product> products) {
-	cout << "Product's name - Product's ID - Brand name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time- Stock out time" << endl;
+	cout << "Product name - Product ID - Firm name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl;
 	for (int i = 0; i < products.size(); i++) {
 		cout << i + 1 << ": ";
 		products[i].showProductInfo();
@@ -137,72 +142,72 @@ void Product::buyProduct(vector<Product>& products, vector<Product>& productssol
 
 void Product::sort(vector<Product>& products, string sort_by) {
 
-	if (sort_by == "_product_name") {
-		for (int i = 0; i < products.size(); i++)
+	if (sort_by == "name") {
+		for (int i = 0; i < products.size() - 1; i++)
 			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductName() > products[j].getProductName())
 					swap(products[i], products[j]);
 		return;
 	}
  
-	if (sort_by == "_product_id") {
-		for (int i = 0; i < products.size(); i++)
+	if (sort_by == "id") {
+		for (int i = 0; i < products.size() - 1; i++)
 			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductId() > products[j].getProductId())
 					swap(products[i], products[j]);
 		return;
 	}
 
-	if (sort_by == "_firm_name") {
-		for (int i = 0; i < products.size(); i++)
+	if (sort_by == "firm name") {
+		for (int i = 0; i < products.size() - 1; i++)
 			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getFirmName() > products[j].getFirmName())
 					swap(products[i], products[j]);
 		return;
 	}
 
-	if (sort_by == "_product_type") {
-		for (int i = 0; i < products.size(); i++)
+	if (sort_by == "type") {
+		for (int i = 0; i < products.size() - 1; i++)
 			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductType() > products[j].getProductType())
 					swap(products[i], products[j]);
 		return;
 	}
 
-	if (sort_by == "_product_color") {
-		for (int i = 0; i < products.size(); i++)
+	if (sort_by == "color") {
+		for (int i = 0; i < products.size() - 1; i++)
 			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductColor() > products[j].getProductColor())
 					swap(products[i], products[j]);
 		return;
 	}
 
-	if (sort_by == "_product_size") {
-		for (int i = 0; i < products.size(); i++)
+	if (sort_by == "size") {
+		for (int i = 0; i < products.size() - 1; i++)
 			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductSize() > products[j].getProductSize())
 					swap(products[i], products[j]);
 		return;
 	}
 
-	if (sort_by == "_product_cost") {
-		for (int i = 0; i < products.size(); i++)
+	if (sort_by == "cost") {
+		for (int i = 0; i < products.size() - 1; i++)
 			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductCost() > products[j].getProductCost())
 					swap(products[i], products[j]);
 		return;
 	}
 
-	if (sort_by == "_product_price") {
-		for (int i = 0; i < products.size(); i++)
+	if (sort_by == "price") {
+		for (int i = 0; i < products.size() - 1; i++)
 			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductPrice() > products[j].getProductPrice())
 					swap(products[i], products[j]);
 		return;
 	}
 
-	if (sort_by == "_discount") {
-		for (int i = 0; i < products.size(); i++)
+	if (sort_by == "discount") {
+		for (int i = 0; i < products.size() - 1; i++)
 			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getDiscount() > products[j].getDiscount())
 					swap(products[i], products[j]);
@@ -223,7 +228,7 @@ Product Product::search_by_ProductId(vector<Product> products, int index) {
 	return products[index];
 }
 
-void Product::savetoFile(vector<Product> products, string FileName) {
+void Product::saveProductList(vector<Product> products, string FileName) {
 	ExcelFstream file;
 	file.open(FileName, ios::out);
 	for (auto& products : products) {
@@ -234,7 +239,7 @@ void Product::savetoFile(vector<Product> products, string FileName) {
 
 vector<string> Product::getBestSelling(string FileName) {
 	vector<Product> productssold;
-	Product::setProductsInfo(productssold, FileName);
+	Product::openProductList(productssold, FileName);
 	vector<string> productname;
 	vector<string> bestselling;
 

@@ -16,10 +16,10 @@ private:
 
 public:
 
-	~MembershipLevel()
+	/*~MembershipLevel()
 	{
 		updateLevel();
-	}
+	}*/
 
 public:
 	MembershipLevel(string level = "", int cumulative_points = 0);

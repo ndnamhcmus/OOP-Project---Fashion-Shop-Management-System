@@ -120,9 +120,10 @@ public:
 	virtual void showStaffInfo() = 0;
 
 	virtual string toString() = 0;
-	static void saveStaffInfoToFile(vector<Staff*> staffs);
-	static void openStaffToRead(vector <Staff*>& staffs);
+	static void saveStaffList(vector<Staff*> staffs);
+	static void openStaffList(vector <Staff*>& staffs);
 
+	static bool login(vector <Staff*> staffs);
 
 private:
 

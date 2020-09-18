@@ -67,7 +67,7 @@ string Account::findLastCustomer_ID_InFile()
 {
 	vector<Account> acc;
 
-	Account::openAccountFile(acc);
+	Account::openAccountList(acc);
 
 	return acc[acc.size() - 1]._customer.getCustomerID();
 }
@@ -76,7 +76,7 @@ string Account::findLastAccount_ID_InFile()
 {
 	vector<Account> acc;
 
-	Account::openAccountFile(acc);
+	Account::openAccountList(acc);
 	
 	return acc[acc.size() - 1]._account_id;
 }
@@ -85,7 +85,7 @@ void Account::addAccountToFile(Account account)
 {
 	vector<Account> acc;
 
-	Account::openAccountFile(acc);
+	Account::openAccountList(acc);
 
 	acc.push_back(account);
 
@@ -101,7 +101,7 @@ void Account::deleteAccountInFile(string account_id)
 {
 	vector<Account> acc;
 
-	Account::openAccountFile(acc);
+	Account::openAccountList(acc);
 
 	Account::deleteAccount(acc, account_id);
 
@@ -123,7 +123,7 @@ vector<Bill> Account::getBillListFromFile(string bill_id)
 {
 	vector<Bill> bills;
 
-	Bill::openBillFile(bills);
+	Bill::openBillList(bills);
 
 	for (int i = 0; i < bills.size(); i++) {
 		if (bills[i].getID() != bill_id) {
@@ -240,7 +240,7 @@ void Account::showAccountInfo()
 	cout << "Level: " << _membership_level.getLevel() << endl;
 }
 
-void Account::saveAccountToFile(vector<Account>accounts)
+void Account::saveAccountList(vector<Account>accounts)
 {
 	string buffer;
 	ExcelFstream file;
@@ -270,7 +270,7 @@ void Account::deleteAccount(vector<Account>&acc, string account_id)
 	return string();
 }*/
 
-void Account::openAccountFile(vector <Account>& accounts, string path)
+void Account::openAccountList(vector <Account>& accounts, string path)
 {
 	ExcelFstream file;
 	file.open(path, ios::in);

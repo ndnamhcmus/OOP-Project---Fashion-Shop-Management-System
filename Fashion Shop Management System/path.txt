@@ -1,5 +1,0 @@
-001 - Le Thi Vy - 10000000
-002 - Ho Trong Thao - 20000000
-003 - Hoang Thuc Nam - 30000000
-004 - Do Manh Thi - 40000000
-005 - Pham Manh Nam - 50000000

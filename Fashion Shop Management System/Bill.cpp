@@ -63,7 +63,7 @@ string Bill::lastBill_ID_InFile()
 {
 	vector<Bill> bills;
 
-	Bill::openBillFile(bills, "Bill.csv");
+	Bill::openBillList(bills, "Bill.csv");
 
 	return bills[bills.size() - 1].getID();
 }
@@ -179,7 +179,7 @@ void Bill::showBillInfo()
 	cout << "\n---***   THANK YOU VISIT AGAIN   ***---\n";
 }
 
-void Bill::saveBillToFile(vector <Bill> bills)
+void Bill::saveBillList(vector <Bill> bills)
 {
 	string buffer;
 	ExcelFstream file;
@@ -194,7 +194,7 @@ void Bill::saveBillToFile(vector <Bill> bills)
 	file.close();
 }
 
-void Bill::openBillFile(vector <Bill>& bills, string path)
+void Bill::openBillList(vector <Bill>& bills, string path)
 {
 	ExcelFstream file;
 	file.open(path, ios::in);

@@ -1,4 +1,5 @@
-#include "Shop.h"
+﻿#include "Shop.h"
+#include <algorithm>
 
 
 
@@ -8,22 +9,22 @@
 
 void Shop::openProductList()
 {
-	Product::setProductsInfo(_products);
+	Product::openProductList(_products);
 }
 
 void Shop::openBillList()
 {
-	Bill::openBillFile(_bills);
+	Bill::openBillList(_bills);
 }
 
 void Shop::openAccountList()
 {
-	Account::openAccountFile(_accounts);
+	Account::openAccountList(_accounts);
 }
 
 void Shop::openStaffList()
 {
-	Staff::openStaffToRead(_staffs);
+	Staff::openStaffList(_staffs);
 }
 
 
@@ -36,22 +37,44 @@ void Shop::openStaffList()
 
 void Shop::saveProductList()
 {
+	if (_products.size())
+	{
+		sortProductList(_products);
+		Product::saveProductList(_products);
+	}
+	
 
+	if (_products_sold.size())
+	{
+		sortProductList(_products_sold);
+		Product::saveProductList(_products_sold);
+	}
 }
 
 void Shop::saveBillList()
 {
-	Bill::saveBillToFile(_bills);
+	if (_bills.size())
+	{
+		sortBillList();
+		Bill::saveBillList(_bills);
+	}
 }
 
 void Shop::saveAccountList()
 {
-	Account::saveAccountToFile(_accounts);
+	if (_accounts.size())
+	{
+		sortAccountList();
+		Account::saveAccountList(_accounts);
+	}
 }
 
 void Shop::saveStaffList()
 {
-	Staff::saveStaffInfoToFile(_staffs);
+	if (_staffs.size())
+	{
+		Staff::saveStaffList(_staffs);
+	}
 }
 
 
@@ -63,18 +86,22 @@ void Shop::saveStaffList()
 /// </summary>
 /// <param name="sort_by"></param>
 
-void Shop::sortProduct()
+void Shop::sortProductList(vector <Product> products, string sort_by)
 {
-	Product::sort(_products, "_product_id");
+	Product::sort(products, sort_by);
 }
 
-void Shop::sortAccount()
+void Shop::sortBillList(string sort_by)
 {
-	Account account;
-	account.sort(_accounts, "id");
+	Bill::sort(_bills, sort_by);
 }
 
-void Shop::sortStaff(string sort_by)
+void Shop::sortAccountList(string sort_by)
+{
+	Account::sort(_accounts, sort_by);
+}
+
+void Shop::sortStaffList(string sort_by)
 {
 }
 
@@ -88,6 +115,17 @@ void Shop::sortStaff(string sort_by)
 
 void Shop::showProductList()
 {
+	cout << "Name\tID\tFirm Name\tType\tColor\tSize\tPrice\tDiscount\n";
+
+
+	string sort_by;
+	cout << "Sort by: ";
+	getline(cin, sort_by);
+	transform(sort_by.begin(), sort_by.end(), sort_by.begin(), ::tolower);	//	chuyển về chữ thường
+
+
+	Product::sort(_products, sort_by);
+	cout << "PRODUCT LIST\n";
 	Product::showProductsInfo(_products);
 }
 
@@ -161,12 +199,28 @@ void Shop::Start()
 
 		case 2:
 
+			if (!(Staff::login(_staffs)))
+			{
+				break;
+			}
+
+
 			ProductManagement();
+			
+			
 			break;
 
 		case 3:
 
+			if (!(Staff::login(_staffs)))
+			{
+				break;
+			}
+
+
 			StaffInfoManagement();
+
+
 			break;
 
 		case 4:
@@ -202,7 +256,6 @@ void Shop::Purchase()
 	system("cls");
 
 
-	cout << "Product list\n";
 	showProductList();
 
 
@@ -341,10 +394,17 @@ void Shop::ProductManagement()
 		case 1:
 
 			system("cls");
-			if (new_product.set() == "cancel")
+			try
 			{
+				new_product.set();
+			}
+			catch (const std::exception& mess)
+			{
+				cout << mess.what() << endl;
 				break;
 			}
+
+
 			Product::addProductInFile(_products, new_product);
 			break;
 

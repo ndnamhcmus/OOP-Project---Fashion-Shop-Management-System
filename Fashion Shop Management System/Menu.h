@@ -19,7 +19,7 @@ public:
 		RED = 12
 	};
 
-	static void gotoxy(int x, int y)
+	static void gotoxy(SHORT x, SHORT y)
 	{
 		static HANDLE h = NULL;
 		if (!h)

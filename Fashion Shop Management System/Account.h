@@ -26,7 +26,7 @@ private:
 public:
 	Account(string account_id = "", Customer customer = Customer() ,MembershipLevel membership_level = MembershipLevel());
 
-	void sort(vector <Account> accounts, string sort_by);
+	static void sort(vector <Account> accounts, string sort_by);
 
 	static Account search(vector <Account> accounts, string search_by);
 
@@ -62,13 +62,13 @@ public:
 
 	void showAccountInfo();
 
-	static void saveAccountToFile(vector<Account>accounts);
+	static void saveAccountList(vector<Account>accounts);
 
 	void deleteAccount(vector<Account>& acc, string account_id);
 
 	//string modifyAccount();
 
-	static void openAccountFile(vector <Account>& accounts, string path = "Account.csv");
+	static void openAccountList(vector <Account>& accounts, string path = "Account.csv");
 
 	string toString();
 

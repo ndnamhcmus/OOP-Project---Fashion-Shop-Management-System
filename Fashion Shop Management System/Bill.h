@@ -67,9 +67,9 @@ public:
 
 public:
 
-	static void saveBillToFile(vector <Bill> bills);
+	static void saveBillList(vector <Bill> bills);
 
-	static void openBillFile(vector <Bill>& bills, string path = "Bill.csv");
+	static void openBillList(vector <Bill>& bills, string path = "Bill.csv");
 
 public:
 
