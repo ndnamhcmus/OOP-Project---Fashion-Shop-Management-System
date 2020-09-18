@@ -22,7 +22,12 @@ Product::Product(string product_name, string product_id, string firm_name, strin
 string Product::toString() {
 	stringstream writer;
 	writer << _product_name << " - " << _product_id << " - " << _firm_name << " - " << _product_type << " - " << _product_color << " - "
-		<< _product_size << " - " << _product_price << " - " << _discount << " - " << _stock_in_time.toString() << " - " << _stock_out_time.toString() << endl;
+		<< _product_size << " - " << to_string(_product_price) << " - " << to_string(_discount) << " - " << _stock_in_time.toString(); 
+	if (!_stock_out_time.getDay() && !_stock_out_time.getMonth() && !_stock_out_time.getYear()) {
+		writer << " - " << "Products are not out of stock" << endl;
+	}
+	else
+		writer << " - " << _stock_out_time.toString() << endl;
 	return writer.str();
 }
 
@@ -60,6 +65,10 @@ void Product::setProductInfo(vector<string> Tok) {
  
 void Product::showProductInfo() {
 	cout << this->toString() << endl;
+}
+
+void Product::setStockOutTime(Date date) {
+	_stock_cover_time = date;
 }
 
 void Product::setProductsInfo(vector<Product>& products, string FileName) {
@@ -130,7 +139,7 @@ void Product::sort(vector<Product>& products, string sort_by) {
 
 	if (sort_by == "_product_name") {
 		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
+			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductName() > products[j].getProductName())
 					swap(products[i], products[j]);
 		return;
@@ -138,7 +147,7 @@ void Product::sort(vector<Product>& products, string sort_by) {
  
 	if (sort_by == "_product_id") {
 		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
+			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductId() > products[j].getProductId())
 					swap(products[i], products[j]);
 		return;
@@ -146,7 +155,7 @@ void Product::sort(vector<Product>& products, string sort_by) {
 
 	if (sort_by == "_firm_name") {
 		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
+			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getFirmName() > products[j].getFirmName())
 					swap(products[i], products[j]);
 		return;
@@ -154,7 +163,7 @@ void Product::sort(vector<Product>& products, string sort_by) {
 
 	if (sort_by == "_product_type") {
 		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
+			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductType() > products[j].getProductType())
 					swap(products[i], products[j]);
 		return;
@@ -162,7 +171,7 @@ void Product::sort(vector<Product>& products, string sort_by) {
 
 	if (sort_by == "_product_color") {
 		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
+			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductColor() > products[j].getProductColor())
 					swap(products[i], products[j]);
 		return;
@@ -170,7 +179,7 @@ void Product::sort(vector<Product>& products, string sort_by) {
 
 	if (sort_by == "_product_size") {
 		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
+			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductSize() > products[j].getProductSize())
 					swap(products[i], products[j]);
 		return;
@@ -178,7 +187,7 @@ void Product::sort(vector<Product>& products, string sort_by) {
 
 	if (sort_by == "_product_cost") {
 		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
+			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductCost() > products[j].getProductCost())
 					swap(products[i], products[j]);
 		return;
@@ -186,7 +195,7 @@ void Product::sort(vector<Product>& products, string sort_by) {
 
 	if (sort_by == "_product_price") {
 		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
+			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getProductPrice() > products[j].getProductPrice())
 					swap(products[i], products[j]);
 		return;
@@ -194,14 +203,14 @@ void Product::sort(vector<Product>& products, string sort_by) {
 
 	if (sort_by == "_discount") {
 		for (int i = 0; i < products.size(); i++)
-			for (int j = i + 1; j < products.size() - 1; j++)
+			for (int j = i + 1; j < products.size(); j++)
 				if (products[i].getDiscount() > products[j].getDiscount())
 					swap(products[i], products[j]);
 		return;
 	}
 }
 
-bool Product::isValidInList(vector<Product>& products, string search_by, int &index) {
+bool Product::isValidInList(vector<Product> products, string search_by, int &index) {
 	for (int i = 0; i < products.size(); i++)
 		if (products[i].getProductId() == search_by) {
 			index = i;
@@ -210,8 +219,64 @@ bool Product::isValidInList(vector<Product>& products, string search_by, int &in
 	return false;
 }
 
-Product Product::search_by_ProductId(vector<Product>& products, int index) {
+Product Product::search_by_ProductId(vector<Product> products, int index) {
 	return products[index];
+}
+
+void Product::savetoFile(vector<Product> products, string FileName) {
+	ExcelFstream file;
+	file.open(FileName, ios::out);
+	for (auto& products : products) {
+		file.writeExcelString(products.toString());
+	}
+	file.close();
+}
+
+vector<string> Product::getBestSelling(string FileName) {
+	vector<Product> productssold;
+	Product::setProductsInfo(productssold, FileName);
+	vector<string> productname;
+	vector<string> bestselling;
+
+	for (int i = 0; i < productssold.size(); i++)
+		productname.push_back(productssold[i].getProductName());
+
+	for (int i = 0; i < productname.size(); i++)
+		for (int j = i + 1; j < productname.size(); j++)
+			if (productname[i] > productname[j])
+				swap(productname[i], productname[j]);
+
+	int max = 0;
+	int count = 1;
+	
+	for (int i = 0; i < productname.size() - 1; i++) {
+		if (productname[i] == productname[i + 1]) {
+			count++;
+			if (i == productname.size() - 2 && count == max) {
+				bestselling.push_back(productname[i]);
+			}
+
+			if (i == productname.size() - 2 && count > max) {
+				for (int j = 0; j < bestselling.size(); j++)
+					bestselling.erase(bestselling.begin() + j);
+				bestselling.push_back(productname[i]);
+			}
+		}
+		else {
+			if (count == max) {
+				bestselling.push_back(productname[i]);
+			}
+			if (count > max) {
+				max = count;
+				for (int j = 0; j < bestselling.size(); j++)
+					bestselling.erase(bestselling.begin() + j);
+				bestselling.push_back(productname[i]);
+			}
+			count = 1;
+		}
+	}
+		
+	return bestselling;
 }
 
 //int main() {

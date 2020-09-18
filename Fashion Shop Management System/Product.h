@@ -43,6 +43,7 @@ public:
 	string set();
 	void setProductInfo(vector<string> Tok);
 	void showProductInfo();
+	void setStockOutTime(Date date);
 
 	static void setProductsInfo(vector<Product>& products, string FileName = "Product.csv");
 	static void showProductsInfo(vector<Product> products);
@@ -52,10 +53,10 @@ public:
 	static void deleteProductInFile(vector<Product>& products, Product prd, string FileName = "Product.csv");
 	static void buyProduct(vector<Product>& products, vector<Product>& productssold, Product prd);
 	static void sort(vector<Product>& products, string sort_by);
-	static bool isValidInList(vector<Product>& products, string search_by, int& index);
-	static Product search_by_ProductId(vector<Product>& products, int index);
-
-	
+	static bool isValidInList(vector<Product> products, string search_by, int& index);
+	static Product search_by_ProductId(vector<Product> products, int index);
+	static void savetoFile(vector<Product> products, string FileName = "Product.csv");
+	static vector<string> getBestSelling(string FileName = "Product Sold.csv");
 
 	string getProductName(){ return _product_name; }
 	string getProductId() { return _product_id; }

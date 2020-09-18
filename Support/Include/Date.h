@@ -27,6 +27,12 @@ public:
 
 	////		Methods			////
 
+	void setDay(int day) { _day = day; }
+
+	void setMonth(int month) { _month = month; }
+
+	void setYear(int year) { _year = year; }
+
 	int getDay();
 
 	int getMonth();
