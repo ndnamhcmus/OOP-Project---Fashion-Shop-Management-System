@@ -1,6 +1,6 @@
 #ifndef _BILL_
 #define _BILL_
-
+// nhớ tí xóa cái này đi	///
 
 #include <iostream>
 #include <string>
