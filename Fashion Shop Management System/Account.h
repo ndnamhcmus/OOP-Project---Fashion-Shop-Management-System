@@ -68,7 +68,7 @@ public:
 
 	//string modifyAccount();
 
-	static void openAccountList(vector <Account>& accounts, string path = "Account.csv");
+	static void openAccountList(vector <Account>& accounts, string directory = "../Fashion Shop Management System/Data Base/Account.csv");
 
 	string toString();
 

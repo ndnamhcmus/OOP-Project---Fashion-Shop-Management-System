@@ -67,9 +67,9 @@ public:
 
 public:
 
-	static void saveBillList(vector <Bill> bills);
+	static void saveBillList(vector <Bill> bills, string directory = "../Fashion Shop Management System/Data Base/Bill.csv");
 
-	static void openBillList(vector <Bill>& bills, string path = "Bill.csv");
+	static void openBillList(vector <Bill>& bills, string directory = "../Fashion Shop Management System/Data Base/Bill.csv");
 
 public:
 

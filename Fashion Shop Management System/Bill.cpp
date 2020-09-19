@@ -179,11 +179,11 @@ void Bill::showBillInfo()
 	cout << "\n---***   THANK YOU VISIT AGAIN   ***---\n";
 }
 
-void Bill::saveBillList(vector <Bill> bills)
+void Bill::saveBillList(vector <Bill> bills, string directory)
 {
 	string buffer;
 	ExcelFstream file;
-	file.open("Bill.csv", ios::out);
+	file.open(directory, ios::out);
 
 
 	for (int i = 0; i < bills.size(); i++)

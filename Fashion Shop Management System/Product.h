@@ -55,15 +55,16 @@ public:
 
 public:
 
-	static void openProductList(vector<Product>& products, string FileName = "Product.csv");
-	static void saveProductList(vector<Product> products, string FileName = "Product.csv");
+	static void openProductList(vector<Product>& products, string directory = "../Fashion Shop Management System/Data Base/Product.csv");
+	static void saveProductList(vector<Product> products, string directory = "../Fashion Shop Management System/Data Base/Product.csv");
 
-	static void addProductInFile(vector<Product>& products, Product prd, string FileName = "Product.csv");
-	static void deleteProductInFile(vector<Product>& products, Product prd, string FileName = "Product.csv");
+	static void addProductInFile(vector<Product>& products, Product prd, string directory = "../Fashion Shop Management System/Data Base/Product.csv");
+	static void deleteProductInFile(vector<Product>& products, Product prd, string directory = "../Fashion Shop Management System/Data Base/Product.csv");
 
-	static vector<string> getBestSelling(string FileName = "Product Sold.csv");
+	static vector<string> getBestSelling(string directory = "../../Data Base/Product Sold.csv");
 	static void showBestSellingProduct();
 
+	void showProductInfoForStaff();
 	void showProductInfo();
 	static void showProductsInfo(vector<Product> products);
 	static void sort(vector<Product>& products, string sort_by);

@@ -2,7 +2,6 @@
 #include <algorithm>
 
 
-
 /// <summary>
 /// Load list
 /// </summary>
@@ -14,7 +13,7 @@ void Shop::openProductList()
 	try
 	{
 		Product::openProductList(_products);
-		Product::openProductList(_products_sold, "Products Sold.csv");
+		Product::openProductList(_products_sold, "../Fashion Shop Management System/Data Base/Product Sold.csv");
 	}
 	catch (const std::exception& mess)
 	{
@@ -173,6 +172,27 @@ void Shop::showProductList()
 	Product::sort(_products, sort_by);
 	cout << "PRODUCT LIST\n";
 	Product::showProductsInfo(_products);
+}
+
+void Shop::showProductListForStaff()
+{
+	cout << "Sort by: Name\tID\tFirm Name\tType\tColor\tSize\tCost\tPrice\tDiscount\n";
+
+
+	string sort_by;
+	cout << "Choose: ";
+	getline(cin, sort_by);
+	transform(sort_by.begin(), sort_by.end(), sort_by.begin(), ::tolower);	//	chuyển về chữ thường
+
+
+	Product::sort(_products, sort_by);
+	cout << "PRODUCT LIST\n";
+	cout << "Product name - Product ID - Firm name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl;
+	for (int i = 0; i < _products.size(); i++)
+	{
+		_products[i].showProductInfoForStaff();
+		cout << endl;
+	}
 }
 
 void Shop::showBillList()	
@@ -335,15 +355,37 @@ void Shop::Purchase()
 	{
 		if (Product::isValidInList(_products, id, index)) {
 			product = Product::search_by_ProductId(_products, index);
-			Product::buyProduct(_products, _products_sold, product);
-
 			cart.push_back(product);
+			
 		}
 		else if (!i)
 		{
-			cout << "the product is out of stock" << endl;
+			cout << "Product is out of stock" << endl;
 			return;
 		}
+		else
+		{
+			cout << "Product is out of stock" << endl;
+		}
+	}
+
+
+	for (int i = 0; i < cart.size(); i++)
+	{
+		cart[i].showProductInfo();
+		cout << endl;
+	}
+
+	string order;
+	cout << "Would you like to buy all products above? Yes or No: ";
+	getline(cin, order);
+	if (order == "yes" || order == "Yes")
+	{
+		Product::buyProduct(_products, _products_sold, product);
+	}
+	else if (order == "no" || order == "No")
+	{
+		return;
 	}
 
 
@@ -449,6 +491,11 @@ void Shop::ProductManagement()
 		{
 		case 1:
 
+			showProductListForStaff();
+			break;
+
+		case 2:
+
 			system("cls");
 			try
 			{
@@ -464,7 +511,7 @@ void Shop::ProductManagement()
 			Product::addProductInFile(_products, new_product);
 			break;
 
-		case 2:
+		case 3:
 
 			system("cls");
 			showProductList();
@@ -489,12 +536,12 @@ void Shop::ProductManagement()
 			}
 			break;
 
-		case 3:
+		case 4:
 
 			showBillList();
 			break;
 
-		case 4:
+		case 5:
 
 			while (Bill::isFoundInList(_bills, ID))
 			{
@@ -508,7 +555,7 @@ void Shop::ProductManagement()
 
 			break;
 
-		case 5:
+		case 6:
 
 			is_continue = false;
 			continue;

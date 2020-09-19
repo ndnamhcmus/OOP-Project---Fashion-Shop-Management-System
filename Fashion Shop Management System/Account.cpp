@@ -240,10 +240,10 @@ void Account::showAccountInfo()
 	cout << "Level: " << _membership_level.getLevel() << endl;
 }
 
-void Account::openAccountList(vector <Account>& accounts, string path)
+void Account::openAccountList(vector <Account>& accounts, string directory)
 {
 	ExcelFstream file;
-	file.open(path, ios::in);
+	file.open(directory, ios::in);
 
 	vector <vector <string>> container;
 	file.readExcelString(container);

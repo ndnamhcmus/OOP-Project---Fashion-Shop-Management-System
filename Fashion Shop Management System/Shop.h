@@ -69,8 +69,6 @@ public:		//		Constructor		//
 		openBillList();
 		openAccountList();
 		openStaffList();
-
-
 	}
 	
 	~Shop()
@@ -111,6 +109,7 @@ private:
 	void showSecurityList();
 
 	void showProductList();
+	void showProductListForStaff();
 
 	void showBillList();
 

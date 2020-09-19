@@ -53,27 +53,32 @@ void Menu::showProductManagementMenu()
 {
 	int x = 55, y = 0;
 
-	_buffer << "1. Add new product\n";
+	_buffer << "1. Show product list\n";
 	gotoxy(x - _buffer.str().size() / 2, y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "2. Delete product\n";
+	_buffer << "2. Add new product\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "3. Delete product\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 	
-	_buffer << "3. Show Bill list\n";
+	_buffer << "4. Show Bill list\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "4. Delete bill\n";
+	_buffer << "5. Delete bill\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "5. Cancel\n";
+	_buffer << "6. Cancel\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");

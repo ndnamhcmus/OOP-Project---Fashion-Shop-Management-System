@@ -120,8 +120,8 @@ public:
 	virtual void showStaffInfo() = 0;
 
 	virtual string toString() = 0;
-	static void saveStaffList(vector<Staff*> staffs);
-	static void openStaffList(vector <Staff*>& staffs);
+	static void saveStaffList(vector<Staff*> staffs, string directory = "../Fashion Shop Management System/Data Base/Staff.csv");
+	static void openStaffList(vector <Staff*>& staffs, string directory = "../Fashion Shop Management System/Data Base/Staff.csv");
 
 	static bool login(vector <Staff*> staffs);
 

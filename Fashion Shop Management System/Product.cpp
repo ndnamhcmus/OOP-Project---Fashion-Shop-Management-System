@@ -23,7 +23,7 @@ string Product::toString() {
 	stringstream writer;
 	writer << _product_name << " - " << _product_id << " - " << _firm_name << " - " << _product_type << " - " << _product_color << " - "
 		<< _product_size << " - " << to_string(_product_cost) << " - " << to_string(_product_price) << " - " << to_string(_discount) << " - " << _stock_in_time.toString();
-	if (!_stock_out_time.getDay() && !_stock_out_time.getMonth() && !_stock_out_time.getYear()) {
+	if (!_stock_out_time.getDay() && !_stock_out_time.getMonth() && _stock_out_time.getYear() == 1) {
 		writer << " - " << "Products are not out of stock";
 	}
 	else
@@ -74,6 +74,11 @@ void Product::setProductInfo(vector<string> Tok) {
 	this->_stock_out_time = this->_stock_out_time.parse(Tok[10]);
 }
  
+void Product::showProductInfoForStaff()
+{
+	cout << toString();
+}
+
 void Product::showProductInfo() {
 	cout << this->show() << endl;
 }
@@ -82,11 +87,11 @@ void Product::setStockOutTime() {
 	this->_stock_out_time = Date();
 }
 
-void Product::openProductList(vector<Product>& products, string FileName) {
+void Product::openProductList(vector<Product>& products, string directory) {
 
 	vector<vector<string>> container;
 	ExcelFstream file;
-	file.open(FileName, ios::in);
+	file.open(directory, ios::in);
 	file.readExcelString(container);
 	file.close();
 
@@ -98,7 +103,7 @@ void Product::openProductList(vector<Product>& products, string FileName) {
 
 	if (!(products.size()))
 	{
-		throw ProductException(FileName + " is empty");
+		throw ProductException("Product list is empty");
 	}
 }
 
@@ -125,20 +130,20 @@ void Product::deleteProduct(vector<Product>& products, Product prd) {
 		cout << "Product not found" << endl;
 }
 
-void Product::addProductInFile(vector<Product>& products, Product prd, string FileName) {
+void Product::addProductInFile(vector<Product>& products, Product prd, string directory) {
 	vector<vector<string>> container;
 	ExcelFstream file;
 	Product::addProduct(products, prd);
-	file.open(FileName, ios::out | ios::app);
+	file.open(directory, ios::out | ios::app);
 	file.writeExcelString(prd.toString());
 	file.close();
 }
 
-void Product::deleteProductInFile(vector<Product>& products, Product prd, string FileName) {
+void Product::deleteProductInFile(vector<Product>& products, Product prd, string directory) {
 	vector<vector<string>> container;
 	ExcelFstream file;
 	Product::deleteProduct(products, prd);
-	file.open(FileName, ios::out);
+	file.open(directory, ios::out);
 	for (auto& products : products) {
 		file.writeExcelString(products.toString());
 	}
@@ -239,18 +244,18 @@ Product Product::search_by_ProductId(vector<Product> products, int index) {
 	return products[index];
 }
 
-void Product::saveProductList(vector<Product> products, string FileName) {
+void Product::saveProductList(vector<Product> products, string directory) {
 	ExcelFstream file;
-	file.open(FileName, ios::out);
+	file.open(directory, ios::out);
 	for (auto& products : products) {
 		file.writeExcelString(products.toString());
 	}
 	file.close();
 }
 
-vector<string> Product::getBestSelling(string FileName) {
+vector<string> Product::getBestSelling(string directory) {
 	vector<Product> productssold;
-	Product::openProductList(productssold, FileName);
+	Product::openProductList(productssold, directory);
 	vector<string> productname;
 	vector<string> bestselling;
 

@@ -141,11 +141,11 @@ Staff* Staff::search(vector<Staff*> staffs)
 	throw exception("Not found");
 }
 
-void Staff::saveStaffList(vector<Staff*> staffs)
+void Staff::saveStaffList(vector<Staff*> staffs, string directory)
 {
 	string buffer;
 	ExcelFstream file;
-	file.open("Staff.csv", ios::out);
+	file.open(directory, ios::out);
 
 
 	for (int i = 0; i < staffs.size(); i++)
@@ -156,10 +156,10 @@ void Staff::saveStaffList(vector<Staff*> staffs)
 	file.close();
 }
 
-void Staff::openStaffList(vector <Staff*>& staffs)
+void Staff::openStaffList(vector <Staff*>& staffs, string directory)
 {
 	ExcelFstream file;
-	file.open("Staff.csv", ios::in | ios::app);
+	file.open(directory, ios::in | ios::app);
 
 	vector <vector <string>> container;
 	file.readExcelString(container);
