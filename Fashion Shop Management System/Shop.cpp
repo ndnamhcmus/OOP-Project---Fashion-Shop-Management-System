@@ -47,7 +47,7 @@ void Shop::saveProductList()
 	if (_products_sold.size())
 	{
 		sortProductList(_products_sold);
-		Product::saveProductList(_products_sold);
+		Product::saveProductList(_products_sold, "Product Sold.csv");
 	}
 }
 
