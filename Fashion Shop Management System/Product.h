@@ -46,6 +46,7 @@ private:
 
 	void setProductInfo(vector<string> Tok);
 	string toString();
+	string show();
 
 public:
 	

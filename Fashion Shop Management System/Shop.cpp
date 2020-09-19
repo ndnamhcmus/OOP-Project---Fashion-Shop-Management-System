@@ -14,6 +14,7 @@ void Shop::openProductList()
 	try
 	{
 		Product::openProductList(_products);
+		Product::openProductList(_products_sold, "Products Sold.csv");
 	}
 	catch (const std::exception& mess)
 	{
@@ -92,7 +93,7 @@ void Shop::saveProductList()
 	if (_products_sold.size())
 	{
 		sortProductList(_products_sold);
-		Product::saveProductList(_products_sold);
+		Product::saveProductList(_products_sold, "Products Sold.csv");
 	}
 }
 
@@ -315,7 +316,6 @@ void Shop::Purchase()
 	showProductList();
 
 
-	vector <Product> products_sold;
 	Product product;
 
 	int index;
@@ -334,7 +334,7 @@ void Shop::Purchase()
 	{
 		if (Product::isValidInList(_products, id, index)) {
 			product = Product::search_by_ProductId(_products, index);
-			Product::buyProduct(_products, products_sold, product);
+			Product::buyProduct(_products, _products_sold, product);
 
 			cart.push_back(product);
 		}

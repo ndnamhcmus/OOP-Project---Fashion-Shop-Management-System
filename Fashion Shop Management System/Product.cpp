@@ -28,7 +28,18 @@ string Product::toString() {
 	}
 	else
 		writer << " - " << _stock_out_time.toString();
-	writer << endl;
+	return writer.str();
+}
+
+string Product::show() {
+	stringstream writer;
+	writer << _product_name << " - " << _product_id << " - " << _firm_name << " - " << _product_type << " - " << _product_color << " - "
+		<< _product_size << " - " << to_string(_product_price) << " - " << to_string(_discount) << " - " << _stock_in_time.toString();
+	if (!_stock_out_time.getDay() && !_stock_out_time.getMonth() && !_stock_out_time.getYear()) {
+		writer << " - " << "Products are not out of stock";
+	}
+	else
+		writer << " - " << _stock_out_time.toString();
 	return writer.str();
 }
 
@@ -64,12 +75,12 @@ void Product::setProductInfo(vector<string> Tok) {
 	this->_product_cost = stod(Tok[6]);
 	this->_product_price = stod(Tok[7]);
 	this->_discount = stod(Tok[8]);
-	this->_stock_in_time.parse(Tok[9]);
-	this->_stock_out_time.parse(Tok[10]);
+	this->_stock_in_time = this->_stock_in_time.parse(Tok[9]);
+	this->_stock_out_time = this->_stock_out_time.parse(Tok[10]);
 }
  
 void Product::showProductInfo() {
-	cout << this->toString() << endl;
+	cout << this->show() << endl;
 }
 
 void Product::setStockOutTime(Date date) {
@@ -93,7 +104,7 @@ void Product::openProductList(vector<Product>& products, string FileName) {
 
 	if (!(products.size()))
 	{
-		throw exception("Product list is empty");
+		throw ProductException(FileName + " is empty");
 	}
 }
 
@@ -141,6 +152,8 @@ void Product::deleteProductInFile(vector<Product>& products, Product prd, string
 }
 
 void Product::buyProduct(vector<Product>& products, vector<Product>& productssold, Product prd) {
+	Date();
+	prd.setStockOutTime(Date());
 	Product::addProduct(productssold, prd);
 	Product::deleteProduct(products, prd);
 }
@@ -267,8 +280,8 @@ vector<string> Product::getBestSelling(string FileName) {
 			}
 
 			if (i == productname.size() - 2 && count > max) {
-				for (int j = 0; j < bestselling.size(); j++)
-					bestselling.erase(bestselling.begin() + j);
+				while (bestselling.size() > 0)
+					bestselling.erase(bestselling.begin());
 				bestselling.push_back(productname[i]);
 			}
 		}
@@ -278,8 +291,8 @@ vector<string> Product::getBestSelling(string FileName) {
 			}
 			if (count > max) {
 				max = count;
-				for (int j = 0; j < bestselling.size(); j++)
-					bestselling.erase(bestselling.begin() + j);
+				while (bestselling.size() > 0)
+					bestselling.erase(bestselling.begin());
 				bestselling.push_back(productname[i]);
 			}
 			count = 1;
@@ -288,34 +301,3 @@ vector<string> Product::getBestSelling(string FileName) {
 		
 	return bestselling;
 }
-
-//int main() {
-//	vector<Product> products;
-//	vector<Product> productssold;
-//
-//	Product::setProductsInfo(products, "Product.csv");
-//	Product::setProductsInfo(productssold, "Product sold.csv");
-//	
-//	////////////////////////// Buy a product ///////////////////////
-//	Product prd;
-//	string id;
-//	int index;
-//	if (Product::isValidInList(products, id, index)) {
-//		prd = Product::search_by_ProductId(products, index);
-//		Product::buyProduct(products, productssold, prd);
-//		cout << "Product has been purchased" << endl;
-//	}
-//	else
-//		cout << "The product is out of stock" << endl;
-//	/////////////////////////////////////////////////////////////////
-//
-//	////////////////////////// Add a product ///////////////////////
-//	Product prd1;
-//	prd1.set();
-//	Product::addProduct(products, prd1);
-//	/////////////////////////////////////////////////////////////////
-//
-//
-//
-//
-//}
