@@ -259,7 +259,7 @@ void Shop::Purchase()
 	showProductList();
 
 
-	vector <Product> products_sold;
+	//vector <Product> products_sold;
 	Product product;
 
 	int index;
@@ -278,7 +278,7 @@ void Shop::Purchase()
 	{
 		if (Product::isValidInList(_products, id, index)) {
 			product = Product::search_by_ProductId(_products, index);
-			Product::buyProduct(_products, products_sold, product);
+			Product::buyProduct(_products, _products_sold, product);
 
 			cart.push_back(product);
 		}
