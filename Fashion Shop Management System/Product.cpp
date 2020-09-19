@@ -23,7 +23,7 @@ string Product::toString() {
 	stringstream writer;
 	writer << _product_name << " - " << _product_id << " - " << _firm_name << " - " << _product_type << " - " << _product_color << " - "
 		<< _product_size << " - " << to_string(_product_cost) << " - " << to_string(_product_price) << " - " << to_string(_discount) << " - " << _stock_in_time.toString();
-	if (!_stock_out_time.getDay() && !_stock_out_time.getMonth() && _stock_out_time.getYear() == 1) {
+	if (!_stock_out_time.getDay() && !_stock_out_time.getMonth() && !_stock_out_time.getYear()) {
 		writer << " - " << "Products are not out of stock";
 	}
 	else
@@ -80,7 +80,7 @@ void Product::showProductInfoForStaff()
 }
 
 void Product::showProductInfo() {
-	cout << this->show() << endl;
+	cout << this->show();
 }
 
 void Product::setStockOutTime() {
@@ -112,6 +112,7 @@ void Product::showProductsInfo(vector<Product> products) {
 	for (int i = 0; i < products.size(); i++) {
 		cout << i + 1 << ": ";
 		products[i].showProductInfo();
+		cout << endl << endl;
 	}
 }
 

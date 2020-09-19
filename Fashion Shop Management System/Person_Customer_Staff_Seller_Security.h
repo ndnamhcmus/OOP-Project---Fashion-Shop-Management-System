@@ -8,9 +8,15 @@
 #include <vector>
 #include <exception>
 
+
 #include <Date.h>
-#include <FakeAddress.h>
 #include <ExcelFstream.h>
+#include <Tokenizer.h>
+#include <FakeAddress.h>
+#include <FakeAddress.h>
+#include <FakeName.h>
+#include <FakeBirthday.h>
+#include <FakeVnTel.h>
 
 using namespace std;
 
@@ -114,17 +120,22 @@ public:
 
 	virtual void setNewStaff();
 
-	virtual void setStaffInfo(vector<string> Tok) = 0;
 	string getStaffID();
-	static Staff* search(vector<Staff*>staffs);
-	virtual void showStaffInfo() = 0;
+	void setLastID(vector <Staff*> staffs);
 
+	virtual void setStaffInfo(vector<string> Tok) = 0;
+	virtual double getSalary() = 0;
+	virtual void showStaffInfo() = 0;
 	virtual string toString() = 0;
+
 	static void saveStaffList(vector<Staff*> staffs, string directory = "../Fashion Shop Management System/Data Base/Staff.csv");
 	static void openStaffList(vector <Staff*>& staffs, string directory = "../Fashion Shop Management System/Data Base/Staff.csv");
 
 	static bool login(vector <Staff*> staffs);
-	void sort(vector <Staff*>& staffs);
+	static void sort(vector <Staff*>& staffs, string sort_by);
+	static Staff* search(vector<Staff*>staffs);
+	void deleteStaff(vector <Staff*>& staffs);
+
 
 private:
 
@@ -133,7 +144,10 @@ private:
 
 public:
 
-	void setLastID(vector <Staff*> staffs);
+	bool operator= (const Staff*& staff);
+
+public:
+
 
 	////  Friend //
 
@@ -212,14 +226,16 @@ public:
 	void setGoodsSale(int goodsale = 0);
 	void setRealSalary();
 	void setStaffInfo(vector<string> Tok);
+
 	double getSalary();
 	double getCommission();
+	int getGoodsSale();
 
 	void addSeller(vector<Staff*>& staff, Staff* sell);
 
 	void showStaffInfo();
 
-	void bestSellerOfMonth();
+	static void bestSellerOfMonth(vector <Staff*> staffs);
 
 
 	//// FRIEND ////

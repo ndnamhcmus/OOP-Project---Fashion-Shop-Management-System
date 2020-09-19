@@ -62,13 +62,14 @@ public:
 
 	void showAccountInfo();
 
-	static void saveAccountList(vector<Account>accounts);
 
 	void deleteAccount(vector<Account>& acc, string account_id);
 
 	//string modifyAccount();
 
 	static void openAccountList(vector <Account>& accounts, string directory = "../Fashion Shop Management System/Data Base/Account.csv");
+
+	static void saveAccountList(vector<Account>accounts, string directory = "../Fashion Shop Management System/Data Base/Account.csv");
 
 	string toString();
 

@@ -8,8 +8,6 @@
 
 void Shop::openProductList()
 {
-
-
 	try
 	{
 		Product::openProductList(_products);
@@ -92,7 +90,7 @@ void Shop::saveProductList()
 	if (_products_sold.size())
 	{
 		sortProductList(_products_sold);
-		Product::saveProductList(_products_sold, "Products Sold.csv");
+		Product::saveProductList(_products_sold, "../Fashion Shop Management System/Data Base/Product Sold.csv");
 	}
 }
 
@@ -118,6 +116,7 @@ void Shop::saveStaffList()
 {
 	if (_staffs.size())
 	{
+		sortStaffList();
 		Staff::saveStaffList(_staffs);
 	}
 }
@@ -148,6 +147,7 @@ void Shop::sortAccountList(string sort_by)
 
 void Shop::sortStaffList(string sort_by)
 {
+	Staff::sort(_staffs, sort_by);
 }
 
 
@@ -187,11 +187,11 @@ void Shop::showProductListForStaff()
 
 	Product::sort(_products, sort_by);
 	cout << "PRODUCT LIST\n";
-	cout << "Product name - Product ID - Firm name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl;
+	cout << "Product name - Product ID - Firm name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl << endl;
 	for (int i = 0; i < _products.size(); i++)
 	{
 		_products[i].showProductInfoForStaff();
-		cout << endl;
+		cout << endl << endl;
 	}
 }
 
@@ -205,34 +205,39 @@ void Shop::showBillList()
 
 void Shop::showStaffList()
 {
+	sortStaffList();
+	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tStaff ID\t-\tBase Salary\t-\tGoods Sale\t-\tSalary\n\n";
 	for (int i = 0; i< _staffs.size(); i++)
 	{
 		_staffs[i]->showStaffInfo();
-		cout << endl;
+		cout << endl << endl;
 	}
 }
 
 void Shop::showSellerList()
 {
-	cout << "Name\tDate of Birth\tPhone Number\tAddress\tStaff ID\tBase Salary\tGoods Sale\tSalary\n";
+	sortStaffList();
+	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tStaff ID\t-\tBase Salary\t-\tGoods Sale\t-\tSalary\n\n";
 	for (int i = 0; i < _staffs.size(); i++)
 	{
 		if (dynamic_cast<Seller*> (_staffs[i]))
 		{
 			_staffs[i]->showStaffInfo();
-			cout << endl;
+			cout << endl << endl;
 		}
 	}
 }
 
 void Shop::showSecurityList()
 {
+	sortStaffList();
+	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tID\t-\tSalary\n\n";
 	for (int i = 0; i < _staffs.size(); i++)
 	{
 		if (dynamic_cast<Security*> (_staffs[i]))
 		{
 			_staffs[i]->showStaffInfo();
-			cout << endl;
+			cout << endl << endl;
 		}
 	}
 }
@@ -244,6 +249,8 @@ void Shop::showSecurityList()
 /// <summary>
 ///			SWITCH\CASE			///
 /// </summary>
+
+
 void Shop::Start()
 {
 	bool is_continue = true;
@@ -373,7 +380,7 @@ void Shop::Purchase()
 	for (int i = 0; i < cart.size(); i++)
 	{
 		cart[i].showProductInfo();
-		cout << endl;
+		cout << endl << endl;
 	}
 
 	string order;
@@ -385,8 +392,45 @@ void Shop::Purchase()
 	}
 	else if (order == "no" || order == "No")
 	{
+		for (int i = 0; i < cart.size(); i++)
+		{
+			_products.push_back(cart[i]);
+			_products_sold.pop_back();
+		}
 		return;
 	}
+
+
+	Seller* seller = nullptr;
+	bool is_found = false;
+	do
+	{
+		try
+		{
+			seller = dynamic_cast <Seller*> (seller->search(_staffs));
+			if (seller)
+			{
+				is_found = true;
+			}
+		}
+		catch (const std::exception& mess)
+		{
+			cout << mess.what() << endl;
+			if (!(strcmp(mess.what(), "Cancel!!!")))
+			{
+				for (int i = 0; i < cart.size(); i++)
+				{
+					_products.push_back(cart[i]);
+					_products_sold.pop_back();
+				}
+				return;
+			}
+			is_found = false;
+		}
+	} while (!(is_found));
+	seller->setGoodsSale(cart.size());
+	seller->setCommission();
+	updateList(_staffs, seller);
 
 
 	long long int new_id = stoll(Bill::getLastBillID(_bills)) + 1;
@@ -626,6 +670,7 @@ void Shop::StaffInfoManagement()
 
 		case 3:
 
+
 			SellerInfoManagement();
 			break;
 
@@ -729,6 +774,8 @@ void Shop::SellerInfoManagement()
 
 		case 5:
 
+			cout << "SELLER OF MONTH\n";
+			Seller::bestSellerOfMonth(_staffs);
 			break;
 
 		case 6:
@@ -756,6 +803,14 @@ void Shop::SellerInfoManagement()
 
 		case 7:		///		Delete Staff information	///
 
+			showStaffList();
+
+
+			Staff* staff;
+			staff = staff->search(_staffs);
+			staff->deleteStaff(_staffs);
+
+
 			break;
 
 		case 8:
@@ -773,6 +828,7 @@ void Shop::SellerInfoManagement()
 		Menu::showSellerMenu();
 		cout << "Choose: ";
 		cin >> choice;
+		cin.ignore();
 	}
 }
 

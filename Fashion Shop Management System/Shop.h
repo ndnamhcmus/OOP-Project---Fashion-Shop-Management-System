@@ -25,6 +25,18 @@ private:	//		List		//
 
 private:
 
+	void updateList(vector <Staff*>& list, Staff* element)
+	{
+		for (int i = 0; i < list.size(); i++)
+		{
+			if (list[i]->getStaffID() == element->getStaffID())
+			{
+				list[i] = element;
+				return;
+			}
+		}
+	}
+
 	template <class T>
 	void updateList(vector <T>& list, T element)
 	{
@@ -37,6 +49,8 @@ private:
 			}
 		}
 	}
+
+	
 
 	///		Add new element		///
 	template <class T>

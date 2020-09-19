@@ -2,7 +2,6 @@
 #include <Tokenizer.h>
 #include "Menu.h"
 #include<string>
-//int Seller::_goods_sale = 0;
 
 ////////      PERSON      ////////
 
@@ -93,9 +92,14 @@ void Staff::setStaff(string name, Date dob, string phone, Address add, string st
 void Staff::setNewStaff()
 {
 	cout << "Name - DD/MM/YYYY(Date of Birth) - Phone Number - Address - Base Salary\n";
-	cout << "PLEASE ENTER THE INFORMATION IN THE FORM ABOVE\n";
+	cout << "PLEASE ENTER THE INFORMATION AS FORM ABOVE\n";
+	stringstream buffer;
+	FakeVnTel tel;
+	buffer << FakeName::next().FullName_to_string() << " - " << FakeBirthday::next().toString() << " - " << tel.toString() << " - "
+		<< FakeHCMAddress::next().toString() << " - " << "5000000";
 	string line;
-	getline(cin, line);
+	//getline(cin, line);
+	line = buffer.str();
 	if (line == "cancel")
 	{
 		throw StaffException(line);
@@ -109,6 +113,10 @@ void Staff::setNewStaff()
 
 
 	setStaffInfo(Tok);
+
+
+	buffer.str("");
+	buffer.clear();
 }
 
 string Staff::getStaffID()
@@ -139,6 +147,17 @@ Staff* Staff::search(vector<Staff*> staffs)
 	}
 
 	throw exception("Not found");
+}
+
+void Staff::deleteStaff(vector<Staff*>& staffs)
+{
+	for (int i = 0; i < staffs.size(); i++)
+	{
+		if (this == staffs[i])
+		{
+			staffs.erase(staffs.begin() + i);
+		}
+	}
 }
 
 void Staff::saveStaffList(vector<Staff*> staffs, string directory)
@@ -240,16 +259,76 @@ string Staff::getNewID()
 	return to_string(stoi(last_ID) + 1);
 }
 
-void Staff:: sort(vector <Staff*>& staffs)
+bool Staff::operator=(const Staff*& staff)
 {
-	for (int i = 0; i < staffs.size()-1; i++)
+	if (this->_staff_id == staff->_staff_id)
 	{
-		if (staffs[i]->_staff_id > staffs[i + 1]->_staff_id)
+		return true;
+	}
+	return false;
+}
+
+void Staff::sort(vector <Staff*>& staffs, string sort_by)
+{
+	if (sort_by == "id")
+	{
+		for (int i = 0; i < staffs.size() - 1; i++)
 		{
-			Staff* a = staffs[i];
-			staffs[i] = staffs[i + 1];
-			staffs[i + 1] = a;
+			for (int j = i + 1; j < staffs.size(); j++)
+			{
+				if (staffs[i]->getStaffID() > staffs[j]->getStaffID())
+				{
+					swap(staffs[i], staffs[j]);
+				}
+			}
 		}
+
+		return;
+	}
+	else if (sort_by == "goods sale")
+	{
+		for (int i = 0; i < staffs.size() - 1; i++)
+		{
+			for (int j = i + 1; j < staffs.size(); j++)
+			{
+				if (dynamic_cast <Seller*> (staffs[i])->getGoodsSale() > dynamic_cast <Seller*> (staffs[j])->getGoodsSale())
+				{
+					swap(staffs[i], staffs[j]);
+				}
+			}
+		}
+
+		return;
+	}
+	else if (sort_by == "commission")
+	{
+		for (int i = 0; i < staffs.size() - 1; i++)
+		{
+			for (int j = i + 1; j < staffs.size(); j++)
+			{
+				if (dynamic_cast <Seller*> (staffs[i])->getCommission() > dynamic_cast <Seller*> (staffs[j])->getCommission())
+				{
+					swap(staffs[i], staffs[j]);
+				}
+			}
+		}
+
+		return;
+	}
+	else if (sort_by == "salary")
+	{
+		for (int i = 0; i < staffs.size() - 1; i++)
+		{
+			for (int j = i + 1; j < staffs.size(); j++)
+			{
+				if ((staffs[i])->getSalary() > staffs[j]->getSalary())
+				{
+					swap(staffs[i], staffs[j]);
+				}
+			}
+		}
+
+		return;
 	}
 }
 
@@ -346,7 +425,7 @@ void Seller:: setCommission()
 
 void Seller::setGoodsSale(int goodsale)
 {
-	_goods_sale = goodsale;
+	_goods_sale += goodsale;
 }
 
 void Seller:: setRealSalary()
@@ -362,6 +441,10 @@ double Seller::getSalary()
 double Seller:: getCommission()
 {
 	return _commission;
+}
+int Seller::getGoodsSale()
+{
+	return _goods_sale;
 }
 void Seller::addSeller(vector<Staff*>& staff, Staff* sell)
 {
@@ -413,37 +496,32 @@ void Seller::setNewStaff()
 	Staff::setNewStaff();
 }
 
-void Seller:: bestSellerOfMonth()
+void Seller::bestSellerOfMonth(vector <Staff*> staffs)
 {
-	ExcelFstream file;
-	file.open("Staff.csv", ios::in | ios::app);
-
-	vector <vector <string>> container;
-	file.readExcelString(container);
-
-	vector<Seller> seller;
-	for (int i = 0; i < container.size(); i++)
+	vector <Seller> sellers;
+	for (const auto& seller : staffs)
 	{
-		if (container[i].size() == 9)
+		if (dynamic_cast <Seller*> (seller))
 		{
-			Seller sel;
-			sel.setStaffInfo(container[i]);
-			seller.push_back(sel);
+			sellers.push_back(*(dynamic_cast <Seller*> (seller)));
 		}
 	}
+	
 
-	Seller best= seller[0];
-	for (int i = 0; i < seller.size(); i++)
+
+	Seller best = sellers[0];
+	for (int i = 1; i < sellers.size(); i++)
 	{
-		if (seller[i]._goods_sale > best._goods_sale)
-			best = seller[i];
+		if (sellers[i]._goods_sale > best._goods_sale)
+			best = sellers[i];
 	}
-	cout << "BEST SELLER OF MONTH" << endl;
-	best.showStaffInfo();
-	for (int i = 0; i < seller.size(); i++)
+	for (int i = 0; i < sellers.size(); i++)
 	{
-		if (seller[i]._goods_sale == best._goods_sale)
-			seller[i].showStaffInfo();
+		if (sellers[i]._goods_sale == best._goods_sale)
+		{
+			sellers[i].showStaffInfo();
+			cout << endl;
+		}
 	}
 
 }

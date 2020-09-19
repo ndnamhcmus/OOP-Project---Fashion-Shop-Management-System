@@ -264,11 +264,11 @@ void Account::openAccountList(vector <Account>& accounts, string directory)
 	}
 }
 
-void Account::saveAccountList(vector<Account>accounts)
+void Account::saveAccountList(vector<Account>accounts, string directory)
 {
 	string buffer;
 	ExcelFstream file;
-	file.open("Account.csv", ios::out);
+	file.open(directory, ios::out);
 
 	for (int i = 0; i < accounts.size(); i++)
 	{
