@@ -240,6 +240,30 @@ void Account::showAccountInfo()
 	cout << "Level: " << _membership_level.getLevel() << endl;
 }
 
+void Account::openAccountList(vector <Account>& accounts, string path)
+{
+	ExcelFstream file;
+	file.open(path, ios::in);
+
+	vector <vector <string>> container;
+	file.readExcelString(container);
+
+	for (int i = 0; i < container.size(); i++)
+	{
+		Account acc;
+		acc.setAccountInfo(container[i]);
+		accounts.push_back(acc);
+	}
+
+	file.close();
+
+
+	if (!(accounts.size()))
+	{
+		throw exception("Account list is empty");
+	}
+}
+
 void Account::saveAccountList(vector<Account>accounts)
 {
 	string buffer;
@@ -269,24 +293,6 @@ void Account::deleteAccount(vector<Account>&acc, string account_id)
 
 	return string();
 }*/
-
-void Account::openAccountList(vector <Account>& accounts, string path)
-{
-	ExcelFstream file;
-	file.open(path, ios::in);
-
-	vector <vector <string>> container;
-	file.readExcelString(container);
-
-	for (int i = 0; i < container.size(); i++)
-	{
-		Account acc;
-		acc.setAccountInfo(container[i]);
-		accounts.push_back(acc);
-	}
-
-	file.close();
-}
 
 string Account::toString()
 {

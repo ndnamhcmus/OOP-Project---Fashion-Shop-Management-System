@@ -1,5 +1,6 @@
 #include "Person_Customer_Staff_Seller_Security.h"
-#include"Tokenizer.h"
+#include <Tokenizer.h>
+#include "Menu.h"
 #include<string>
 //int Seller::_goods_sale = 0;
 
@@ -179,13 +180,32 @@ void Staff::openStaffList(vector <Staff*>& staffs)
 		}
 	}
 	file.close();
+
+
+	if (!(staffs.size()))
+	{
+		throw exception("Staff list is empty");
+	}
 }
 
 bool Staff::login(vector <Staff*> staffs)
 {
+	int x = 55, y = 0;
 	bool is_login = false;
+	stringstream buffer;
 	do
 	{
+		system("cls");
+
+
+		buffer.str("");
+		buffer.clear();
+
+
+		buffer << "LOGIN";
+		Menu::gotoxy(x - buffer.str().size() / 2, y);
+		cout << buffer.str() << endl;
+		
 		try
 		{
 			if (Staff::search(staffs))
@@ -204,6 +224,7 @@ bool Staff::login(vector <Staff*> staffs)
 			cout << mess.what() << endl;
 			is_login = false;
 		}
+		system("pause");
 	} while (!(is_login));
 	return is_login;
 }

@@ -101,6 +101,11 @@ void Product::openProductList(vector<Product>& products, string FileName) {
 		products.push_back(prd);
 	}
 
+
+	if (!(products.size()))
+	{
+		throw ProductException(FileName + " is empty");
+	}
 }
 
 void Product::showProductsInfo(vector<Product> products) {
