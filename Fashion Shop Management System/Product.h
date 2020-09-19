@@ -51,7 +51,7 @@ private:
 public:
 	
 	void set();
-	void setStockOutTime(Date date);
+	void setStockOutTime();
 
 public:
 
@@ -62,6 +62,7 @@ public:
 	static void deleteProductInFile(vector<Product>& products, Product prd, string FileName = "Product.csv");
 
 	static vector<string> getBestSelling(string FileName = "Product Sold.csv");
+	static void showBestSellingProduct();
 
 	void showProductInfo();
 	static void showProductsInfo(vector<Product> products);

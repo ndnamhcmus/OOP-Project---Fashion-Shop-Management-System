@@ -175,7 +175,7 @@ void Shop::showProductList()
 	Product::showProductsInfo(_products);
 }
 
-void Shop::showBillList()
+void Shop::showBillList()	
 {
 	for (int i = 0; i < _bills.size(); i++)
 	{

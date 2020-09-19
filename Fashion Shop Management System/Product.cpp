@@ -35,7 +35,7 @@ string Product::show() {
 	stringstream writer;
 	writer << _product_name << " - " << _product_id << " - " << _firm_name << " - " << _product_type << " - " << _product_color << " - "
 		<< _product_size << " - " << to_string(_product_price) << " - " << to_string(_discount) << " - " << _stock_in_time.toString();
-	if (!_stock_out_time.getDay() && !_stock_out_time.getMonth() && !_stock_out_time.getYear()) {
+	if (!_stock_out_time.getDay() && !_stock_out_time.getMonth() && _stock_out_time.getYear()) {
 		writer << " - " << "Products are not out of stock";
 	}
 	else
@@ -44,7 +44,7 @@ string Product::show() {
 }
 
 void Product::set() { 
-	cout << "Product name - Product ID - Firm name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time" << endl;
+	cout << "Product name - Product ID - Firm name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl;
 	cout << "Please enter the information in the form above" << endl;
 	string line;
 	getline(cin, line);
@@ -54,11 +54,6 @@ void Product::set() {
 	{
 		throw ProductException("Cancel!!!");
 	}
-
-
-	stringstream buffer;
-	buffer << line << " - 0/0/0";
-
 
 	auto Tok = Tokenizer::parse(line, " - ");
 	this->setProductInfo(Tok);
@@ -83,8 +78,8 @@ void Product::showProductInfo() {
 	cout << this->show() << endl;
 }
 
-void Product::setStockOutTime(Date date) {
-	_stock_cover_time = date;
+void Product::setStockOutTime() {
+	this->_stock_out_time = Date();
 }
 
 void Product::openProductList(vector<Product>& products, string FileName) {
@@ -101,7 +96,6 @@ void Product::openProductList(vector<Product>& products, string FileName) {
 		products.push_back(prd);
 	}
 
-
 	if (!(products.size()))
 	{
 		throw ProductException(FileName + " is empty");
@@ -109,7 +103,7 @@ void Product::openProductList(vector<Product>& products, string FileName) {
 }
 
 void Product::showProductsInfo(vector<Product> products) {
-	cout << "Product name - Product ID - Firm name - Product type - Product color - Product size - Product cost - Product price - Discount - Stock in time - Stock out time" << endl;
+	cout << "Product name - Product ID - Firm name - Product type - Product color - Product size - Product price - Discount - Stock in time - Stock out time" << endl;
 	for (int i = 0; i < products.size(); i++) {
 		cout << i + 1 << ": ";
 		products[i].showProductInfo();
@@ -152,8 +146,7 @@ void Product::deleteProductInFile(vector<Product>& products, Product prd, string
 }
 
 void Product::buyProduct(vector<Product>& products, vector<Product>& productssold, Product prd) {
-	Date();
-	prd.setStockOutTime(Date());
+	prd.setStockOutTime();
 	Product::addProduct(productssold, prd);
 	Product::deleteProduct(products, prd);
 }
@@ -300,4 +293,11 @@ vector<string> Product::getBestSelling(string FileName) {
 	}
 		
 	return bestselling;
+}
+
+void Product::showBestSellingProduct() {
+	vector<string> bestselling = Product::getBestSelling();
+	cout << "The best selling products are:" << endl;
+	for (int i = 0; i < bestselling.size(); i++)
+		cout << i + 1 << ": " << bestselling[i] << endl;
 }
