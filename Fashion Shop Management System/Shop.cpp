@@ -9,22 +9,68 @@
 
 void Shop::openProductList()
 {
-	Product::openProductList(_products);
+
+
+	try
+	{
+		Product::openProductList(_products);
+		Product::openProductList(_products_sold, "Products Sold.csv");
+	}
+	catch (const std::exception& mess)
+	{
+		Menu::gotoxy(55 - strlen(mess.what()) / 2, 0);
+		cout << mess.what() << endl;
+		system("pause");
+		system("cls");
+	}
 }
 
 void Shop::openBillList()
 {
-	Bill::openBillList(_bills);
+	try
+	{
+		Bill::openBillList(_bills);
+	}
+	catch (const std::exception& mess)
+	{
+		Menu::gotoxy(55 - strlen(mess.what()) / 2, 0);
+		cout << mess.what() << endl;
+		system("pause");
+		system("cls");
+	}
+	
 }
 
 void Shop::openAccountList()
 {
-	Account::openAccountList(_accounts);
+	
+	try
+	{
+		Account::openAccountList(_accounts);
+	}
+	catch (const std::exception& mess)
+	{
+		Menu::gotoxy(55 - strlen(mess.what()) / 2, 0);
+		cout << mess.what() << endl;
+		system("pause");
+		system("cls");
+	}
 }
 
 void Shop::openStaffList()
 {
-	Staff::openStaffList(_staffs);
+	try
+	{
+		Staff::openStaffList(_staffs);
+	}
+	catch (const std::exception& mess)
+	{
+		Menu::gotoxy(55 - strlen(mess.what()) / 2, 0);
+		cout << mess.what() << endl;
+		system("pause");
+		system("cls");
+	}
+	
 }
 
 
@@ -47,7 +93,7 @@ void Shop::saveProductList()
 	if (_products_sold.size())
 	{
 		sortProductList(_products_sold);
-		Product::saveProductList(_products_sold, "Product Sold.csv");
+		Product::saveProductList(_products_sold, "Products Sold.csv");
 	}
 }
 
@@ -194,7 +240,14 @@ void Shop::Start()
 		{
 		case 1:
 
-			Purchase();
+			try
+			{
+				Purchase();
+			}
+			catch (const std::exception& mess)
+			{
+				cout << mess.what() << endl;
+			}
 			break;
 
 		case 2:
@@ -254,12 +307,16 @@ void Shop::Start()
 void Shop::Purchase()
 {
 	system("cls");
+	if (!(_products.size()))
+	{
+		throw exception("Out of stock");
+	}
 
 
 	showProductList();
 
-
 	//vector <Product> products_sold;
+
 	Product product;
 
 	int index;
@@ -282,7 +339,7 @@ void Shop::Purchase()
 
 			cart.push_back(product);
 		}
-		else
+		else if (!i)
 		{
 			cout << "the product is out of stock" << endl;
 			return;
@@ -295,7 +352,6 @@ void Shop::Purchase()
 	account = AccountManagement();
 	Bill bill(to_string(new_id), account.getMemberShipLevel(), account.getMemberShip(), Date(), cart);
 	addToList(_bills, bill);
-	//_bills.push_back(bill);
 	bill.showBillInfo();
 
 
@@ -648,11 +704,14 @@ void Shop::SellerInfoManagement()
 			}
 
 			addToList(_staffs, seller);
-			//_staffs.push_back(seller);
 
 			break;
 
-		case 7:
+		case 7:		///		Delete Staff information	///
+
+			break;
+
+		case 8:
 
 			is_continue = false;
 			continue;
@@ -689,7 +748,7 @@ void Shop::SecurityInfoManagement()
 	{
 		switch (choice)
 		{
-		case 1:
+		case 1:		///		Show Staff information		///
 
 			showSecurityList();
 			break;
@@ -725,7 +784,7 @@ void Shop::SecurityInfoManagement()
 			cout << "Salary: " << dynamic_cast<Security*> (security)->getSalary() << endl;
 			break;
 
-		case 4:
+		case 4:		///		New Staff	///
 
 			security = new Security;
 			security->setLastID(_staffs);
@@ -747,11 +806,14 @@ void Shop::SecurityInfoManagement()
 
 
 			addToList(_staffs, security);
-			//_staffs.push_back(security);
 
 			break;
 
-		case 5:
+		case 5:		///		Delete Staff infomation
+
+			break;
+
+		case 6:
 
 			is_continue = false;
 			continue;

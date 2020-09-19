@@ -69,6 +69,8 @@ public:		//		Constructor		//
 		openBillList();
 		openAccountList();
 		openStaffList();
+
+
 	}
 	
 	~Shop()
