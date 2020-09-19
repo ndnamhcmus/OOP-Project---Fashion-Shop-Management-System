@@ -124,6 +124,7 @@ public:
 	static void openStaffList(vector <Staff*>& staffs, string directory = "../Fashion Shop Management System/Data Base/Staff.csv");
 
 	static bool login(vector <Staff*> staffs);
+	void sort(vector <Staff*>& staffs);
 
 private:
 
@@ -218,7 +219,7 @@ public:
 
 	void showStaffInfo();
 
-
+	void bestSellerOfMonth();
 
 
 	//// FRIEND ////

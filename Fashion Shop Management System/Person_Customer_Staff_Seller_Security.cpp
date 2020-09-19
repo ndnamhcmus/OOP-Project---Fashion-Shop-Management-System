@@ -240,6 +240,18 @@ string Staff::getNewID()
 	return to_string(stoi(last_ID) + 1);
 }
 
+void Staff:: sort(vector <Staff*>& staffs)
+{
+	for (int i = 0; i < staffs.size()-1; i++)
+	{
+		if (staffs[i]->_staff_id > staffs[i + 1]->_staff_id)
+		{
+			Staff* a = staffs[i];
+			staffs[i] = staffs[i + 1];
+			staffs[i + 1] = a;
+		}
+	}
+}
 
 
 
@@ -399,4 +411,39 @@ void Seller::parse(string line)
 void Seller::setNewStaff()
 {
 	Staff::setNewStaff();
+}
+
+void Seller:: bestSellerOfMonth()
+{
+	ExcelFstream file;
+	file.open("Staff.csv", ios::in | ios::app);
+
+	vector <vector <string>> container;
+	file.readExcelString(container);
+
+	vector<Seller> seller;
+	for (int i = 0; i < container.size(); i++)
+	{
+		if (container[i].size() == 9)
+		{
+			Seller sel;
+			sel.setStaffInfo(container[i]);
+			seller.push_back(sel);
+		}
+	}
+
+	Seller best= seller[0];
+	for (int i = 0; i < seller.size(); i++)
+	{
+		if (seller[i]._goods_sale > best._goods_sale)
+			best = seller[i];
+	}
+	cout << "BEST SELLER OF MONTH" << endl;
+	best.showStaffInfo();
+	for (int i = 0; i < seller.size(); i++)
+	{
+		if (seller[i]._goods_sale == best._goods_sale)
+			seller[i].showStaffInfo();
+	}
+
 }
