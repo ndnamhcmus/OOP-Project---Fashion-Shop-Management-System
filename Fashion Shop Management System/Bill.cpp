@@ -114,7 +114,7 @@ string Bill::toString()
 
 
 	total = total * (1 - MembershipLevel::getDiscount(_level));
-	w << "Total:" << to_string(total) << " - ";
+	w << "Total:" << to_string(total);
 
 	return w.str();
 }
@@ -209,4 +209,10 @@ void Bill::openBillList(vector <Bill>& bills, string path)
 		bills.push_back(bill);
 	}
 	file.close();
+
+
+	if (!(bills.size()))
+	{
+		throw exception("Bill list is empty");
+	}
 }

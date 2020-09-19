@@ -30,7 +30,7 @@ void Menu::showMenu()
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "4. Cancel\n";
+	_buffer << "4. Save and Exit\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
@@ -165,7 +165,12 @@ void Menu::showSellerMenu()
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "7. Cancel\n";
+	_buffer << "7. Delete Staff\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "8. Cancel\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
@@ -196,7 +201,12 @@ void Menu::showSecurityMenu()
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "5. Cancel\n";
+	_buffer << "5. Delete staff\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "6. Cancel\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");

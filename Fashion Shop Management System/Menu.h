@@ -14,10 +14,6 @@ class Menu
 
 public:
 
-	enum Color
-	{
-		RED = 12
-	};
 
 	static void gotoxy(SHORT x, SHORT y)
 	{
