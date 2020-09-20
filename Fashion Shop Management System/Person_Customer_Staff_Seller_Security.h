@@ -199,7 +199,7 @@ class Seller : public Staff
 private:
 
 	double _commission;		// tiền hoa hồng
-	int _goods_sale;		// doanh số bán hàng
+	int _sales;		// doanh số bán hàng
 	double _real_salary;
 
 public:
@@ -207,7 +207,7 @@ public:
 	Seller(string name = "", Date dob = Date(0, 0, 0), string phone = "", Address add = Address("", "", "", "", ""), string staff_id = "", double base_salary = 0,double commission=0, int goods_sale =0,double real_salary=0) : Staff(name, dob, phone, add, staff_id, base_salary)
 	{
 		_commission = commission;
-		_goods_sale = goods_sale;
+		_sales = goods_sale;
 		_real_salary = real_salary;
 	}
 
@@ -223,13 +223,17 @@ public:
 
 	void setSeller(string name, Date dob, string phone, Address add, string staff_id, double base_salary, double comission, int goodsale, double realsalary);
 	void setCommission();
-	void setGoodsSale(int goodsale = 0);
+	void setSales(int sales = 0);
 	void setRealSalary();
 	void setStaffInfo(vector<string> Tok);
 
 	double getSalary();
 	double getCommission();
-	int getGoodsSale();
+	int getSales();
+
+	void updateSales(const int& sales);
+
+public:
 
 	void addSeller(vector<Staff*>& staff, Staff* sell);
 

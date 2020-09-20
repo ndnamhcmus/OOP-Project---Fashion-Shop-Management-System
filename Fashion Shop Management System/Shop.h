@@ -123,6 +123,7 @@ private:
 	void showSecurityList();
 
 	void showProductList();
+	void showPurchaseHistory();
 	void showProductListForStaff();
 
 	void showBillList();

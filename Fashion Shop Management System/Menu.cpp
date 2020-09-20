@@ -78,7 +78,12 @@ void Menu::showProductManagementMenu()
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "6. Cancel\n";
+	_buffer << "6. Show purchase history\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "7. Exit\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
@@ -98,7 +103,7 @@ void Menu::showAccountMenu()
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "3. Cancel\n";
+	_buffer << "3. Exit\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
@@ -128,7 +133,7 @@ void Menu::showStaffMenu()
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "5. Cancel\n";
+	_buffer << "5. Exit\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
@@ -155,27 +160,32 @@ void Menu::showSellerMenu()
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "4. Show commission\n";
+	_buffer << "4. Show sales\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "5. Seller of the month\n";
+	_buffer << "5. Show commission\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "6. Add new Staff\n";
+	_buffer << "6. Seller of the month\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "7. Delete Staff\n";
+	_buffer << "7. Add new Staff\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "8. Cancel\n";
+	_buffer << "8. Delete Staff\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "9. Exit\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");
@@ -211,7 +221,7 @@ void Menu::showSecurityMenu()
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "6. Cancel\n";
+	_buffer << "6. Exit\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");

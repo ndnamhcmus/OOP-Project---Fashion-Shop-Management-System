@@ -110,25 +110,23 @@ void Product::openProductList(vector<Product>& products, string directory) {
 void Product::showProductsInfo(vector<Product> products) {
 	cout << "Product name - Product ID - Firm name - Product type - Product color - Product size - Product price - Discount - Stock in time - Stock out time" << endl;
 	for (int i = 0; i < products.size(); i++) {
-		cout << i + 1 << ": ";
+		cout << endl << i + 1 << ": ";
 		products[i].showProductInfo();
-		cout << endl << endl;
+		cout << endl;
 	}
 }
 
 void Product::addProduct(vector<Product>& products, Product prd) {
 	products.push_back(prd);
-	cout << "Product has been added successfully" << endl; 
 }
 
 void Product::deleteProduct(vector<Product>& products, Product prd) {
 	int index;
 	if (Product::isValidInList(products, prd.getProductId(), index)) {
 		products.erase(products.begin() + index);
-		cout << "Product deleted successfully" << endl;
 	}
 	else
-		cout << "Product not found" << endl;
+		throw exception("Product not found");
 }
 
 void Product::addProductInFile(vector<Product>& products, Product prd, string directory) {
@@ -238,6 +236,7 @@ bool Product::isValidInList(vector<Product> products, string search_by, int &ind
 			index = i;
 			return true;
 		}
+	throw exception("Product not found");
 	return false;
 }
 

@@ -291,7 +291,7 @@ void Staff::sort(vector <Staff*>& staffs, string sort_by)
 		{
 			for (int j = i + 1; j < staffs.size(); j++)
 			{
-				if (dynamic_cast <Seller*> (staffs[i])->getGoodsSale() > dynamic_cast <Seller*> (staffs[j])->getGoodsSale())
+				if (dynamic_cast <Seller*> (staffs[i])->getSales() > dynamic_cast <Seller*> (staffs[j])->getSales())
 				{
 					swap(staffs[i], staffs[j]);
 				}
@@ -398,21 +398,21 @@ void Security::showStaffInfo()
 
 
 ///////////////////// SELLER ///////////
-void Seller:: setSeller(string name, Date dob, string phone, Address add, string staff_id, double base_salary, double comission, int goodsale, double realsalary)
+void Seller:: setSeller(string name, Date dob, string phone, Address add, string staff_id, double base_salary, double comission, int sales, double realsalary)
 {
 	Staff::setStaff(name, dob, phone, add, staff_id, base_salary);
 	_commission = comission;
-	_goods_sale = goodsale;
+	_sales = sales;
 	_real_salary = realsalary;
 }
 
 void Seller:: setCommission()
 {
-	if (_goods_sale < 10)
+	if (_sales < 10)
 	{
 		_commission = 0;
 	}
-	else if (_goods_sale >= 10 && _goods_sale <20 )
+	else if (_sales >= 10 && _sales <20 )
 	{
 		_commission = _base_salary / 10;
 	}
@@ -423,9 +423,9 @@ void Seller:: setCommission()
 
 }
 
-void Seller::setGoodsSale(int goodsale)
+void Seller::setSales(int sales)
 {
-	_goods_sale += goodsale;
+	_sales = sales;
 }
 
 void Seller:: setRealSalary()
@@ -442,10 +442,16 @@ double Seller:: getCommission()
 {
 	return _commission;
 }
-int Seller::getGoodsSale()
+int Seller::getSales()
 {
-	return _goods_sale;
+	return _sales;
 }
+
+void Seller::updateSales(const int& sales)
+{
+	_sales += sales;
+}
+
 void Seller::addSeller(vector<Staff*>& staff, Staff* sell)
 {
 	staff.push_back(sell);
@@ -454,7 +460,7 @@ void Seller::addSeller(vector<Staff*>& staff, Staff* sell)
 string Seller::toString()
 {
 	string sell;
-	sell += _name + " - " + _date_of_birth.toString() + " - " + _phone_number + " - " + _address.toString() + " - " + _staff_id + " - " + to_string(_base_salary) + " - " + to_string(_goods_sale) +" - "+ to_string(_real_salary);
+	sell += _name + " - " + _date_of_birth.toString() + " - " + _phone_number + " - " + _address.toString() + " - " + _staff_id + " - " + to_string(_base_salary) + " - " + to_string(_sales) +" - "+ to_string(_real_salary);
 	return sell;
 }
 
@@ -475,7 +481,7 @@ void Seller::setStaffInfo(vector<string> Tok)
 	_address = Address(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4]);
 	_staff_id = Tok[4];
 	_base_salary = stod(Tok[5]);
-	_goods_sale = stoi(Tok[6]);
+	_sales = stoi(Tok[6]);
 	_real_salary = stod(Tok[7]);
 }
 void Seller::showStaffInfo()
@@ -512,12 +518,12 @@ void Seller::bestSellerOfMonth(vector <Staff*> staffs)
 	Seller best = sellers[0];
 	for (int i = 1; i < sellers.size(); i++)
 	{
-		if (sellers[i]._goods_sale > best._goods_sale)
+		if (sellers[i]._sales > best._sales)
 			best = sellers[i];
 	}
 	for (int i = 0; i < sellers.size(); i++)
 	{
-		if (sellers[i]._goods_sale == best._goods_sale)
+		if (sellers[i]._sales == best._sales)
 		{
 			sellers[i].showStaffInfo();
 			cout << endl;
