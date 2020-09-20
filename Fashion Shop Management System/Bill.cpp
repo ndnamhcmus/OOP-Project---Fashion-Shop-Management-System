@@ -1,7 +1,7 @@
 #include "Bill.h"
 #include"Tokenizer.h"
 
-Bill::Bill(string id, string level, MembershipLevel membership, Date d, vector<Product> p)
+Bill::Bill(string id, string level, MembershipLevel membership, Date d, vector<Product> p, string account_id)
 {
 	_bill_id = id;
 	_curr_date = d;
@@ -10,6 +10,7 @@ Bill::Bill(string id, string level, MembershipLevel membership, Date d, vector<P
 	_cart.resize(p.size());
 	for (int i = 0; i < p.size(); i++)
 		_cart[i] = p[i];
+	_account_id = account_id;
 }
 
 void Bill::sort(vector<Bill> bills, string sort_by)
@@ -30,7 +31,7 @@ Bill Bill::search(vector<Bill> bills, string search_by)
 	for (int i = 0; i < bills.size(); i++)
 		if (bills[i]._bill_id == search_by)
 			return bills[i];
-	return bills[0];
+	throw exception("Not found");
 }
 
 void Bill::setBillInfo(vector<string>Tok)
@@ -42,11 +43,12 @@ void Bill::setBillInfo(vector<string>Tok)
 	_curr_date = Date(stoi(tokens[0]), stoi(tokens[1]), stoi(tokens[2]));
 
 
-	for (int i = 2; i < Tok.size() - 1; i = i + 2)
+	for (int i = 2; i < Tok.size() - 2; i = i + 2)
 	{
 		_cart.push_back(Product(Tok[i], "", "", "", "", "", 0.0, stod(Tok[i + 1]), 0.0, Date(), Date(), Date()));
 		continue;
 	}
+	_account_id = Tok[Tok.size() - 1];
 }
 
 Bill Bill::getBill()
@@ -77,14 +79,15 @@ int Bill::isFoundInList(vector<Bill>& bills, string ID)
 	return 0;
 }
 
-void Bill::deleteBill(vector<Bill>& bills, Bill bill)
+void Bill::deleteBill(vector<Bill>& bills)
 {
 	int index;
-	if (isFoundInList(bills, bill.getID())) {
-		bills.erase(bills.begin() + isFoundInList(bills, bill.getID()));
+	if (isFoundInList(bills, _bill_id)) {
+		bills.erase(bills.begin() + isFoundInList(bills, _bill_id));
+		throw exception("Deleted successfully");
 	}
 	else
-		throw BillException("Not found");
+		throw BillException("Deleted failed");
 }
 
 string Bill::getID()
@@ -92,9 +95,19 @@ string Bill::getID()
 	return _bill_id;
 }
 
+string Bill::getAccountID()
+{
+	return _account_id;
+}
+
 Date Bill::getDate()
 {
 	return _curr_date;
+}
+
+void Bill::setMembershipLevel(string level)
+{
+	_level = level;
 }
 
 string Bill::toString()
@@ -107,14 +120,14 @@ string Bill::toString()
 	w << _bill_id << " - " << _curr_date.toString() << " - ";
 	for (int i = 0; i < _cart.size(); i++) {
 		w << _cart[i].getProductName() << " - " 
-		  << to_string(_cart[i].getProductPrice()) << " - ";
+		  << to_string(_cart[i].getProductPrice() * (1 - _cart[i].getDiscount())) << " - ";
 
 		total += _cart[i].getProductPrice() * (1 - _cart[i].getDiscount());
 	}
 
 
 	total = total * (1 - MembershipLevel::getDiscount(_level));
-	w << "Total:" << to_string(total);
+	w << "Total:" << to_string(total) << " - " << _account_id;
 
 	return w.str();
 }
@@ -205,7 +218,14 @@ void Bill::openBillList(vector <Bill>& bills, string path)
 	for (int i = 0; i < container.size(); i++)
 	{
 		Bill bill;
-		bill.setBillInfo(container[i]);
+		try
+		{
+			bill.setBillInfo(container[i]);
+		}
+		catch (const std::exception&)
+		{
+			throw exception("Something happened while Bill was setting up information");
+		}
 		bills.push_back(bill);
 	}
 	file.close();

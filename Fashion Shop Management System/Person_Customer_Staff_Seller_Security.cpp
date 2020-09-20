@@ -93,30 +93,55 @@ void Staff::setNewStaff()
 {
 	cout << "Name - DD/MM/YYYY(Date of Birth) - Phone Number - Address - Base Salary\n";
 	cout << "PLEASE ENTER THE INFORMATION AS FORM ABOVE\n";
-	stringstream buffer;
+
+	string line;
+	do
+	{
+		getline(cin, line);
+	} while (line == "");
+
+
+	/// <summary>
+	///			Fake test		///
+	/// </summary>
+	/*stringstream buffer;
 	FakeVnTel tel;
 	buffer << FakeName::next().FullName_to_string() << " - " << FakeBirthday::next().toString() << " - " << tel.toString() << " - "
 		<< FakeHCMAddress::next().toString() << " - " << "5000000";
-	string line;
-	//getline(cin, line);
-	line = buffer.str();
+	line = buffer.str();*/
+
+
 	if (line == "cancel")
 	{
 		throw StaffException(line);
 	}
 
 
+	
 	auto Tok = Tokenizer::parse(line, " - ");
+	if (Tok.size() != 5)
+	{
+		throw exception("Invalid, try again");
+	}
+
+
 	Tok.insert(Tok.begin() + 4, getNewID());
 	Tok.push_back("0");
 	Tok.push_back(Tok[5]);
 
 
-	setStaffInfo(Tok);
+	try
+	{
+		setStaffInfo(Tok);
+	}
+	catch (const std::exception&)
+	{
+		throw exception("Something wrong, try again");
+	}
 
 
-	buffer.str("");
-	buffer.clear();
+	/*buffer.str("");
+	buffer.clear();*/
 }
 
 string Staff::getStaffID()
@@ -188,13 +213,27 @@ void Staff::openStaffList(vector <Staff*>& staffs, string directory)
 		if (container[i].size() == 6)
 		{
 			Staff* staff= new Security;
-			staff->setStaffInfo(container[i]);
+			try
+			{
+				staff->setStaffInfo(container[i]);
+			}
+			catch (const std::exception&)
+			{
+				throw exception("Something happened while Staff was setting up information");
+			}
 			staffs.push_back(staff);
 		}
 		else
 		{
 			Staff* staff = new Seller;
-			staff->setStaffInfo(container[i]);
+			try
+			{
+				staff->setStaffInfo(container[i]);
+			}
+			catch (const std::exception&)
+			{
+				throw exception("Something happened while Staff was setting up information");
+			}
 			staffs.push_back(staff);
 		}
 	}
@@ -259,7 +298,7 @@ string Staff::getNewID()
 	return to_string(stoi(last_ID) + 1);
 }
 
-bool Staff::operator=(const Staff*& staff)
+bool Staff::operator==(const Staff*& staff)
 {
 	if (this->_staff_id == staff->_staff_id)
 	{

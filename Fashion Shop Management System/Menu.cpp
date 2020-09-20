@@ -30,7 +30,12 @@ void Menu::showMenu()
 	cout << _buffer.str();
 	_buffer.str("");
 
-	_buffer << "4. Save and Exit\n";
+	_buffer << "4. Account information\n";
+	gotoxy(x - _buffer.str().size() / 2, ++y);
+	cout << _buffer.str();
+	_buffer.str("");
+
+	_buffer << "5. Save and Exit\n";
 	gotoxy(x - _buffer.str().size() / 2, ++y);
 	cout << _buffer.str();
 	_buffer.str("");

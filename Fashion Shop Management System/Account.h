@@ -24,7 +24,14 @@ private:
 	MembershipLevel _membership_level;
 
 public:
+
 	Account(string account_id = "", Customer customer = Customer() ,MembershipLevel membership_level = MembershipLevel());
+
+public:
+
+	void addBill(Bill bill);
+
+public:
 
 	static void sort(vector <Account> accounts, string sort_by);
 
@@ -46,7 +53,7 @@ public:
 
 	string getID();
 
-	string getMemberShipLevel();
+	string getMembershipLevel();
 
 	MembershipLevel getMemberShip();
 
@@ -62,14 +69,17 @@ public:
 
 	void showAccountInfo();
 
-
 	void deleteAccount(vector<Account>& acc, string account_id);
 
 	//string modifyAccount();
 
+public:
+
 	static void openAccountList(vector <Account>& accounts, string directory = "../Fashion Shop Management System/Data Base/Account.csv");
 
 	static void saveAccountList(vector<Account>accounts, string directory = "../Fashion Shop Management System/Data Base/Account.csv");
+
+private:
 
 	string toString();
 

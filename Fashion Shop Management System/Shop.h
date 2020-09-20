@@ -23,6 +23,27 @@ private:	//		List		//
 	vector <Account> _accounts;
 	vector <Staff*> _staffs;
 
+public:		//		Constructor		//
+
+	Shop()
+	{
+		openProductList();
+		openBillList();
+		openAccountList();
+		openStaffList();
+	}
+	
+	~Shop()
+	{
+		saveProductList();
+		saveBillList();
+		saveAccountList();
+		saveStaffList();
+
+
+		releaseStaffPtr();
+	}
+
 private:
 
 	void updateList(vector <Staff*>& list, Staff* element)
@@ -50,7 +71,7 @@ private:
 		}
 	}
 
-	
+
 
 	///		Add new element		///
 	template <class T>
@@ -73,27 +94,6 @@ private:
 				}
 			}
 		}
-	}
-
-public:		//		Constructor		//
-
-	Shop()
-	{
-		openProductList();
-		openBillList();
-		openAccountList();
-		openStaffList();
-	}
-	
-	~Shop()
-	{
-		saveProductList();
-		saveBillList();
-		saveAccountList();
-		saveStaffList();
-
-
-		releaseStaffPtr();
 	}
 
 private:

@@ -97,7 +97,14 @@ void Product::openProductList(vector<Product>& products, string directory) {
 
 	for (int i = 0; i < container.size(); i++) {
 		Product prd;
-		prd.setProductInfo(container[i]);
+		try
+		{
+			prd.setProductInfo(container[i]);
+		}
+		catch (const std::exception& mess)
+		{
+			throw exception("Something happened while Product was setting up infomation");
+		}
 		products.push_back(prd);
 	}
 

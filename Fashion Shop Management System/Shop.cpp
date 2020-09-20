@@ -40,7 +40,6 @@ void Shop::openBillList()
 
 void Shop::openAccountList()
 {
-	
 	try
 	{
 		Account::openAccountList(_accounts);
@@ -52,8 +51,19 @@ void Shop::openAccountList()
 		system("pause");
 		system("cls");
 	}
-}
 
+
+	for (auto& account : _accounts)
+	{
+		for (auto& bill : _bills)
+		{
+			if (account.getID() == bill.getAccountID())
+			{
+				account.addBill(bill);
+			}
+		}
+	}
+}
 void Shop::openStaffList()
 {
 	try
@@ -260,6 +270,10 @@ void Shop::Start()
 {
 	bool is_continue = true;
 	int choice;
+	string ID;
+
+
+	Account account;
 
 
 	Menu::showMenu();
@@ -310,9 +324,20 @@ void Shop::Start()
 
 		case 4:
 
+			
+			account = AccountManagement();
+			account.showAccountInfo();
+			cout << endl;
+			cout << "BILL LIST" << endl << endl;
+			account.showBillList();
+
+
+			break;
+
+		case 5:
+
 			is_continue = false;
 			continue;
-
 		}
 
 
@@ -468,7 +493,7 @@ void Shop::Purchase()
 	long long int new_id = stoll(Bill::getLastBillID(_bills)) + 1;
 	Account account;
 	account = AccountManagement();
-	Bill bill(to_string(new_id), account.getMemberShipLevel(), account.getMemberShip(), Date(), cart);
+	Bill bill(to_string(new_id), account.getMembershipLevel(), account.getMemberShip(), Date(), cart, account.getID());
 	addToList(_bills, bill);
 	bill.showBillInfo();
 
@@ -556,6 +581,8 @@ void Shop::ProductManagement()
 
 
 	Product new_product;
+	Bill bill;
+
 	string ID;
 	string delete_amount;
 	
@@ -661,15 +688,32 @@ void Shop::ProductManagement()
 
 		case 5:
 
-			while (Bill::isFoundInList(_bills, ID))
+			showBillList();
+
+			cout << "Enter your Bill ID: ";
+			getline(cin, ID);
+
+
+			do
 			{
-				if (!Bill::isFoundInList(_bills, ID))
+				try
 				{
-					cout << "Not found\n";
+					bill = bill.search(_bills, ID);
+				}
+				catch (const std::exception& mess)
+				{
+					cout << mess.what() << endl;
 					break;
 				}
-				Bill::deleteBill(_bills, Bill::search(_bills, ID));
-			}
+				try
+				{
+					bill.deleteBill(_bills);
+				}
+				catch (const std::exception& mess)
+				{
+					cout << mess.what() << endl;
+				}
+			} while (Bill::isFoundInList(_bills, ID));
 
 			break;
 
@@ -1036,5 +1080,6 @@ void Shop::SecurityInfoManagement()
 		Menu::showSecurityMenu();
 		cout << "Choose: ";
 		cin >> choice;
+		cin.ignore();
 	}
 }

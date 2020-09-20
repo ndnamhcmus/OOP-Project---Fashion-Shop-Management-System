@@ -18,8 +18,12 @@ private:
 
 	string _bill_id;
 	string _level;
+	string _account_id;
+
 	MembershipLevel _membership;
+
 	Date _curr_date;
+
 	vector<Product> _cart;
 
 public:
@@ -29,7 +33,7 @@ public:
 
 	}
 
-	Bill(string id, string level, MembershipLevel membership, Date d, vector<Product> p);
+	Bill(string id, string level, MembershipLevel membership, Date d, vector<Product> p, string account_id);
 
 private:
 
@@ -53,7 +57,7 @@ public:
 
 	static int isFoundInList(vector <Bill>& bills, string ID);
 
-	static void deleteBill(vector<Bill>& bills, Bill bill);
+	void deleteBill(vector<Bill>& bills);
 
 public:
 
@@ -61,7 +65,11 @@ public:
 
 	string getID();
 
+	string getAccountID();
+
 	Date getDate();
+
+	void setMembershipLevel(string level);
 
 	string toString();
 

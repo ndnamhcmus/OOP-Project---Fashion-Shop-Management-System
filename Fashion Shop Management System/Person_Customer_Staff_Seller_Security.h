@@ -144,7 +144,7 @@ private:
 
 public:
 
-	bool operator= (const Staff*& staff);
+	bool operator==(const Staff*& staff);
 
 public:
 

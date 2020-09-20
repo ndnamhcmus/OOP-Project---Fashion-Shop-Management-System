@@ -14,6 +14,11 @@ Account::Account(string account_id, Customer customer, MembershipLevel membershi
 	_membership_level = membership_level;
 }
 
+void Account::addBill(Bill bill)
+{
+	_bills.push_back(bill);
+}
+
 void Account::sort(vector<Account> accounts, string sort_by)
 {
 	if (sort_by == "id") {
@@ -35,9 +40,15 @@ void Account::sort(vector<Account> accounts, string sort_by)
 
 Account Account::search(vector<Account> accounts, string search_by)
 {
-		for (int i = 0; i < accounts.size(); i++)
-			if (accounts[i]._account_id == search_by)
-				return accounts[i];
+	if (search_by == "cancel")
+	{
+		throw exception("Cancel!!!");
+	}
+	for (int i = 0; i < accounts.size(); i++)
+		if (accounts[i]._account_id == search_by)
+			return accounts[i];
+
+	throw exception("Account not found");
 }
 
 void Account::setAccountInfo(vector<string>Tok)
@@ -139,7 +150,7 @@ string Account::getID()
 	return _account_id;
 }
 
-string Account::getMemberShipLevel()
+string Account::getMembershipLevel()
 {
 	return _membership_level.getLevel();
 }
@@ -222,7 +233,8 @@ Account Account::sign_up(vector<Account>&accounts)
 void Account::showBillList()
 {
 	for (int i = 0; i < _bills.size(); i++) {
-		cout << i + 1<<endl; 
+		cout << i + 1 << endl;
+		_bills[i].setMembershipLevel(getMembershipLevel());
 		_bills[i].showBillInfo();
 		cout << endl;
 	}
@@ -232,7 +244,7 @@ void Account::showAccountInfo()
 {
 	cout << "Account ID: " << _account_id << endl;
 
-	cout << "Customer ID\tDOB\tTel\tAddress\n";
+	cout << "Customer ID\tDate of Birth\tPhone Number\tAddress\n\n";
 	cout << _customer.toString() << endl;
 
 	cout << "Number of bill: " << _bills.size() << endl;
@@ -251,7 +263,15 @@ void Account::openAccountList(vector <Account>& accounts, string directory)
 	for (int i = 0; i < container.size(); i++)
 	{
 		Account acc;
-		acc.setAccountInfo(container[i]);
+		try
+		{
+			acc.setAccountInfo(container[i]);
+		}
+		catch (const std::exception&)
+		{
+			throw exception("Something happened while Account was setting up information");
+		}
+		
 		accounts.push_back(acc);
 	}
 
