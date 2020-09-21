@@ -149,7 +149,7 @@ string Staff::getStaffID()
 	return _staff_id;
 }
 
-Staff* Staff::search(vector<Staff*> staffs)
+Staff* Staff::search(vector<Staff*> staffs, string for_what)
 {
 	string ID;
 	cout << "Enter your Staff ID: ";
@@ -163,7 +163,7 @@ Staff* Staff::search(vector<Staff*> staffs)
 	{
 		if (Staff->getStaffID() == ID)
 		{
-			if (!(dynamic_cast<Seller*> (Staff)))
+			if (!(dynamic_cast<Seller*> (Staff)) && for_what != "delete security information")
 			{
 				throw StaffException("Not a Seller");
 			}
@@ -273,14 +273,12 @@ bool Staff::login(vector <Staff*> staffs)
 		}
 		catch (const exception& mess)
 		{
+			cout << mess.what() << endl;
+			is_login = false;
 			if (!(strcmp(mess.what(), "Cancel!!!")))
 			{
 				break;
 			}
-
-
-			cout << mess.what() << endl;
-			is_login = false;
 		}
 		system("pause");
 	} while (!(is_login));
@@ -445,7 +443,12 @@ void Seller:: setSeller(string name, Date dob, string phone, Address add, string
 	_real_salary = realsalary;
 }
 
-void Seller:: setCommission()
+void Seller::setBaseSalary(double base_salary)
+{
+	_base_salary = base_salary;
+}
+
+void Seller::setCommission()
 {
 	if (_sales < 10)
 	{
@@ -453,13 +456,19 @@ void Seller:: setCommission()
 	}
 	else if (_sales >= 10 && _sales <20 )
 	{
-		_commission = _base_salary / 10;
+		_commission = double(_base_salary) / 10;
 	}
 	else
 	{
-		_commission = _base_salary / 15;
+		_commission = double(_base_salary) / 15;
 	}
 
+}
+
+void Seller::updateSalary()
+{
+	setCommission();
+	_real_salary = _base_salary + _commission;
 }
 
 void Seller::setSales(int sales)
@@ -467,9 +476,9 @@ void Seller::setSales(int sales)
 	_sales = sales;
 }
 
-void Seller:: setRealSalary()
+void Seller::setRealSalary(double real_salary)
 {
-	_real_salary = _base_salary + _commission;
+	_real_salary = real_salary;
 }
 
 double Seller::getSalary()

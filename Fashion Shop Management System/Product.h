@@ -58,8 +58,8 @@ public:
 	static void openProductList(vector<Product>& products, string directory = "../Fashion Shop Management System/Data Base/Product.csv");
 	static void saveProductList(vector<Product> products, string directory = "../Fashion Shop Management System/Data Base/Product.csv");
 
-	static void addProductInFile(vector<Product>& products, Product prd, string directory = "../Fashion Shop Management System/Data Base/Product.csv");
-	static void deleteProductInFile(vector<Product>& products, Product prd, string directory = "../Fashion Shop Management System/Data Base/Product.csv");
+	void addProductInFile(vector<Product>& products, string directory = "../Fashion Shop Management System/Data Base/Product.csv");
+	void deleteProductInFile(vector<Product>& products, string directory = "../Fashion Shop Management System/Data Base/Product.csv");
 
 	static vector<string> getBestSelling(string directory = "../../Data Base/Product Sold.csv");
 	static void showBestSellingProduct();
@@ -69,12 +69,13 @@ public:
 	static void showProductsInfo(vector<Product> products);
 	static void sort(vector<Product>& products, string sort_by);
 
-	static void addProduct(vector<Product>& products, Product prd);
-	static void deleteProduct(vector<Product>& products, Product prd);
+	void addProduct(vector<Product>& products);
+	//static void addProduct(vector<Product>& products, Product prd);
+	void deleteProduct(vector<Product>& products);
 	static bool isValidInList(vector<Product> products, string search_by, int& index);
 
-	static void buyProduct(vector<Product>& products, vector<Product>& productssold, Product prd);
-	static Product search_by_ProductId(vector<Product> products, int index);
+	void buyProduct(vector<Product>& products, vector<Product>& productssold);
+	Product search_by_ProductId(vector<Product> products, int index);
 
 public:
 

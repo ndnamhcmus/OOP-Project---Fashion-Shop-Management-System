@@ -43,8 +43,7 @@ public:
 
 	static void sort(vector <Bill> bills, string sort_by);
 
-	static Bill search(vector <Bill> bills, string search_by);
-
+	Bill search(vector <Bill> bills, string search_by);
 
 	void showBillInfo();
 
@@ -54,10 +53,13 @@ public:
 
 	static string lastBill_ID_InFile();
 
-
 	static int isFoundInList(vector <Bill>& bills, string ID);
 
 	void deleteBill(vector<Bill>& bills);
+
+public:
+
+	void setMembershipLevel(string level);
 
 public:
 
@@ -68,8 +70,6 @@ public:
 	string getAccountID();
 
 	Date getDate();
-
-	void setMembershipLevel(string level);
 
 	string toString();
 

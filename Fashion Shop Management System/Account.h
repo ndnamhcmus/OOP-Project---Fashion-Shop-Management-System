@@ -27,6 +27,14 @@ public:
 
 	Account(string account_id = "", Customer customer = Customer() ,MembershipLevel membership_level = MembershipLevel());
 
+private:
+
+	void setAccountInfo(vector<string>Tok);
+
+	string getLastCustomerID(vector <Account> accounts);
+
+	string getLastAccountID(vector <Account> accounts);
+
 public:
 
 	void addBill(Bill bill);
@@ -37,19 +45,11 @@ public:
 
 	static Account search(vector <Account> accounts, string search_by);
 
-	void setAccountInfo(vector<string>Tok);
+	void deleteAccount(vector<Account>& acc, string account_id);
 
-	string findLastCustomer_ID_InFile();
 
-	string findLastAccount_ID_InFile();
+public:
 
-	void addAccountToFile(Account account);
-
-	void deleteAccountInFile(string account_id);
-
-	//void modifyAccountInFile(string account_id);
-
-	vector <Bill> getBillListFromFile(string account_id);
 
 	string getID();
 
@@ -57,21 +57,26 @@ public:
 
 	MembershipLevel getMemberShip();
 
+	double getDiscount();
+
+
+public:
+
 	void setMemberShip(MembershipLevel membership);
 
-	double getDiscount();
+public:
 
 	static Account sign_in(vector <Account> accounts, string  account_id);
 		
 	Account sign_up(vector<Account>&);
 
+public:
+
 	void showBillList();
 
 	void showAccountInfo();
 
-	void deleteAccount(vector<Account>& acc, string account_id);
 
-	//string modifyAccount();
 
 public:
 
@@ -101,6 +106,24 @@ public:
 	friend class ExcelIfstream;
 
 	friend class ExcelOfstream;
+
+private:
+
+	void addAccountToFile(Account account);
+
+	void deleteAccountInFile(string account_id);
+
+	vector <Bill> getBillListFromFile(string account_id);
+
+	string modifyAccount()
+	{
+
+	}
+	void modifyAccountInFile(string account_id)
+	{
+
+	}
+
 };
 
 

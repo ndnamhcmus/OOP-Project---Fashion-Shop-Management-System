@@ -65,6 +65,10 @@ void Account::setAccountInfo(vector<string>Tok)
 
 	Address ad(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4]);
 
+	if (Tok[3][0] != '0')
+	{
+		Tok[3].insert(0, "0");
+	}
 	_customer = Customer(Tok[1], d, Tok[3], ad, Tok[5]);
 
 	_bills.resize(0);
@@ -74,22 +78,14 @@ void Account::setAccountInfo(vector<string>Tok)
 	_membership_level.setLevel(Tok[7]);
 }
 
-string Account::findLastCustomer_ID_InFile()
+string Account::getLastCustomerID(vector <Account> accounts)
 {
-	vector<Account> acc;
-
-	Account::openAccountList(acc);
-
-	return acc[acc.size() - 1]._customer.getCustomerID();
+	return accounts[accounts.size() - 1]._customer.getCustomerID();
 }
 
-string Account::findLastAccount_ID_InFile()
+string Account::getLastAccountID(vector <Account> accounts)
 {
-	vector<Account> acc;
-
-	Account::openAccountList(acc);
-	
-	return acc[acc.size() - 1]._account_id;
+	return accounts[accounts.size() - 1]._account_id;
 }
 
 void Account::addAccountToFile(Account account)
@@ -172,6 +168,12 @@ double Account::getDiscount()
 
 Account Account::sign_in(vector<Account> accounts, string account_id)
 {
+	if (account_id == "cancel")
+	{
+		throw exception("Cancel!!!");
+	}
+
+
 	bool is_found = false;
 	for (int i = 0; i < accounts.size(); i++)
 	{
@@ -194,40 +196,51 @@ Account Account::sign_up(vector<Account>&accounts)
 	vector<string> st;
 	string s;
 
-	st.push_back(to_string(stoi(findLastAccount_ID_InFile()) + 1));
+	st.push_back(to_string(stoi(getLastAccountID(accounts)) + 1));
 
-	cout << "Full Name: ";
-	/*getline(cin, s);
-	st.push_back(s);*/
-	st.push_back(string(FakeName::next()));
+	/*cout << "Full Name: ";
+	getline(cin, s);
+	st.push_back(s);
 
 	cout << "Date of birth: ";
-	/*getline(cin, s);
-	st.push_back(s);*/
-	st.push_back(FakeBirthday::next().toString());
+	getline(cin, s);
+	st.push_back(s);
 
 	cout << "Phone number: ";
 	getline(cin, s);
 	st.push_back(s);
 
 	cout << "Address: ";
-	/*getline(cin, s);
+	getline(cin, s);
 	st.push_back(s);*/
-	st.push_back(FakeHCMAddress::next().toString());
 
-	st.push_back(to_string(stoi(findLastCustomer_ID_InFile()) + 1));
+
+	/// <summary>
+	///		Fake test		///
+	/// </summary>
+	st.push_back(string(FakeName::next()));
+
+	st.push_back(FakeBirthday::next().toString());
+
+	FakeVnTel tel;
+	st.push_back(tel.toString());
+
+	st.push_back(FakeHCMAddress::next().toString());
+	/// <summary>
+	///		Fake test		///
+	/// </summary>
+
+	st.push_back(to_string(stoi(getLastCustomerID(accounts)) + 1));
 
 	st.push_back("0");
 
 	st.push_back("none");  //membership level
 
-	Account account;
+	this->setAccountInfo(st);
 
-	account.setAccountInfo(st);
+	accounts.push_back(*this);
 
-	accounts.push_back(account);
-
-	return account;
+	return *this;
 }
 
 void Account::showBillList()
@@ -244,7 +257,7 @@ void Account::showAccountInfo()
 {
 	cout << "Account ID: " << _account_id << endl;
 
-	cout << "Customer ID\tDate of Birth\tPhone Number\tAddress\n\n";
+	cout << "Name\tCustomer ID\tDate of Birth\tPhone Number\tAddress\n\n";
 	cout << _customer.toString() << endl;
 
 	cout << "Number of bill: " << _bills.size() << endl;

@@ -123,32 +123,37 @@ void Product::showProductsInfo(vector<Product> products) {
 	}
 }
 
-void Product::addProduct(vector<Product>& products, Product prd) {
-	products.push_back(prd);
+void Product::addProduct(vector<Product>& products)
+{
+	products.push_back(*this);
 }
 
-void Product::deleteProduct(vector<Product>& products, Product prd) {
+//void Product::addProduct(vector<Product>& products, Product prd) {
+//	products.push_back(prd);
+//}
+
+void Product::deleteProduct(vector<Product>& products) {
 	int index;
-	if (Product::isValidInList(products, prd.getProductId(), index)) {
+	if (Product::isValidInList(products, _product_id, index)) {
 		products.erase(products.begin() + index);
 	}
 	else
 		throw exception("Product not found");
 }
 
-void Product::addProductInFile(vector<Product>& products, Product prd, string directory) {
+void Product::addProductInFile(vector<Product>& products, string directory) {
 	vector<vector<string>> container;
 	ExcelFstream file;
-	Product::addProduct(products, prd);
+	this->addProduct(products);
 	file.open(directory, ios::out | ios::app);
-	file.writeExcelString(prd.toString());
+	file.writeExcelString(toString());
 	file.close();
 }
 
-void Product::deleteProductInFile(vector<Product>& products, Product prd, string directory) {
+void Product::deleteProductInFile(vector<Product>& products, string directory) {
 	vector<vector<string>> container;
 	ExcelFstream file;
-	Product::deleteProduct(products, prd);
+	this->deleteProduct(products);
 	file.open(directory, ios::out);
 	for (auto& products : products) {
 		file.writeExcelString(products.toString());
@@ -156,10 +161,10 @@ void Product::deleteProductInFile(vector<Product>& products, Product prd, string
 	file.close();
 }
 
-void Product::buyProduct(vector<Product>& products, vector<Product>& productssold, Product prd) {
-	prd.setStockOutTime();
-	Product::addProduct(productssold, prd);
-	Product::deleteProduct(products, prd);
+void Product::buyProduct(vector<Product>& products, vector<Product>& productssold) {
+	this->setStockOutTime();
+	this->addProduct(productssold);
+	this->deleteProduct(products);
 }
 
 void Product::sort(vector<Product>& products, string sort_by) {
@@ -237,6 +242,8 @@ void Product::sort(vector<Product>& products, string sort_by) {
 	}
 }
 
+
+
 bool Product::isValidInList(vector<Product> products, string search_by, int &index) {
 	for (int i = 0; i < products.size(); i++)
 		if (products[i].getProductId() == search_by) {
@@ -248,7 +255,8 @@ bool Product::isValidInList(vector<Product> products, string search_by, int &ind
 }
 
 Product Product::search_by_ProductId(vector<Product> products, int index) {
-	return products[index];
+	*this = products[index];
+	return *this;
 }
 
 void Product::saveProductList(vector<Product> products, string directory) {

@@ -232,7 +232,7 @@ void Shop::showStaffList()
 void Shop::showSellerList()
 {
 	sortStaffList();
-	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tStaff ID\t-\tBase Salary\t-\tGoods Sale\t-\tSalary\n\n";
+	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tStaff ID\t-\tBase Salary\t-\tGoods Sale\t-\tReal Salary\n\n";
 	for (int i = 0; i < _staffs.size(); i++)
 	{
 		if (dynamic_cast<Seller*> (_staffs[i]))
@@ -370,16 +370,19 @@ void Shop::Purchase()
 	}
 
 
-	int index;
 	Product product;
 	vector <Product> cart;
+
+
 	while (true)
 	{
 		showProductList();
 		string ID;
 		cout << "Enter Product ID: ";
-		getline(cin, ID);
-
+		while (ID == "")
+		{
+			getline(cin, ID);
+		}
 		int amount;
 		cout << "Amount: ";
 		cin >> amount;
@@ -388,21 +391,25 @@ void Shop::Purchase()
 
 		for (int i = 0; i < amount; i++)
 		{
+			int index;
 			try
 			{
 				Product::isValidInList(_products, ID, index);
 			}
 			catch (const std::exception& mess)
 			{
-
 				if (!(strcmp(mess.what(), "Product not found")))
 				{
+					cout << "Add to cart failed" << endl;
 					continue;
 				}
 			}
-			cout << "Add to cart successfully\n";
 			product = product.search_by_ProductId(_products, index);
 			cart.push_back(product);
+			cout << "Add to cart successfully\n";
+
+
+			product.buyProduct(_products, _products_sold);
 		}
 
 
@@ -418,8 +425,10 @@ void Shop::Purchase()
 		}
 	}
 
+
 	system("pause");
 	system("cls");
+
 
 	for (int i = 0; i < cart.size(); i++)
 	{
@@ -430,15 +439,14 @@ void Shop::Purchase()
 
 	string order;
 	cout << "Would you like to buy all products above? Yes or No: ";
-	getline(cin, order);
+	while (order == "")
+	{
+		getline(cin, order);
+	}
 
 
 	if (order == "yes" || order == "Yes")
 	{
-		for (int i = 0; i < cart.size(); i++)
-		{
-			Product::buyProduct(_products, _products_sold, cart[i]);
-		}
 		system("cls");
 	}
 	else if (order == "no" || order == "No")
@@ -450,6 +458,26 @@ void Shop::Purchase()
 		}
 		return;
 	}
+
+
+	/// <summary>
+	///		Chuẩn bị bill mua hàng		///
+	/// </summary>
+	long long int new_id = stoll(Bill::getLastBillID(_bills)) + 1;
+	Account account;
+	account = AccountManagement();
+	Bill bill(to_string(new_id), account.getMembershipLevel(), account.getMemberShip(), Date(), cart, account.getID());
+	addToList(_bills, bill);
+	bill.showBillInfo();
+
+
+	/// <summary>
+	///			Tích luỹ điểm cho Account		///
+	/// </summary>
+	MembershipLevel update(account.getMemberShip().getLevel(), account.getMemberShip().getCummulativePoints() + cart.size());
+	update.updateLevel();
+	account.setMemberShip(update);
+	updateList(_accounts, account);
 
 
 	/// <summary>
@@ -483,28 +511,8 @@ void Shop::Purchase()
 		}
 	} while (!(is_found));
 	seller->updateSales(cart.size());
-	seller->setCommission();
+	seller->updateSalary();
 	updateList(_staffs, seller);
-
-
-	/// <summary>
-	///		Chuẩn bị bill mua hàng		///
-	/// </summary>
-	long long int new_id = stoll(Bill::getLastBillID(_bills)) + 1;
-	Account account;
-	account = AccountManagement();
-	Bill bill(to_string(new_id), account.getMembershipLevel(), account.getMemberShip(), Date(), cart, account.getID());
-	addToList(_bills, bill);
-	bill.showBillInfo();
-
-
-	/// <summary>
-	///			Tích luỹ điểm cho Account		///
-	/// </summary>
-	MembershipLevel update(account.getMemberShip().getLevel(), account.getMemberShip().getCummulativePoints() + cart.size());
-	update.updateLevel();
-	account.setMemberShip(update);
-	updateList(_accounts, account);
 }
 
 
@@ -543,16 +551,19 @@ Account Shop::AccountManagement()
 			{
 				return Account::sign_in(_accounts, id);
 			}
-			catch (const std::exception& error)
+			catch (const std::exception& mess)
 			{
-				cout << error.what() << endl;
+				cout << mess.what() << endl;
+				if (!(strcmp(mess.what(), "Cancel!!!")))
+				{
+					return new_account;
+				}
 			}
 			break;
 
 		case 2:
 
-			new_account = new_account.sign_up(_accounts);
-			return new_account;
+			return new_account.sign_up(_accounts);
 
 		case 3:
 
@@ -580,6 +591,7 @@ void Shop::ProductManagement()
 	bool is_continue = true;
 
 
+	Product product;
 	Product new_product;
 	Bill bill;
 
@@ -621,7 +633,7 @@ void Shop::ProductManagement()
 			cin.ignore();
 			for (int i = 0; i < amount; i++)
 			{
-				Product::addProductInFile(_products, new_product);
+				new_product.addProductInFile(_products);
 			}
 
 
@@ -632,7 +644,10 @@ void Shop::ProductManagement()
 			system("cls");
 			showProductList();
 			cout << "Enter product's ID: ";
-			getline(cin, ID);
+			while (ID == "")
+			{
+				getline(cin, ID);
+			}
 			if (ID == "cancel")
 			{
 				cout << "Cancel!!!\n";
@@ -656,13 +671,14 @@ void Shop::ProductManagement()
 							break;
 						}
 					}
-					Product::deleteProduct(_products, Product::search_by_ProductId(_products, index));
+					product.search_by_ProductId(_products, index);
+					product.deleteProduct(_products);
 				}
 			}
 			else if (delete_amount >= "0" && delete_amount <= "9")
 			{
 				int count = stoi(delete_amount);
-				while (!(count))
+				while (count)
 				{
 					try
 					{
@@ -675,7 +691,8 @@ void Shop::ProductManagement()
 							break;
 						}
 					}
-					Product::deleteProduct(_products, Product::search_by_ProductId(_products, index));
+					product.search_by_ProductId(_products, index);
+					product.deleteProduct(_products);
 					count--;
 				}
 			}
@@ -698,7 +715,7 @@ void Shop::ProductManagement()
 			{
 				try
 				{
-					bill = bill.search(_bills, ID);
+					bill.search(_bills, ID);
 				}
 				catch (const std::exception& mess)
 				{
@@ -776,7 +793,7 @@ void Shop::StaffInfoManagement()
 
 			try
 			{
-				staff = Staff::search(_staffs);
+				staff = staff->search(_staffs);
 			}
 			catch (const std::exception& error)
 			{
@@ -947,17 +964,16 @@ void Shop::SellerInfoManagement()
 			showStaffList();
 
 
-			Staff* staff;
 			try
 			{
-				staff = staff->search(_staffs);
+				seller = seller->search(_staffs);
 			}
 			catch (const std::exception& mess)
 			{
 				cout << mess.what() << endl;
 				break;
 			}
-			staff->deleteStaff(_staffs);
+			seller->deleteStaff(_staffs);
 
 
 			break;
@@ -1009,7 +1025,7 @@ void Shop::SecurityInfoManagement()
 
 			try
 			{
-				security = Staff::search(_staffs);
+				security = security->search(_staffs);
 			}
 			catch (const std::exception& error)
 			{
@@ -1063,6 +1079,18 @@ void Shop::SecurityInfoManagement()
 
 		case 5:		///		Delete Staff infomation
 
+			showSecurityList();
+
+			try
+			{
+				security = security->search(_staffs, "delete security information");
+			}
+			catch (const std::exception& mess)
+			{
+				cout << mess.what() << endl;
+				break;
+			}
+			security->deleteStaff(_staffs);
 			break;
 
 		case 6:

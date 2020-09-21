@@ -30,7 +30,10 @@ Bill Bill::search(vector<Bill> bills, string search_by)
 {
 	for (int i = 0; i < bills.size(); i++)
 		if (bills[i]._bill_id == search_by)
-			return bills[i];
+		{
+			*this = bills[i];
+			return *this;
+		}
 	throw exception("Not found");
 }
 

@@ -133,7 +133,7 @@ public:
 
 	static bool login(vector <Staff*> staffs);
 	static void sort(vector <Staff*>& staffs, string sort_by);
-	static Staff* search(vector<Staff*>staffs);
+	static Staff* search(vector<Staff*>staffs, string for_what = "");
 	void deleteStaff(vector <Staff*>& staffs);
 
 
@@ -198,9 +198,9 @@ class Seller : public Staff
 {
 private:
 
+	double _real_salary;
 	double _commission;		// tiền hoa hồng
 	int _sales;		// doanh số bán hàng
-	double _real_salary;
 
 public:
 
@@ -217,14 +217,19 @@ private:
 
 	string toString();
 
+private:
+
+	void setCommission();
+
+
 public:
 
 	void setNewStaff();
 
 	void setSeller(string name, Date dob, string phone, Address add, string staff_id, double base_salary, double comission, int goodsale, double realsalary);
-	void setCommission();
+	void setBaseSalary(double base_salary);
 	void setSales(int sales = 0);
-	void setRealSalary();
+	void setRealSalary(double real_salary);
 	void setStaffInfo(vector<string> Tok);
 
 	double getSalary();
@@ -232,6 +237,8 @@ public:
 	int getSales();
 
 	void updateSales(const int& sales);
+	void updateSalary();
+
 
 public:
 
