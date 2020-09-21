@@ -21,7 +21,7 @@ private:	//		List		//
 	vector <Product> _products_sold;
 	vector <Bill> _bills;
 	vector <Account> _accounts;
-	vector <Staff*> _staffs;
+	static vector <Staff*> _staffs;
 
 public:		//		Constructor		//
 
@@ -101,7 +101,7 @@ private:
 	void sortProductList(vector <Product> products, string sort_by = "id");
 	void sortBillList(string sort_by = "id");
 	void sortAccountList(string sort_by ="id");
-	void sortStaffList(string sort_by = "id");
+	void sortStaffList(string sort_by = "id", vector <Staff*> staffs = _staffs);
 
 private:
 

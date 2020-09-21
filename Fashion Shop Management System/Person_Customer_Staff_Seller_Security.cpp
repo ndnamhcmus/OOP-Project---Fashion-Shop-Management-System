@@ -153,7 +153,10 @@ Staff* Staff::search(vector<Staff*> staffs, string for_what)
 {
 	string ID;
 	cout << "Enter your Staff ID: ";
-	getline(cin, ID);
+	while (ID == "")
+	{
+		getline(cin, ID);
+	}
 	if (ID == "cancel")
 	{
 		throw exception("Cancel!!!");
@@ -322,7 +325,7 @@ void Staff::sort(vector <Staff*>& staffs, string sort_by)
 
 		return;
 	}
-	else if (sort_by == "goods sale")
+	else if (sort_by == "sales")	///		fix		///
 	{
 		for (int i = 0; i < staffs.size() - 1; i++)
 		{
@@ -534,8 +537,6 @@ void Seller::setStaffInfo(vector<string> Tok)
 }
 void Seller::showStaffInfo()
 {
-	/*Staff::showStaffInfo();
-	cout << " - " << _goods_sale << " - " << _real_salary;*/
 	cout << toString();
 }
 

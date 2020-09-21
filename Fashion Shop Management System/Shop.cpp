@@ -155,9 +155,10 @@ void Shop::sortAccountList(string sort_by)
 	Account::sort(_accounts, sort_by);
 }
 
-void Shop::sortStaffList(string sort_by)
+vector <Staff*>Shop::_staffs;
+void Shop::sortStaffList(string sort_by, vector <Staff*> staffs)
 {
-	Staff::sort(_staffs, sort_by);
+	Staff::sort(staffs, sort_by);
 }
 
 
@@ -175,7 +176,15 @@ void Shop::showProductList()
 
 	string sort_by;
 	cout << "Sort by: ";
-	getline(cin, sort_by);
+	while (sort_by == "")
+	{
+		getline(cin, sort_by);
+	}
+	if (sort_by == "cancel")
+	{
+		cout << "Cancel!!!" << endl;
+		return;
+	}
 	transform(sort_by.begin(), sort_by.end(), sort_by.begin(), ::tolower);	//	chuyển về chữ thường
 
 
@@ -196,7 +205,15 @@ void Shop::showProductListForStaff()
 
 	string sort_by;
 	cout << "Choose: ";
-	getline(cin, sort_by);
+	while (sort_by == "")
+	{
+		getline(cin, sort_by);
+	}
+	if (sort_by == "cancel")
+	{
+		cout << "Cancel!!!" << endl;
+		return;
+	}
 	transform(sort_by.begin(), sort_by.end(), sort_by.begin(), ::tolower);	//	chuyển về chữ thường
 
 
@@ -220,8 +237,23 @@ void Shop::showBillList()
 
 void Shop::showStaffList()
 {
-	sortStaffList();
-	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tStaff ID\t-\tBase Salary\t-\tGoods Sale\t-\tSalary\n\n";
+	string sort_by;
+	cout << "Sort by:\tID\tSalary" << endl;
+	cout << "Choose: ";
+	while (sort_by == "")
+	{
+		getline(cin, sort_by);
+	}
+	if (sort_by == "cancel")
+	{
+		cout << "Cancel!!!" << endl;
+		return;
+	}
+	transform(sort_by.begin(), sort_by.end(), sort_by.begin(), ::tolower);	//	chuyển về chữ thường
+
+
+	sortStaffList(sort_by);
+	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tStaff ID\t-\tBase Salary\t-\tSales\t-\tSalary\n\n";
 	for (int i = 0; i< _staffs.size(); i++)
 	{
 		_staffs[i]->showStaffInfo();
@@ -231,8 +263,33 @@ void Shop::showStaffList()
 
 void Shop::showSellerList()
 {
-	sortStaffList();
-	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tStaff ID\t-\tBase Salary\t-\tGoods Sale\t-\tReal Salary\n\n";
+	vector <Staff*> sellers;
+	for (int i = 0; i < _staffs.size(); i++)
+	{
+		if (dynamic_cast <Seller*> (_staffs[i]))
+		{
+			sellers.push_back(dynamic_cast <Seller*> (_staffs[i]));
+		}
+	}
+
+
+	string sort_by;
+	cout << "Sort by:\tID\tSales\tSalary" << endl;
+	cout << "Choose: ";
+	while (sort_by == "")
+	{
+		getline(cin, sort_by);
+	}
+	if (sort_by == "cancel")
+	{
+		cout << "Cancel!!!" << endl;
+		return;
+	}
+	transform(sort_by.begin(), sort_by.end(), sort_by.begin(), ::tolower);	//	chuyển về chữ thường
+
+
+	sortStaffList(sort_by, sellers);
+	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tStaff ID\t-\tBase Salary\t-\tSales\t-\tReal Salary\n\n";
 	for (int i = 0; i < _staffs.size(); i++)
 	{
 		if (dynamic_cast<Seller*> (_staffs[i]))
@@ -241,11 +298,28 @@ void Shop::showSellerList()
 			cout << endl << endl;
 		}
 	}
+
+
 }
 
 void Shop::showSecurityList()
 {
-	sortStaffList();
+	string sort_by;
+	cout << "Sort by:\tID\tSalary" << endl;
+	cout << "Choose: ";
+	while (sort_by == "")
+	{
+		getline(cin, sort_by);
+	}
+	if (sort_by == "cancel")
+	{
+		cout << "Cancel!!!" << endl;
+		return;
+	}
+	transform(sort_by.begin(), sort_by.end(), sort_by.begin(), ::tolower);	//	chuyển về chữ thường
+
+
+	sortStaffList(sort_by);
 	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tID\t-\tSalary\n\n";
 	for (int i = 0; i < _staffs.size(); i++)
 	{
@@ -326,6 +400,10 @@ void Shop::Start()
 
 			
 			account = AccountManagement();
+			if (account.getID() == "")
+			{
+				break;
+			}
 			account.showAccountInfo();
 			cout << endl;
 			cout << "BILL LIST" << endl << endl;
@@ -382,6 +460,11 @@ void Shop::Purchase()
 		while (ID == "")
 		{
 			getline(cin, ID);
+		}
+		if (ID == "cancel")
+		{
+			cout << "Cancel!!!" << endl;
+			return;
 		}
 		int amount;
 		cout << "Amount: ";
@@ -530,7 +613,7 @@ Account Shop::AccountManagement()
 	bool is_continue = true;
 
 
-	string id;
+	string ID;
 	Account new_account;
 
 
@@ -546,10 +629,13 @@ Account Shop::AccountManagement()
 		case 1:
 
 			cout << "Enter your account id: ";
-			getline(cin, id);
+			while (ID == "")
+			{
+				getline(cin, ID);
+			}
 			try
 			{
-				return Account::sign_in(_accounts, id);
+				return Account::sign_in(_accounts, ID);
 			}
 			catch (const std::exception& mess)
 			{
