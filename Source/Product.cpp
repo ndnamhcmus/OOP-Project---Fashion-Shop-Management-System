@@ -56,6 +56,10 @@ void Product::set() {
 	}
 
 	auto Tok = Tokenizer::parse(line, " - ");
+	if (Tok.size() != 11)
+	{
+		throw exception("Invalid, try again!!!");
+	}
 	this->setProductInfo(Tok);
 }
 
@@ -70,7 +74,21 @@ void Product::setProductInfo(vector<string> Tok) {
 	this->_product_cost = stod(Tok[6]);
 	this->_product_price = stod(Tok[7]);
 	this->_discount = stod(Tok[8]);
+
+	auto test_case = Tokenizer::parse(Tok[9], "/");
+	if (test_case.size() != 3)
+	{
+		throw exception("Invalid, try again!!!");
+	}
+	test_case.clear();
 	this->_stock_in_time = this->_stock_in_time.parse(Tok[9]);
+
+	test_case = Tokenizer::parse(Tok[9], "/");
+	if (test_case.size() != 3)
+	{
+		throw exception("Invalid, try again!!!");
+	}
+	test_case.clear();
 	this->_stock_out_time = this->_stock_out_time.parse(Tok[10]);
 }
  

@@ -207,18 +207,34 @@ Account Account::sign_up(vector<Account>&accounts)
 
 	cout << "Full Name: ";
 	getline(cin, s);
+	if (s == "cancel")
+	{
+		throw exception("Cancel!!!");
+	}
 	st.push_back(s);
 
 	cout << "Date of birth (Form: DD/MM/YYYY): ";
 	getline(cin, s);
+	if (s == "cancel")
+	{
+		throw exception("Cancel!!!");
+	}
 	st.push_back(s);
 
 	cout << "Phone number: ";
 	getline(cin, s);
+	if (s == "cancel")
+	{
+		throw exception("Cancel!!!");
+	}
 	st.push_back(s);
 
 	cout << "Address (Form: Number-Street-Ward-District-City): ";
 	getline(cin, s);
+	if (s == "cancel")
+	{
+		throw exception("Cancel!!!");
+	}
 	st.push_back(s);
 
 

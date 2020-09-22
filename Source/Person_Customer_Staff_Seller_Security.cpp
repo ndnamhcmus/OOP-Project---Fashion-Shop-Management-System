@@ -91,7 +91,7 @@ void Staff::setStaff(string name, Date dob, string phone, Address add, string st
 
 void Staff::setNewStaff()
 {
-	cout << "Name - DD/MM/YYYY(Date of Birth) - Phone Number - Address (Form: Number-Street-Ward-District-City) - Base Salary\n";
+	cout << "Name - Date of Birth (DD/MM/YYYY) - Phone Number - Address (Form: Number-Street-Ward-District-City) - Base Salary\n";
 	cout << "PLEASE ENTER THE INFORMATION AS FORM ABOVE\n";
 
 	string line;
@@ -113,7 +113,7 @@ void Staff::setNewStaff()
 
 	if (line == "cancel")
 	{
-		throw StaffException(line);
+		throw exception("Cancel!!!");
 	}
 
 
@@ -136,7 +136,7 @@ void Staff::setNewStaff()
 	}
 	catch (const std::exception&)
 	{
-		throw exception("Something wrong, try again");
+		throw exception("Invalid, try again");
 	}
 
 
@@ -389,7 +389,10 @@ void Security::setSecurity(string name, Date dob, string phone, Address add, str
 void Security::setStaffInfo(vector<string> Tok)
 {
 	auto tokens = Tokenizer::parse(Tok[1], "/");
-
+	if (tokens.size() != 3)
+	{
+		throw exception("Invalid, try again!!!");
+	}
 
 	_name = Tok[0];
 	_date_of_birth = Date(stoi(tokens[0]), stoi(tokens[1]), stoi(tokens[2]));
@@ -399,7 +402,10 @@ void Security::setStaffInfo(vector<string> Tok)
 	tokens.clear();
 	tokens = Tokenizer::parse(Tok[3], "-");
 
-
+	if (tokens.size() != 5)
+	{
+		throw exception("Invalid, try again!!!");
+	}
 	_address = Address(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4]);
 	_staff_id = Tok[4];
 	_base_salary = stod(Tok[5]);
@@ -519,6 +525,10 @@ string Seller::toString()
 void Seller::setStaffInfo(vector<string> Tok)
 {
 	auto tokens = Tokenizer::parse(Tok[1], "/");
+	if (tokens.size() != 3)
+	{
+		throw exception("Invalid, try again!!!");
+	}
 
 
 	_name = Tok[0];
@@ -528,6 +538,10 @@ void Seller::setStaffInfo(vector<string> Tok)
 
 	tokens.clear();
 	tokens = Tokenizer::parse(Tok[3], "-");
+	if (tokens.size() != 5)
+	{
+		throw exception("Invalid, try again!!!");
+	}
 
 
 	_address = Address(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4]);
@@ -564,7 +578,7 @@ void Seller::bestSellerOfMonth(vector <Staff*> staffs)
 	}
 	
 
-
+	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tStaff ID\t-\tBase Salary\t-\tSales\t-\tSalary\n\n";
 	Seller best = sellers[0];
 	for (int i = 1; i < sellers.size(); i++)
 	{
@@ -576,7 +590,7 @@ void Seller::bestSellerOfMonth(vector <Staff*> staffs)
 		if (sellers[i]._sales == best._sales)
 		{
 			sellers[i].showStaffInfo();
-			cout << endl;
+			cout << endl << endl;
 		}
 	}
 

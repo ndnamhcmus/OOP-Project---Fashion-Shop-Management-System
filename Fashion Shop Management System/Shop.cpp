@@ -674,7 +674,7 @@ Account Shop::AccountManagement()
 				cout << mess.what() << endl;
 				if (!(strcmp(mess.what(), "Cancel!!!")))
 				{
-					return new_account;
+					break;
 				}
 			}
 
@@ -697,11 +697,17 @@ Account Shop::AccountManagement()
 				catch (const std::exception& mess)
 				{
 					cout << mess.what() << endl;
+					if (!(strcmp(mess.what(), "Cancel!!!")))
+					{
+						break;
+					}
 					system("pause");
 					system("cls");
 				}
 			}
-			
+
+
+			break;
 
 		case 3:
 
@@ -764,13 +770,31 @@ void Shop::ProductManagement()
 		case 2:
 
 			system("cls");
-			try
+			while (true)
 			{
-				new_product.set();
+				try
+				{
+					new_product.set();
+					if (new_product.getProductId() != "")
+					{
+						break;
+					}
+				}
+				catch (const std::exception& mess)
+				{
+					cout << mess.what() << endl;
+
+
+					if (!(strcmp(mess.what(), "Cancel!!!")))
+					{
+						break;
+					}
+					system("pause");
+					system("cls");
+				}
 			}
-			catch (const std::exception& mess)
+			if (!(new_product.getProductId() != ""))
 			{
-				cout << mess.what() << endl;
 				break;
 			}
 
@@ -1126,8 +1150,6 @@ void Shop::SellerInfoManagement()
 				catch (const std::exception& mess)
 				{
 					cout << mess.what() << endl;
-					system("pause");
-					system("cls");
 
 
 					if (!(strcmp(mess.what(), "Cancel!!!")))
@@ -1139,6 +1161,8 @@ void Shop::SellerInfoManagement()
 						seller = nullptr;
 						break;
 					}
+					system("pause");
+					system("cls");
 				}
 			}
 			
@@ -1287,8 +1311,6 @@ void Shop::SecurityInfoManagement()
 				catch (const std::exception& mess)
 				{
 					cout << mess.what() << endl;
-					system("pause");
-					system("cls");
 
 
 					if (!(strcmp(mess.what(), "Cancel!!!")))
@@ -1300,6 +1322,8 @@ void Shop::SecurityInfoManagement()
 						security = nullptr;
 						break;
 					}
+					system("pause");
+					system("cls");
 				}
 			}
 			

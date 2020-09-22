@@ -57,12 +57,19 @@ void Account::setAccountInfo(vector<string>Tok)
 
 	vector<string>tokens = Tokenizer::parse(Tok[2], "/");
 
+	if (tokens.size() != 3)
+	{
+		throw exception("Invalid, try again!!!");
+	}
 	Date d(stoi(tokens[0]), stoi(tokens[1]), stoi(tokens[2]));
 
 	tokens.clear();
 
 	tokens = Tokenizer::parse(Tok[4], "-");
-
+	if (tokens.size() != 5)
+	{
+		throw exception("Invalid, try again!!!");
+	}
 	Address ad(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4]);
 
 	if (Tok[3][0] != '0')
@@ -200,18 +207,34 @@ Account Account::sign_up(vector<Account>&accounts)
 
 	cout << "Full Name: ";
 	getline(cin, s);
+	if (s == "cancel")
+	{
+		throw exception("Cancel!!!");
+	}
 	st.push_back(s);
 
-	cout << "Date of birth: ";
+	cout << "Date of birth (Form: DD/MM/YYYY): ";
 	getline(cin, s);
+	if (s == "cancel")
+	{
+		throw exception("Cancel!!!");
+	}
 	st.push_back(s);
 
 	cout << "Phone number: ";
 	getline(cin, s);
+	if (s == "cancel")
+	{
+		throw exception("Cancel!!!");
+	}
 	st.push_back(s);
 
-	cout << "Address: ";
+	cout << "Address (Form: Number-Street-Ward-District-City): ";
 	getline(cin, s);
+	if (s == "cancel")
+	{
+		throw exception("Cancel!!!");
+	}
 	st.push_back(s);
 
 
@@ -236,6 +259,11 @@ Account Account::sign_up(vector<Account>&accounts)
 
 	st.push_back("none");  //membership level
 
+
+	if (st.size() != 8)
+	{
+		throw exception("Invalid, try again!!!");
+	}
 	this->setAccountInfo(st);
 
 	accounts.push_back(*this);
@@ -246,7 +274,6 @@ Account Account::sign_up(vector<Account>&accounts)
 void Account::showBillList()
 {
 	for (int i = 0; i < _bills.size(); i++) {
-		cout << i + 1 << endl;
 		_bills[i].setMembershipLevel(getMembershipLevel());
 		_bills[i].showBillInfo();
 		cout << endl;

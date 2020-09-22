@@ -230,8 +230,11 @@ void Shop::showProductListForStaff()
 
 void Shop::showBillList()	
 {
+	cout << "BILL LIST\n";
+	cout << "Bill ID\tDate\tProduct Name\tProduct Price\tTotal\tAccount ID" << endl;
 	for (int i = 0; i < _bills.size(); i++)
 	{
+		cout << i + 1 << ": ";
 		cout << _bills[i].toString() << endl;
 	}
 }
@@ -254,9 +257,11 @@ void Shop::showStaffList()
 
 
 	sortStaffList(sort_by);
+	cout << "STAFF LIST" << endl;
 	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tStaff ID\t-\tBase Salary\t-\tSales\t-\tSalary\n\n";
 	for (int i = 0; i< _staffs.size(); i++)
 	{
+		cout << i + 1 << ": ";
 		_staffs[i]->showStaffInfo();
 		cout << endl << endl;
 	}
@@ -290,11 +295,13 @@ void Shop::showSellerList()
 
 
 	sortStaffList(sort_by, sellers);
+	cout << "SELLER LIST" << endl;
 	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tStaff ID\t-\tBase Salary\t-\tSales\t-\tReal Salary\n\n";
 	for (int i = 0; i < _staffs.size(); i++)
 	{
 		if (dynamic_cast<Seller*> (_staffs[i]))
 		{
+			cout << i + 1 << ": ";
 			_staffs[i]->showStaffInfo();
 			cout << endl << endl;
 		}
@@ -321,11 +328,13 @@ void Shop::showSecurityList()
 
 
 	sortStaffList(sort_by);
+	cout << "SECURITY LIST" << endl;
 	cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tID\t-\tSalary\n\n";
 	for (int i = 0; i < _staffs.size(); i++)
 	{
 		if (dynamic_cast<Security*> (_staffs[i]))
 		{
+			cout << i + 1 << ": ";
 			_staffs[i]->showStaffInfo();
 			cout << endl << endl;
 		}
@@ -405,7 +414,6 @@ void Shop::Start()
 			{
 				break;
 			}
-			account.showAccountInfo();
 			cout << endl;
 			cout << "BILL LIST" << endl << endl;
 			account.showBillList();
@@ -666,14 +674,40 @@ Account Shop::AccountManagement()
 				cout << mess.what() << endl;
 				if (!(strcmp(mess.what(), "Cancel!!!")))
 				{
-					return new_account;
+					break;
 				}
 			}
+
+
 			break;
 
 		case 2:
 
-			return new_account.sign_up(_accounts);
+
+			while (true)
+			{
+				try
+				{
+					new_account.sign_up(_accounts);
+					if (new_account.getID() != "")
+					{
+						return new_account;
+					}
+				}
+				catch (const std::exception& mess)
+				{
+					cout << mess.what() << endl;
+					if (!(strcmp(mess.what(), "Cancel!!!")))
+					{
+						break;
+					}
+					system("pause");
+					system("cls");
+				}
+			}
+
+
+			break;
 
 		case 3:
 
@@ -736,13 +770,31 @@ void Shop::ProductManagement()
 		case 2:
 
 			system("cls");
-			try
+			while (true)
 			{
-				new_product.set();
+				try
+				{
+					new_product.set();
+					if (new_product.getProductId() != "")
+					{
+						break;
+					}
+				}
+				catch (const std::exception& mess)
+				{
+					cout << mess.what() << endl;
+
+
+					if (!(strcmp(mess.what(), "Cancel!!!")))
+					{
+						break;
+					}
+					system("pause");
+					system("cls");
+				}
 			}
-			catch (const std::exception& mess)
+			if (!(new_product.getProductId() != ""))
 			{
-				cout << mess.what() << endl;
 				break;
 			}
 
@@ -755,6 +807,11 @@ void Shop::ProductManagement()
 			{
 				new_product.addProductInFile(_products);
 			}
+
+
+			system("cls");
+			showProductListForStaff();
+
 
 
 			break;
@@ -809,8 +866,10 @@ void Shop::ProductManagement()
 					}
 					catch (const std::exception& mess)
 					{
+						cout << mess.what() << endl;
 						if (!(strcmp(mess.what(), "Product not found")))
 						{
+							system("pause");
 							break;
 						}
 					}
@@ -819,6 +878,12 @@ void Shop::ProductManagement()
 					count--;
 				}
 			}
+
+
+			system("cls");
+			showProductListForStaff();
+
+
 			break;
 
 		case 4:
@@ -852,8 +917,14 @@ void Shop::ProductManagement()
 				catch (const std::exception& mess)
 				{
 					cout << mess.what() << endl;
+					system("pause");
 				}
 			} while (Bill::isFoundInList(_bills, ID));
+
+
+			system("cls");
+			showBillList();
+
 
 			break;
 
@@ -925,6 +996,7 @@ void Shop::StaffInfoManagement()
 			}
 
 
+			cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tStaff ID\t-\tBase Salary\t-\tSales\t-\tSalary\n\n";
 			staff->showStaffInfo();
 			cout << endl;
 
@@ -967,7 +1039,7 @@ void Shop::SellerInfoManagement()
 	int choice;
 
 
-	Staff* seller;
+	Staff* seller = nullptr;
 
 
 	Menu::showSellerMenu();
@@ -978,7 +1050,7 @@ void Shop::SellerInfoManagement()
 	{
 		switch (choice)
 		{
-		case 1:
+		case 1:		///		Show information		///
 
 			showSellerList();
 			break;
@@ -994,8 +1066,9 @@ void Shop::SellerInfoManagement()
 				cout << error.what() << endl;
 				break;
 			}
+			
 
-
+			cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tStaff ID\t-\tBase Salary\t-\tSales\t-\tSalary\n\n";
 			seller->showStaffInfo();
 			cout << endl;
 
@@ -1053,38 +1126,65 @@ void Shop::SellerInfoManagement()
 
 			break;
 
-		case 6:
+		case 6:		///		Seller of month		///
 
 			cout << "SELLER OF MONTH\n";
 			Seller::bestSellerOfMonth(_staffs);
 			break;
 
-		case 7:
+		case 7:		///		Add new staff		///
 
 			seller = new Seller;
 			seller->setLastID(_staffs);
 
-			try
+			while (true)
 			{
-				seller->setNewStaff();
-			}
-			catch (const std::exception& error)
-			{
-				cout << error.what() << endl;
-				if (seller)
+				try
 				{
-					delete seller;
+					seller->setNewStaff();
+					if (seller)
+					{
+						break;
+					}
 				}
+				catch (const std::exception& mess)
+				{
+					cout << mess.what() << endl;
+
+
+					if (!(strcmp(mess.what(), "Cancel!!!")))
+					{
+						if (seller)
+						{
+							delete seller;
+						}
+						seller = nullptr;
+						break;
+					}
+					system("pause");
+					system("cls");
+				}
+			}
+			
+
+			if (!(seller))
+			{
 				break;
 			}
 
+
 			addToList(_staffs, seller);
+
+
+			system("cls");
+			showSellerList();
+
 
 			break;
 
 		case 8:		///		Delete Staff information	///
 
-			showStaffList();
+			showSellerList();
 
 
 			try
@@ -1097,6 +1197,10 @@ void Shop::SellerInfoManagement()
 				break;
 			}
 			seller->deleteStaff(_staffs);
+
+
+			system("cls");
+			showSellerList();
 
 
 			break;
@@ -1160,7 +1264,10 @@ void Shop::SecurityInfoManagement()
 				break;
 			}
 			
+
+			cout << "Name\t-\tDate of Birth\t-\tPhone Number\t-\tAddress\t-\tID\t-\tSalary\n\n";
 			security->showStaffInfo();
+
 
 			break;
 
@@ -1181,6 +1288,8 @@ void Shop::SecurityInfoManagement()
 			}
 
 			cout << "Salary: " << to_string(dynamic_cast<Security*> (security)->getSalary())<< endl;
+
+
 			break;
 
 		case 4:		///		New Staff	///
@@ -1189,22 +1298,48 @@ void Shop::SecurityInfoManagement()
 			security->setLastID(_staffs);
 			
 
-			try
+			while (true)
 			{
-				security->setNewStaff();
-			}
-			catch (const std::exception& error)
-			{
-				cout << error.what() << endl;
-				if (security)
+				try
 				{
-					delete security;
+					security->setNewStaff();
+					if (security)
+					{
+						break;
+					}
 				}
+				catch (const std::exception& mess)
+				{
+					cout << mess.what() << endl;
+
+
+					if (!(strcmp(mess.what(), "Cancel!!!")))
+					{
+						if (security)
+						{
+							delete security;
+						}
+						security = nullptr;
+						break;
+					}
+					system("pause");
+					system("cls");
+				}
+			}
+			
+
+			if (!(security))
+			{
 				break;
 			}
 
 
 			addToList(_staffs, security);
+
+
+			system("cls");
+			showSecurityList();
+
 
 			break;
 
@@ -1226,6 +1361,12 @@ void Shop::SecurityInfoManagement()
 				break;
 			}
 			security->deleteStaff(_staffs);
+
+
+			system("cls");
+			showSecurityList();
+
+
 			break;
 
 		case 6:

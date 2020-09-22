@@ -91,7 +91,7 @@ void Staff::setStaff(string name, Date dob, string phone, Address add, string st
 
 void Staff::setNewStaff()
 {
-	cout << "Name - DD/MM/YYYY(Date of Birth) - Phone Number - Address (Form: Number-Street-Ward-District-City) - Base Salary\n";
+	cout << "Name - Date of Birth (DD/MM/YYYY) - Phone Number - Address (Form: Number-Street-Ward-District-City) - Base Salary\n";
 	cout << "PLEASE ENTER THE INFORMATION AS FORM ABOVE\n";
 
 	string line;

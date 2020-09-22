@@ -45,7 +45,6 @@ void Bill::setBillInfo(vector<string>Tok)
 	
 	_curr_date = Date(stoi(tokens[0]), stoi(tokens[1]), stoi(tokens[2]));
 
-
 	for (int i = 2; i < Tok.size() - 2; i = i + 2)
 	{
 		_cart.push_back(Product(Tok[i], "", "", "", "", "", 0.0, stod(Tok[i + 1]), 0.0, Date(), Date(), Date()));
