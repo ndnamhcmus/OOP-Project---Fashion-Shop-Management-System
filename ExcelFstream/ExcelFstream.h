@@ -14,6 +14,62 @@
 using namespace std;
 
 
+class ExcelFstream
+{
+private:
+
+	fstream _file;
+
+private:
+
+	stringstream _buffer;
+
+public:
+
+	~ExcelFstream()
+	{
+		close();
+	}
+
+public:
+
+	void open(const string& path, ios_base::openmode mode = ios::in | ios::out);
+
+	void close();
+
+public:
+
+	void readExcelString(vector<vector <string>>& container);
+
+	void writeExcelString(const string& String, const string& needle = " - ");
+
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class ExcelFstreamException : public exception
+{
+private:
+
+	string _exception_mess;
+
+public:
+
+	ExcelFstreamException(string exception_mess)
+	{
+		this->_exception_mess = exception_mess;
+	}
+
+
+	const char* what() const throw()
+	{
+		return _exception_mess.c_str();
+	}
+};
+
+
+/////		KHÔNG DÙNG ĐƯỢC PHẦN COMMENT		////
 //class ExcelIfstream
 //{
 //	
@@ -125,63 +181,6 @@ using namespace std;
 //
 //	void writeExcelFile(Security security, const string& file_name = "Staff.csv");
 //};
-
-class ExcelFstream
-{
-private:
-
-	fstream _file;
-
-private:
-
-	stringstream _buffer;
-
-public:
-
-	~ExcelFstream()
-	{
-		close();
-	}
-
-public:
-
-	void open(const string& path, ios_base::openmode mode = ios::in | ios::out);
-
-	void close();
-
-public:
-
-	void readExcelString(vector<vector <string>>& container);
-
-	void writeExcelString(const string& String, const string& needle = " - ");
-
-};
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-class ExcelFstreamException : public exception
-{
-private:
-
-	string _exception_mess;
-
-public:
-
-	ExcelFstreamException(string exception_mess)
-	{
-		this->_exception_mess = exception_mess;
-	}
-
-
-	const char* what() const throw()
-	{
-		return _exception_mess.c_str();
-	}
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 //template<class T>
 //inline void ExcelIfstream::readExcelFile(T& object, const string& file_name)
 //{
@@ -210,6 +209,10 @@ public:
 //		inputToObject(object, container);
 //	}
 //}
+
+
+
+
 
 
 #endif // !_EXCEL_FSTREAM_
